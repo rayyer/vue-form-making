@@ -8,9 +8,8 @@
         <a class="ad" target="_blank" href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=x5oqy0nh">阿里云限量红包</a>
         <a target="_blank" href="https://www.yuque.com/zhulei-sbpfz/ua9nar">开始使用</a>
         <a target="_blank" href="#/price">商业授权</a>
+        <a target="_blank" href="#/form">效果演示</a>
         <a href="https://github.com/GavinZhuLei/vue-form-making">GitHub</a>
-        <a href="https://gitee.com/gavinzhulei/vue-form-making">码云</a>
-        <a href="http://www.xiaoyaoji.cn" target="_blank">小幺鸡接口文档</a>
       </div>
     </div>
     <div  class="fm-container"><router-view/></div>
