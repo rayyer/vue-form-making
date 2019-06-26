@@ -15,14 +15,14 @@
             @end="handleMoveEnd"
             @add="handleWidgetAdd">
           <el-col v-for="(element, index) in data.list" :key="index" :span="element.cols">
-                <widget-form-item
-                  v-if="element && element.key" 
-                  :key="element.key" 
-                  :element="element" 
-                  :select.sync="selectWidget" 
-                  :index="index" 
-                  :data="data">
-                </widget-form-item>
+            <widget-form-item
+              v-if="element && element.key" 
+              :key="element.key" 
+              :element="element" 
+              :select.sync="selectWidget" 
+              :index="index" 
+              :data="data">
+            </widget-form-item>
           </el-col>
           </draggable>
         </el-row>
@@ -71,7 +71,7 @@
             <widget-form-item v-if="element && element.key"  :key="element.key" :element="element" :select.sync="selectWidget" :index="index" :data="data"></widget-form-item>
           </template>
         </template> -->
-           </draggable> 
+      </draggable> 
     </el-form>
   </div>
 </template>
