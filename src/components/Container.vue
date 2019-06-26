@@ -3,9 +3,6 @@
     <el-main class="fm2-main">
       <el-container>
         <el-aside style="wdith: 250px;">
-          <a style="margin: 10px 10px 0; display: block;" target="_blank" href="https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=x5oqy0nh">
-            <img src="http://tools.xiaoyaoji.cn/form/img/ad2.301da306.jpg" style="width: 100%;">
-          </a>
           <div class="components-list">
             <div class="widget-cate">基础字段</div>
             <draggable tag="ul" :list="basicComponents" 
@@ -487,17 +484,14 @@ export default {
 
   },
   methods: {
-    handleGoGithub () {
-      window.location.href = 'https://github.com/GavinZhuLei/vue-form-making'
-    },
     handleConfigSelect (value) {
       this.configTab = value
     },
     handleMoveEnd (evt) {
-      console.log('end', evt)
+      // console.log('leftEnd', evt)
     },
     handleMoveStart ({oldIndex}) {
-      console.log('start', oldIndex, this.basicComponents)
+      // console.log('leftStart', oldIndex, this.basicComponents)
     },
     handleMove () {
       return true
@@ -517,7 +511,7 @@ export default {
     handleGenerateJson () {
       this.jsonVisible = true
       this.jsonTemplate = this.widgetForm
-      console.log(JSON.stringify(this.widgetForm))
+      // console.log(JSON.stringify(this.widgetForm))
       this.$nextTick(() => {
 
         const editor = ace.edit('jsoneditor')
@@ -564,7 +558,7 @@ export default {
       }
     },
     handleInput (val) {
-      console.log(val)
+      // console.log(val)
       this.blank = val
     }
   },
@@ -572,7 +566,7 @@ export default {
     widgetForm: {
       deep: true,
       handler: function (val) {
-        console.log(this.$refs.widgetForm)
+        // console.log(this.$refs.widgetForm)
       }
     }
   }

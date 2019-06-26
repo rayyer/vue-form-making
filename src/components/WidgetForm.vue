@@ -3,14 +3,32 @@
     <el-form :size="data.config.size" :label-position="data.config.labelPosition" :label-width="data.config.labelWidth + 'px'">
       
       <draggable class="widget-form-list" 
-        
         v-model="data.list" 
         v-bind="{group:'people', ghostClass: 'ghost'}"
         @end="handleMoveEnd"
         @add="handleWidgetAdd"
       >
+        <el-row class="widget-grid " :gutter="24">
+          <draggable class="widget-form-list" 
+            v-model="data.list" 
+            v-bind="{group:'people', ghostClass: 'ghost'}"
+            @end="handleMoveEnd"
+            @add="handleWidgetAdd">
+          <el-col v-for="(element, index) in data.list" :key="index" :span="element.cols">
+                <widget-form-item
+                  v-if="element && element.key" 
+                  :key="element.key" 
+                  :element="element" 
+                  :select.sync="selectWidget" 
+                  :index="index" 
+                  :data="data">
+                </widget-form-item>
+          </el-col>
+          </draggable>
+        </el-row>
+      
 
-        <template v-for="(element, index) in data.list">
+        <!-- <template v-for="(element, index) in data.list">
           <template v-if="element.type == 'grid'">
             <div v-if="element && element.key"  class="widget-grid-container data-grid" :key="element.key" style="position: relative;">
               <el-row class="widget-grid "
@@ -45,7 +63,6 @@
                 
               </el-row>
               <el-button title="删除" style="bottom: -20px;" @click.stop="handleWidgetDelete(index)" class="widget-action-delete" v-if="selectWidget.key == element.key" circle plain type="danger">
-                <!-- <icon name="icon-trash" style="width: 12px;height: 12px;"></icon> -->
                 <i class="iconfont icon-trash" ></i>
               </el-button>
             </div>
@@ -53,9 +70,8 @@
           <template v-else>
             <widget-form-item v-if="element && element.key"  :key="element.key" :element="element" :select.sync="selectWidget" :index="index" :data="data"></widget-form-item>
           </template>
-        </template>
-            
-      </draggable>
+        </template> -->
+           </draggable> 
     </el-form>
   </div>
 </template>
@@ -93,12 +109,14 @@ export default {
       this.selectWidget = this.data.list[index]
     },
     handleWidgetAdd (evt) {
-      console.log('add', evt)
-      console.log('end', evt)
+      // console.log('add', evt)
+      // console.log('end', evt)
       const newIndex = evt.newIndex
       const to = evt.to
+      console.log(newIndex)
       console.log(to)
       
+      console.log(this.data)
       //为拖拽到容器的元素添加唯一 key
       const key = Date.parse(new Date()) + '_' + Math.ceil(Math.random() * 99999)
       this.$set(this.data.list, newIndex, {

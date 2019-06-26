@@ -26,6 +26,14 @@
           <el-radio-button :label="true">行内</el-radio-button>
         </el-radio-group>
       </el-form-item>
+      <el-form-item label="布局占比" v-if="Object.keys(data).indexOf('cols')>=0">
+        <el-radio-group v-model="data.cols">
+          <el-radio-button :label="6">25%</el-radio-button>
+          <el-radio-button :label="12">50%</el-radio-button>
+          <el-radio-button :label="18">75%</el-radio-button>
+          <el-radio-button :label="24">100%</el-radio-button>
+        </el-radio-group>
+      </el-form-item>
       <el-form-item label="显示输入框" v-if="Object.keys(data.options).indexOf('showInput')>=0">
         <el-switch v-model="data.options.showInput" ></el-switch>
       </el-form-item>

@@ -3,6 +3,7 @@ export const basicComponents = [
     type: 'input',
     name: '单行文本',
     icon: 'icon-input',
+    cols: 12,
     options: {
       width: '100%',
       defaultValue: '',
@@ -16,6 +17,7 @@ export const basicComponents = [
     type: 'textarea',
     name: '多行文本',
     icon: 'icon-diy-com-textarea',
+    cols: 12,
     options: {
       width: '100%',
       defaultValue: '',
@@ -29,6 +31,7 @@ export const basicComponents = [
     type: 'number',
     name: '计数器',
     icon: 'icon-number',
+    cols: 12,
     options: {
       width: '',
       required: false,
@@ -44,6 +47,7 @@ export const basicComponents = [
     type: 'radio',
     name: '单选框组',
     icon: 'icon-radio-active',
+    cols: 12,
     options: {
       inline: false,
       defaultValue: '',
@@ -77,6 +81,7 @@ export const basicComponents = [
     type: 'checkbox',
     name: '多选框组',
     icon: 'icon-check-box',
+    cols: 12,
     options: {
       inline: false,
       defaultValue: [],
@@ -107,6 +112,7 @@ export const basicComponents = [
     type: 'time',
     name: '时间选择器',
     icon: 'icon-time',
+    cols: 12,
     options: {
       defaultValue: '21:19:56',
       readonly: false,
@@ -127,6 +133,7 @@ export const basicComponents = [
     type: 'date',
     name: '日期选择器',
     icon: 'icon-date',
+    cols: 12,
     options: {
       defaultValue: '',
       readonly: false,
@@ -147,6 +154,7 @@ export const basicComponents = [
     type: 'rate',
     name: '评分',
     icon: 'icon-icon-test',
+    cols: 12,
     options: {
       defaultValue: null,
       max: 5,
@@ -159,6 +167,7 @@ export const basicComponents = [
     type: 'color',
     name: '颜色选择器',
     icon: 'icon-color',
+    cols: 12,
     options: {
       defaultValue: '',
       disabled: false,
@@ -170,6 +179,7 @@ export const basicComponents = [
     type: 'select',
     name: '下拉选择框',
     icon: 'icon-select',
+    cols: 12,
     options: {
       defaultValue: '',
       multiple: false,
@@ -203,6 +213,7 @@ export const basicComponents = [
     type: 'switch',
     name: '开关',
     icon: 'icon-switch',
+    cols: 12,
     options: {
       defaultValue: false,
       required: false,
@@ -213,6 +224,7 @@ export const basicComponents = [
     type: 'slider',
     name: '滑块',
     icon: 'icon-slider',
+    cols: 12,
     options: {
       defaultValue: 0,
       disabled: false,
@@ -232,6 +244,7 @@ export const advanceComponents = [
     type: 'blank',
     name: '自定义',
     icon: 'icon-ic',
+    cols: 24,
     options: {
       defaultType: 'String'
     }
@@ -240,6 +253,7 @@ export const advanceComponents = [
     type: 'imgupload',
     name: '图片',
     icon: 'icon-tupian',
+    cols: 24,
     options: {
       defaultValue: [],
       size: {
@@ -264,6 +278,7 @@ export const advanceComponents = [
     type: 'editor',
     name: '编辑器',
     icon: 'icon-fuwenbenkuang',
+    cols: 24,
     options: {
       defaultValue: '',
       width: ''
@@ -273,6 +288,7 @@ export const advanceComponents = [
     type: 'cascader',
     name: '级联选择器',
     icon: 'icon-jilianxuanze',
+    cols: 12,
     options: {
       defaultValue: [],
       width: '',
@@ -292,24 +308,24 @@ export const advanceComponents = [
 ]
 
 export const layoutComponents = [
-  {
-    type: 'grid',
-    name: '栅格布局',
-    icon: 'icon-grid-',
-    columns: [
-      {
-        span: 12,
-        list: []
-      },
-      {
-        span: 12,
-        list: []
-      }
-    ],
-    options: {
-      gutter: 0,
-      justify: 'start',
-      align: 'top'
-    }
-  }
+  // {
+  //   type: 'grid',
+  //   name: '栅格布局',
+  //   icon: 'icon-grid-',
+  //   columns: [
+  //     {
+  //       span: 12,
+  //       list: []
+  //     },
+  //     {
+  //       span: 12,
+  //       list: []
+  //     }
+  //   ],
+  //   options: {
+  //     gutter: 0,
+  //     justify: 'start',
+  //     align: 'top'
+  //   }
+  // }
 ]
