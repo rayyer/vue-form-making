@@ -1,10 +1,11 @@
 <template>
-  <el-form-item class="widget-view "
-      v-if="element && element.key" 
-      :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
-      :label="element.name"
-      @click.native.stop="handleSelectWidget(index)"
-    >
+  <el-col :span="element.cols">
+    <el-form-item class="widget-view "
+        v-if="element && element.key" 
+        :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
+        :label="element.name"
+        @click.native.stop="handleSelectWidget(index)"
+      >
         <template v-if="element.type == 'input'">
           <el-input 
             v-model="element.options.defaultValue"
@@ -192,6 +193,7 @@
         </el-button>
         
     </el-form-item>
+  </el-col>
 </template>
 
 <script>
