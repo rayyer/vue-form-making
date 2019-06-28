@@ -1,11 +1,11 @@
 基于 GavinZhuLei/vue-form-making 进行量身开发，感谢 [GavinZhuLei/vue-form-making](https://github.com/GavinZhuLei/vue-form-making)
 
 # 快速使用
-> yarn add health-form-builder  
+> yarn add health-form-making
 
 或  
 
-> npm i health-form-builder
+> npm i health-form-making
 
 # form-making
 基于Vue,ElementUI开发的一款表单设计器，提高表单开发效率的利器，让开发者从枯燥的表单代码编写中解放出来
