@@ -1,3 +1,12 @@
+基于 GavinZhuLei/vue-form-making 进行量身开发，感谢 [GavinZhuLei/vue-form-making](https://github.com/GavinZhuLei/vue-form-making)
+
+# 快速使用
+> yarn add health-form-builder  
+
+或  
+
+> npm i health-form-builder
+
 # form-making
 基于Vue,ElementUI开发的一款表单设计器，提高表单开发效率的利器，让开发者从枯燥的表单代码编写中解放出来
 
@@ -34,10 +43,6 @@
 
 * [jsonEditor、ace和clipboard](https://note.youdao.com/share/?id=4cb3b53c76cb9f5f733f171529f71501&type=note#/) （by @[jianhunxia](https://github.com/jianhunxia) 提供)
 
-## 支持
-
-* 如果你发现了新的 bug，或者有新的 feature request，请新建一个 issue
-
 ## 捐赠 
 
 如果觉得还不错，请作者喝杯咖啡吧 ☺
@@ -50,4 +55,4 @@
 
 ## 商业许可
 
-开源版本遵循 LGPL 条款发布，如果您不能接受 LGPL，并且需要将该项目用于商业用途且不想保留版权信息（底部“Powered by GavinZhuLei”版权及链接），为保障您的合法权益，需购买[商业授权](http://tools.xiaoyaoji.cn/form/#/price)
+开源版本遵循 LGPL 条款发布，如果您不能接受 LGPL，并且需要将该项目用于商业用途且不想保留版权信息（底部“Powered by GavinZhuLei”版权及链接），为保障您的合法权益，需购买作者的[商业授权](http://tools.xiaoyaoji.cn/form/#/price)
