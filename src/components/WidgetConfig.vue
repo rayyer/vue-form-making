@@ -28,6 +28,7 @@
       </el-form-item>
       <el-form-item label="布局占比" v-if="Object.keys(data).indexOf('cols')>=0">
         <el-radio-group v-model="data.cols">
+          <el-radio-button :label="3">12%</el-radio-button>
           <el-radio-button :label="6">25%</el-radio-button>
           <el-radio-button :label="12">50%</el-radio-button>
           <el-radio-button :label="18">75%</el-radio-button>
