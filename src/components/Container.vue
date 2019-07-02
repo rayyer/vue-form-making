@@ -212,7 +212,7 @@ export default {
       widgetForm: {
         list: [],
         config: {
-          labelWidth: 100,
+          labelWidth: 70,
           labelPosition: 'left',
           size: 'small'
         },
