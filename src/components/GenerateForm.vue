@@ -1,6 +1,7 @@
 <template>
   <div>
     <el-form ref="generateForm" 
+      label-suffix=":"
       :size="data.config.size"
       :model="models" :rules="rules" :label-position="data.config.labelPosition" :label-width="data.config.labelWidth + 'px'">
       <el-row :gutter="24">
@@ -86,6 +87,9 @@ export default {
           }
         })
       })
+    },
+    reset () {
+      this.$refs.generateForm.resetFields()
     },
     refresh () {
       

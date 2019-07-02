@@ -10,7 +10,8 @@ export const basicComponents = [
       required: false,
       dataType: 'string',
       pattern: '',
-      placeholder: ''
+      placeholder: '',
+      disabled: false,
     }
   },
   {
@@ -74,7 +75,8 @@ export const basicComponents = [
         value: 'value',
         label: 'label'
       },
-      remoteFunc: ''
+      remoteFunc: '',
+      disabled: false,
     }
   },
   {
@@ -105,7 +107,8 @@ export const basicComponents = [
         value: 'value',
         label: 'label'
       },
-      remoteFunc: ''
+      remoteFunc: '',
+      disabled: false,
     }
   },
   {
