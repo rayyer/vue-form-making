@@ -4,7 +4,7 @@
       label-suffix=":"
       :size="data.config.size"
       :model="models" :rules="rules" :label-position="data.config.labelPosition" :label-width="data.config.labelWidth + 'px'">
-      <el-row :gutter="24">
+      <el-row :gutter="12">
         <el-col v-for="(item, index) in data.list" :key="index" :span="item.cols">
             <el-form-item v-if="item.type=='blank'" :label="item.name" :prop="item.model" :key="item.key">
               <slot :name="item.model" :model="models"></slot>
