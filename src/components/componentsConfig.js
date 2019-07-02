@@ -49,7 +49,7 @@ export const basicComponents = [
     icon: 'icon-radio-active',
     cols: 12,
     options: {
-      inline: false,
+      inline: true,
       defaultValue: '',
       showLabel: false,
       options: [

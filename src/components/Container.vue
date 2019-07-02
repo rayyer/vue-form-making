@@ -204,7 +204,7 @@ export default {
         list: [],
         config: {
           labelWidth: 100,
-          labelPosition: 'top',
+          labelPosition: 'left',
           size: 'small'
         },
       },
