@@ -71,14 +71,14 @@
           </el-main>
         </el-container>
         
-        <el-aside class="widget-config-container">
+        <el-aside class="widget-config-container" style="width:315px">
           <el-container>
             <el-header height="45px">
               <div class="config-tab" :class="{active: configTab=='widget'}" @click="handleConfigSelect('widget')">字段属性</div>
               <div class="config-tab" :class="{active: configTab=='form'}" @click="handleConfigSelect('form')">表单属性</div>
             </el-header>
             <el-main class="config-content">
-              <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
+              <widget-config v-show="configTab=='widget'" :data="widgetFormSelect" :widgetFormList="widgetForm.list"></widget-config>
               <form-config v-show="configTab=='form'" :data="widgetForm.config"></form-config>
             </el-main>
           </el-container>
@@ -317,7 +317,7 @@ export default {
       return true
     },
     handlePreview () {
-      console.log(this.widgetForm)
+      // console.log(this.widgetForm)
       this.previewVisible = true
     },
     handleTest () {
@@ -421,7 +421,7 @@ export default {
     widgetForm: {
       deep: true,
       handler: function (val) {
-        // console.log(this.$refs.widgetForm)
+        // console.log('111',this.$refs.widgetForm)
       }
     }
   }

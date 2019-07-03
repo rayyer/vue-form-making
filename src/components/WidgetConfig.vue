@@ -27,7 +27,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="布局占比" v-if="Object.keys(data).indexOf('cols')>=0">
-        <el-radio-group v-model="data.cols">
+        <el-radio-group v-model="data.cols" size="mini">
           <el-radio-button :label="3">12.5%</el-radio-button>
           <el-radio-button :label="6">25%</el-radio-button>
           <el-radio-button :label="12">50%</el-radio-button>
@@ -38,6 +38,17 @@
       <el-form-item label="显示输入框" v-if="Object.keys(data.options).indexOf('showInput')>=0">
         <el-switch v-model="data.options.showInput" ></el-switch>
       </el-form-item>
+
+      <el-form-item label="依赖显示">
+        <el-cascader
+          :options="dependItems"
+          v-model="data.options.dependItem"
+          :props="{ multiple: true}"
+          clearable
+          placeholder="请选择依赖项"
+          ></el-cascader>
+      </el-form-item>      
+
       <el-form-item label="最小值" v-if="Object.keys(data.options).indexOf('min')>=0">
         <el-input-number v-model="data.options.min" :min="0" :max="100" :step="1"></el-input-number>
       </el-form-item>
@@ -347,14 +358,16 @@
 
 <script>
 import Draggable from 'vuedraggable'
+import { continueStatement } from 'babel-types';
 
 export default {
   components: {
     Draggable
   },
-  props: ['data'],
+  props: ['data', 'widgetFormList'],
   data () {
     return {
+      dependItems: [],
       validator: {
         type: null,
         required: null,
@@ -367,19 +380,48 @@ export default {
   computed: {
     show () {
       if (this.data && Object.keys(this.data).length > 0) {
+        this.formatDepentCascader()
         return true
       }
       return false
     }
   },
   methods: {
+    formatDepentCascader () {
+      this.dependItems = []
+      const dependableType = ['radio', 'checkbox', 'select', 'switch']
+      for(var item of this.widgetFormList)
+      {
+        if(dependableType.indexOf(item.type) === -1) continue
+        if(item.model === this.data.model) continue // 自己无需依赖自己
+
+        // 格式化options的格式为value:v,label:b
+        var childList = []
+        for(let child of item.options.options)
+        {
+          child = Object.assign(
+            {value: child.value}, 
+            {label: child.label || child.value }
+            )
+          childList.push(child)
+        }
+
+        this.dependItems.push(
+          {
+            'value': item.model,
+            'label': item.name, 
+            'children': childList
+          }
+        ) 
+        console.log(this.dependItems)
+      }
+    },
     handleOptionsRemove (index) {
       if (this.data.type === 'grid') {
         this.data.columns.splice(index, 1)
       } else {
         this.data.options.options.splice(index, 1)
       }
-      
     },
     handleAddOption () {
       if (this.data.options.showLabel) {

@@ -19,7 +19,7 @@ export const basicComponents = [
       dataType: 'string',
       pattern: '',
       placeholder: '',
-      disabled: false,
+      disabled: false
     }
   },
   {
@@ -64,15 +64,15 @@ export const basicComponents = [
       options: [
         {
           value: '选项1',
-          label: '选项1'
+          // label: '选项1'
         },
         {
           value: '选项2',
-          label: '选项2'
+          // label: '选项2'
         },
         {
           value: '选项3',
-          label: '选项3'
+          // label: '选项3'
         }
       ],
       required: false,
@@ -84,7 +84,7 @@ export const basicComponents = [
         label: 'label'
       },
       remoteFunc: '',
-      disabled: false,
+      disabled: false
     }
   },
   {
@@ -93,7 +93,7 @@ export const basicComponents = [
     icon: 'icon-check-box',
     cols: 12,
     options: {
-      inline: false,
+      inline: true,
       defaultValue: [],
       showLabel: false,
       options: [
@@ -116,7 +116,7 @@ export const basicComponents = [
         label: 'label'
       },
       remoteFunc: '',
-      disabled: false,
+      disabled: false
     }
   },
   {
@@ -137,7 +137,7 @@ export const basicComponents = [
       arrowControl: true,
       format: 'HH:mm:ss',
       required: false,
-      width: '',
+      width: ''
     }
   },
   {
@@ -158,7 +158,7 @@ export const basicComponents = [
       format: 'yyyy-MM-dd',
       timestamp: false,
       required: false,
-      width: '',
+      width: ''
     }
   },
   {
@@ -228,7 +228,7 @@ export const basicComponents = [
     options: {
       defaultValue: false,
       required: false,
-      disabled: false,
+      disabled: false
     }
   },
   {
