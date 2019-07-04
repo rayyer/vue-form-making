@@ -15,7 +15,7 @@
       </template>
       <!--组件slot--->
     </fm-generate-form>
-    <el-button type="primary" @click="handleTest">获取数据</el-button>
+    <el-button type="primary" @click="handleSubmit">提交</el-button>
     <el-button @click="handleReset">重置</el-button>
   </div>
 </template>
@@ -195,11 +195,14 @@ export default {
     }
   },
   methods: {
-    handleTest () {
+    handleSubmit () {
       this.$refs.generateForm.getData().then(data => {
-        this.$alert(data, '').catch(e=>{})
+        // 数据校验成功
+        // data 为获取的表单数据
+        // this.$alert(data, '').catch(e=>{})
         // this.$refs.widgetPreview.end()
       }).catch(e => {
+        // 数据校验失败
         // this.$refs.widgetPreview.end()
       })
     },
