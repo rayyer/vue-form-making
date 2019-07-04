@@ -56,14 +56,12 @@
         </el-aside>
         <el-container class="center-container" direction="vertical">
           <el-header class="btn-bar" style="height: 45px;">
-            <slot name="action">
-            </slot>
             <el-button v-if="upload" type="text" size="medium" icon="el-icon-upload2" @click="handleUpload">导入JSON</el-button>
             <el-button v-if="clearable" type="text" size="medium" icon="el-icon-delete" @click="handleClear">清空</el-button>
             <el-button v-if="preview" type="text" size="medium" icon="el-icon-view" @click="handlePreview">预览</el-button>
             <el-button v-if="generateJson" type="text" size="medium" icon="el-icon-tickets" @click="handleGenerateJson">生成JSON</el-button>
             <el-button v-if="generateCode" type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">生成代码</el-button>
-            <el-button v-if="submitForm" type="text" size="medium" icon="el-icon-document" @click="handleSubmitForm">保存表单</el-button>
+            <slot name="action" :formData="widgetForm"></slot>
           </el-header>
           <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
             <widget-form v-if="!resetJson"  ref="widgetForm" :data="widgetForm" :select.sync="widgetFormSelect"></widget-form>
@@ -187,14 +185,6 @@ export default {
     upload: {
       type: Boolean, 
       default: false
-    },
-    submitForm: {
-      type: Boolean,
-      default: false
-    },
-    submitFormUrl: {
-      type: String,
-      default: ''
     },
     clearable: {
       type: Boolean,
@@ -370,19 +360,6 @@ export default {
       } catch (e) {
         this.$message.error(e.message)
         this.$refs.uploadJson.end()
-      }
-    },
-    handleSubmitForm () {
-      if(this.submitFormUrl)
-      {
-        this.$message({
-          message: '<div style="width:300px">提交表单模板到'+this.submitFormUrl+'<br>'+JSON.stringify(this.widgetForm)+'</div>',
-          dangerouslyUseHTMLString: true
-        })
-      }
-      else
-      {
-        this.$message.error('没有url地址')
       }
     },
     handleClear () {
