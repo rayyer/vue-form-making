@@ -42,7 +42,7 @@
       <el-form-item label="依赖显示">
         <el-cascader
           :options="dependItems"
-          v-model="data.options.dependItem"
+          v-model="data.dependences"
           :props="{ multiple: true}"
           clearable
           placeholder="请选择依赖项"
@@ -412,8 +412,7 @@ export default {
             'label': item.name, 
             'children': childList
           }
-        ) 
-        console.log(this.dependItems)
+        )
       }
     },
     handleOptionsRemove (index) {
