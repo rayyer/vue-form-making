@@ -66,7 +66,6 @@
             <el-button v-if="submitForm" type="text" size="medium" icon="el-icon-document" @click="handleSubmitForm">保存表单</el-button>
           </el-header>
           <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
-            
             <widget-form v-if="!resetJson"  ref="widgetForm" :data="widgetForm" :select.sync="widgetFormSelect"></widget-form>
           </el-main>
         </el-container>
@@ -93,7 +92,6 @@
           form
         >
           <generate-form insite="true" v-if="previewVisible" :data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm">
-
             <template v-slot:blank="scope">
               宽度：<el-input v-model="scope.model.blank.width" style="width: 100px"></el-input>
               高度：<el-input v-model="scope.model.blank.height" style="width: 100px"></el-input>

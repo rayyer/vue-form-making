@@ -257,7 +257,7 @@ export const advanceComponents = [
     icon: 'icon-ic',
     cols: 24,
     options: {
-      defaultType: 'String'
+      defaultType: 'Object'
     }
   },
   {
