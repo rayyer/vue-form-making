@@ -210,9 +210,10 @@ export default {
       advanceComponents,
       resetJson: false,
       widgetForm: {
+        title: '',
         list: [],
         config: {
-          labelWidth: 70,
+          labelWidth: 80,
           labelPosition: 'left',
           size: 'small'
         },
