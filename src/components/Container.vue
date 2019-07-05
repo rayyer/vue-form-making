@@ -2,7 +2,7 @@
   <el-container class="fm2-container">
     <el-main class="fm2-main">
       <el-container>
-        <el-aside width="250px">
+        <el-aside width="210px">
           <div class="components-list">
             <div class="widget-cate">基础字段</div>
             <draggable tag="ul" :list="basicComponents" 
@@ -201,7 +201,7 @@ export default {
         title: '',
         list: [],
         config: {
-          labelWidth: 80,
+          labelWidth: 90,
           labelPosition: 'left',
           size: 'small'
         },
