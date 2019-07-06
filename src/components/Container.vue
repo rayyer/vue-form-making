@@ -56,12 +56,13 @@
         </el-aside>
         <el-container class="center-container" direction="vertical">
           <el-header class="btn-bar" style="height: 45px;">
+            <slot name="action">
+            </slot>
             <el-button v-if="upload" type="text" size="medium" icon="el-icon-upload2" @click="handleUpload">导入JSON</el-button>
             <el-button v-if="clearable" type="text" size="medium" icon="el-icon-delete" @click="handleClear">清空</el-button>
             <el-button v-if="preview" type="text" size="medium" icon="el-icon-view" @click="handlePreview">预览</el-button>
             <el-button v-if="generateJson" type="text" size="medium" icon="el-icon-tickets" @click="handleGenerateJson">生成JSON</el-button>
             <el-button v-if="generateCode" type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">生成代码</el-button>
-            <slot name="action" :formData="widgetForm"></slot>
           </el-header>
           <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
             <widget-form v-if="!resetJson"  ref="widgetForm" :data="widgetForm" :select.sync="widgetFormSelect"></widget-form>
@@ -189,6 +190,12 @@ export default {
     clearable: {
       type: Boolean,
       default: false
+    },
+    loadData: {
+      type: Object,
+      default: function () {
+        return {}
+      }
     }
   },
   data () {
@@ -290,7 +297,7 @@ export default {
     }
   },
   mounted () {
-
+    this.setJSON(this.loadData)
   },
   methods: {
     handleConfigSelect (value) {
