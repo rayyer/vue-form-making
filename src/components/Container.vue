@@ -297,7 +297,8 @@ export default {
     }
   },
   mounted () {
-    this.setJSON(this.loadData)
+    // 如果有传值，则初始化传值
+    if(!(Object.keys(this.loadData).length === 0 && this.loadData.constructor === Object)) this.setJSON(this.loadData)
   },
   methods: {
     handleConfigSelect (value) {
@@ -389,7 +390,6 @@ export default {
       return generateCode(JSON.stringify(this.widgetForm))
     },
     setJSON (json) {
-      console.log(json)
       // 针对外面传值，如果缺少指定key，则使用默认key
       if(!json.config) json.config = this.widgetForm.config
       if(!json.list) json.list = this.widgetForm.list

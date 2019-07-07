@@ -7,6 +7,13 @@
     generate-code
     clearable
     :loadData="jsonData">
+    <!-- <fm-making-form
+    ref="makingForm"
+    upload
+    preview
+    generate-json
+    generate-code
+    clearable> -->
     <template slot="action" slot-scope="props">
       <el-button type="text" size="medium" icon="el-icon-document" @click="handleSubmitForm(props.formData)">保存表单</el-button>
     </template>

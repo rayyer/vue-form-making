@@ -390,6 +390,7 @@ export default {
     formatDepentCascader () {
       this.dependItems = []
       const dependableType = ['radio', 'checkbox', 'select', 'switch']
+      // 在先拖计数器，然后拖进单行文本，控制台会报错Error in nextTick: "TypeError: Cannot read property 'getCheckedNodes',不影响业务，尚未修复
       for(var item of this.widgetFormList)
       {
         if(dependableType.indexOf(item.type) === -1) continue
