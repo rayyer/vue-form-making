@@ -19,7 +19,7 @@
         >
           <template v-for="(element, index) in data.list">
             <widget-form-item
-              v-if="element && element.key" 
+              v-if="element && element.key && !element.is_delete" 
               :key="element.key" 
               :element="element" 
               :select.sync="selectWidget" 
@@ -178,6 +178,7 @@ export default {
     selectWidget: {
       handler (val) {
         this.$emit('update:select', val)
+        console.log(this.data)
       },
       deep: true
     }

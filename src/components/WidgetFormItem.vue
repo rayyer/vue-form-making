@@ -222,6 +222,7 @@ export default {
       this.selectWidget = this.data.list[index]
     },
     handleWidgetDelete (index) {
+      this.selectWidget.is_delete = 1 //对当前组件进行软删除标记
       if (this.data.list.length - 1 === index) {
         if (index === 0) {
           this.selectWidget = {}
@@ -233,7 +234,9 @@ export default {
       }
 
       this.$nextTick(() => {
-        this.data.list.splice(index, 1)
+        // 存在id属性，可能是从服务器上返回，在修改表单的场景下进行删除，则不删除当前字段对象
+        // 如果没有id属性，则是新增字段，删除无需保存
+        if(!this.data.list[index].hasOwnProperty('id')) this.data.list.splice(index, 1)
       })
     },
     handleWidgetClone (index) {
