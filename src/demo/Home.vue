@@ -1,19 +1,19 @@
 <template>
-  <!-- <fm-making-form
+  <fm-making-form
     ref="makingForm"
     upload
     preview
     generate-json
     generate-code
     clearable
-    :loadData="jsonData"> -->
-    <fm-making-form
+    :loadData="jsonData">
+    <!-- <fm-making-form
     ref="makingForm"
     upload
     preview
     generate-json
     generate-code
-    clearable>
+    clearable> -->
     <template slot="action" slot-scope="props">
       <el-button type="text" size="medium" icon="el-icon-document" @click="handleSubmitForm(props.formData)">保存表单</el-button>
     </template>
@@ -22,164 +22,159 @@
 
 <script>
 const formList = [
-  {
-    'type': 'blank',
-    'name': '自定义',
-    'icon': 'icon-ic',
-    'cols': 24,
-    'options': {
-      'defaultType': 'Object',
-      'remoteFunc': 'func_1562222183000_12341'
-    },
-    'key': '1562222183000_12341',
-    'model': 'blank',
-    'rules': []
-  },
-  {
-    'type': 'input',
-    'name': '单行文本',
-    'icon': 'icon-input',
-    'cols': 12,
-    'options': {
-      'width': '100%',
-      'defaultValue': '',
-      'required': false,
-      'dataType': 'string',
-      'pattern': '',
-      'placeholder': '',
-      'remoteFunc': 'func_1561623027000_24735'
-    },
-    'key': '1561623027000_24735',
-    'model': 'input_1561623027000_24735',
-    'rules': [
-      {
-        'type': 'string',
-        'message': '单行文本格式不正确'
-      }
-    ]
-  },
-  {
-    'type': 'textarea',
-    'name': '多行文本',
-    'icon': 'icon-diy-com-textarea',
-    'cols': 12,
-    'options': {
-      'width': '100%',
-      'defaultValue': '',
-      'required': false,
-      'disabled': false,
-      'pattern': '',
-      'placeholder': '',
-      'remoteFunc': 'func_1561623029000_95127'
-    },
-    'key': '1561623029000_95127',
-    'model': 'textarea_1561623029000_95127',
-    'rules': []
-  },
-  {
-    'type': 'input',
-    'name': '单行文本',
-    'icon': 'icon-input',
-    'cols': 12,
-    'options': {
-      'width': '100%',
-      'defaultValue': '',
-      'required': false,
-      'dataType': 'string',
-      'pattern': '',
-      'placeholder': '',
-      'remoteFunc': 'func_1561623032000_98125'
-    },
-    'key': '1561623032000_98125',
-    'model': 'input_1561623032000_98125',
-    'rules': [
-      {
-        'type': 'string',
-        'message': '单行文本格式不正确'
-      }
-    ]
-  },
-  {
-    'type': 'radio',
-    'name': '单选框组',
-    'icon': 'icon-radio-active',
-    'cols': 12,
-    'options': {
-      'inline': false,
-      'defaultValue': '',
-      'showLabel': false,
-      'options': [
+    {
+      "id": 32,
+      "form_id": 13,
+      "name": "单行文本2",
+      "type": "input",
+      "options": {
+        "width": "100%",
+        "defaultValue": null,
+        "required": false,
+        "dataType": "string",
+        "pattern": null,
+        "placeholder": null,
+        "disabled": false,
+        "remoteFunc": "func_1562576523000_62589"
+      },
+      "icon": "icon-input",
+      "key": "1562576523000_62589",
+      "model": "input_1562576523000_62589",
+      "cols": 12,
+      "rules": [
         {
-          'value': '选项1',
-          'label': '选项1'
-        },
-        {
-          'value': '选项2',
-          'label': '选项2'
-        },
-        {
-          'value': '选项3',
-          'label': '选项3'
+          "type": "string",
+          "message": "单行文本2格式不正确"
         }
       ],
-      'required': false,
-      'width': '',
-      'remote': false,
-      'remoteOptions': [],
-      'props': {
-        'value': 'value',
-        'label': 'label'
+      "is_delete": 1
+    },
+    {
+      "id": 33,
+      "form_id": 13,
+      "name": "单行文本1",
+      "type": "input",
+      "options": {
+        "width": "100%",
+        "defaultValue": null,
+        "required": false,
+        "dataType": "string",
+        "pattern": null,
+        "placeholder": null,
+        "disabled": false,
+        "remoteFunc": "func_1562576589000_46001"
       },
-      'remoteFunc': 'func_1561623035000_50587'
+      "icon": "icon-input",
+      "key": "1562576589000_46001",
+      "model": "input_1562576589000_46001",
+      "cols": 12,
+      "rules": [
+        {
+          "type": "string",
+          "message": "单行文本1格式不正确"
+        }
+      ],
+      "is_delete": 1
     },
-    'key': '1561623035000_50587',
-    'model': 'radio_1561623035000_50587',
-    'rules': []
-  },
-  {
-    'type': 'input',
-    'name': '单行文本',
-    'icon': 'icon-input',
-    'cols': 12,
-    'options': {
-      'width': '100%',
-      'defaultValue': '',
-      'required': false,
-      'dataType': 'string',
-      'pattern': '',
-      'placeholder': '',
-      'remoteFunc': 'func_1561623037000_32246'
+    {
+      "id": 34,
+      "form_id": 13,
+      "name": "单行文本3",
+      "type": "input",
+      "options": {
+        "width": "100%",
+        "defaultValue": null,
+        "required": false,
+        "dataType": "string",
+        "pattern": null,
+        "placeholder": null,
+        "disabled": false,
+        "remoteFunc": "func_1562576567000_73306"
+      },
+      "icon": "icon-input",
+      "key": "1562576567000_73306",
+      "model": "input_1562576567000_73306",
+      "cols": 12,
+      "rules": [
+        {
+          "type": "string",
+          "message": "单行文本3格式不正确"
+        }
+      ],
+      "is_delete": 0
     },
-    'key': '1561623037000_32246',
-    'model': 'input_1561623037000_32246',
-    'rules': [
-      {
-        'type': 'string',
-        'message': '单行文本格式不正确'
-      }
-    ]
-  },
-  {
-    'type': 'number',
-    'name': '计数器',
-    'icon': 'icon-number',
-    'cols': 12,
-    'options': {
-      'width': '',
-      'required': false,
-      'defaultValue': 0,
-      'min': 0,
-      'max': 0,
-      'step': 1,
-      'disabled': false,
-      'controlsPosition': '',
-      'remoteFunc': 'func_1561623041000_57961'
+    {
+      "id": 35,
+      "form_id": 13,
+      "name": "单行文本4",
+      "type": "input",
+      "options": {
+        "width": "100%",
+        "defaultValue": null,
+        "required": false,
+        "dataType": "string",
+        "pattern": null,
+        "placeholder": null,
+        "disabled": false,
+        "remoteFunc": "func_1562576618000_36628"
+      },
+      "icon": "icon-input",
+      "key": "1562576618000_36628",
+      "model": "input_1562576618000_36628",
+      "cols": 12,
+      "rules": [
+        {
+          "type": "string",
+          "message": "单行文本4格式不正确"
+        }
+      ],
+      "is_delete": 0
     },
-    'key': '1561623041000_57961',
-    'model': 'number_1561623041000_57961',
-    'rules': []
-  }
-]
+    {
+      "id": 36,
+      "form_id": 13,
+      "name": "计数器",
+      "type": "number",
+      "options": {
+        "width": null,
+        "required": false,
+        "defaultValue": 0,
+        "min": 0,
+        "max": 0,
+        "step": 1,
+        "disabled": false,
+        "controlsPosition": null,
+        "remoteFunc": "func_1562576639000_87448"
+      },
+      "icon": "icon-number",
+      "key": "1562576639000_87448",
+      "model": "number_1562576639000_87448",
+      "cols": 12,
+      "rules": [],
+      "is_delete": 0
+    },
+    {
+      "id": 37,
+      "form_id": 13,
+      "name": "多行文本",
+      "type": "textarea",
+      "options": {
+        "width": "100%",
+        "defaultValue": null,
+        "required": false,
+        "disabled": false,
+        "pattern": null,
+        "placeholder": null,
+        "remoteFunc": "func_1562576644000_91614"
+      },
+      "icon": "icon-diy-com-textarea",
+      "key": "1562576644000_91614",
+      "model": "textarea_1562576644000_91614",
+      "cols": 12,
+      "rules": [],
+      "is_delete": 0
+    }
+  ]
 
 const config = {
     "labelWidth": 80,
@@ -201,13 +196,11 @@ export default {
   },
   methods: {
     formatJson () {
+      const deleted = {'deleted': formList.filter(item => item.is_delete===1 )}
       const title = {'title': '1111111'}
-      const list = {'list': formList}
+      const list = {'list': formList.filter(item => item.is_delete!==1 )}
       const config = {'config': config}
-
-      const data = Object.assign({}, this.jsonData, title, list, config)
-      this.jsonData = data
-      // this.jsonData.config = config
+      this.jsonData = Object.assign({}, this.jsonData, title, list, config, deleted)
       // console.log(this.jsonData)
     },
     handleSubmitForm (formData) {
