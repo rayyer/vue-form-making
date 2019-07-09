@@ -112,7 +112,15 @@
           form
         >
           <el-alert type="info" title="JSON格式如下，直接复制生成的json覆盖此处代码点击确定即可"></el-alert>
-          <div id="uploadeditor" style="height: 400px;width: 100%;">{{jsonEg}}</div>
+          <el-input
+            type="textarea"
+            :autosize="{ minRows: 5, maxRows: 16 }"
+            placeholder="请输入内容"
+            style="height: 400px;width: 100%;"
+            v-model="uploadEditor">
+            {{jsonEg}}
+          </el-input>
+          <!-- <div id="uploadeditor" style="height: 400px;width: 100%;">{{jsonEg}}</div> -->
         </cus-dialog>
 
         <cus-dialog
@@ -335,8 +343,8 @@ export default {
       // console.log(JSON.stringify(this.widgetForm))
       this.$nextTick(() => {
 
-        const editor = ace.edit('jsoneditor')
-        editor.session.setMode("ace/mode/json")
+        // const editor = ace.edit('jsoneditor')
+        // editor.session.setMode("ace/mode/json")
 
         if (!this.jsonClipboard) {
           this.jsonClipboard = new Clipboard('.json-btn')
@@ -357,14 +365,15 @@ export default {
     },
     handleUpload () {
       this.uploadVisible = true
-      this.$nextTick(() => {
-        this.uploadEditor = ace.edit('uploadeditor')
-        this.uploadEditor.session.setMode("ace/mode/json")
-      })
+      // this.$nextTick(() => {
+      //   this.uploadEditor = ace.edit('uploadeditor')
+      //   this.uploadEditor.session.setMode("ace/mode/json")
+      // })
     },
     handleUploadJson () {
       try {
-        this.setJSON(JSON.parse(this.uploadEditor.getValue()))
+        this.setJSON(JSON.parse(this.uploadEditor))
+        // this.setJSON(JSON.parse(this.uploadEditor.getValue()))
         this.uploadVisible = false
       } catch (e) {
         this.$message.error(e.message)
