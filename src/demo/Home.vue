@@ -174,6 +174,8 @@ const formList = [
   ]
 
 const config = {
+    "title": '默认标题',
+    "key":'default_key_20190808',
     "labelWidth": 80,
     "labelPosition": "left",
     "size": "small"
@@ -193,11 +195,12 @@ export default {
   },
   methods: {
     formatJson () {
-      const deleted = {'deleted': formList.filter(item => item.is_delete===1 )}
-      const title = {'title': '1111111'}
-      const list = {'list': formList.filter(item => item.is_delete!==1 )}
-      const config = {'config': config}
-      this.jsonData = Object.assign({}, this.jsonData, title, list, config, deleted)
+      this.jsonData = Object.assign(
+        {},
+        {'list': formList.filter(item => item.is_delete!==1 )}, // 表单字段
+        {'deleted': formList.filter(item => item.is_delete===1 )},  // 表单已删除字段
+        {'config': config} // 表单配置项
+      )
       // console.log(this.jsonData)
     }
   }

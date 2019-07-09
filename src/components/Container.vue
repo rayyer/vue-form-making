@@ -205,9 +205,10 @@ export default {
       advanceComponents,
       resetJson: false,
       widgetForm: {
-        title: '',
         list: [],
         config: {
+          title: '',
+          key: '',
           labelWidth: 90,
           labelPosition: 'left',
           size: 'small'
@@ -374,7 +375,7 @@ export default {
       this.widgetForm = {
         list: [],
         config: {
-          labelWidth: 100,
+          labelWidth: 90,
           labelPosition: 'right',
           size: 'small',
           customClass: ''

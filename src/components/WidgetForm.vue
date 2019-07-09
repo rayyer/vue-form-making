@@ -2,13 +2,6 @@
   <div class="widget-form-container">
     <div v-if="data.list.length == 0" class="form-empty">从左侧拖拽来添加字段</div>
     <el-form :size="data.config.size" :label-position="data.config.labelPosition" :label-width="data.config.labelWidth + 'px'">
-      <el-row class="widget-grid " :gutter="0">
-        <el-col :span="24">
-          <el-form-item label="表单名称" required>
-            <el-input v-model="data.title" placeholder="请输入要创建的表单名称"></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
       <el-row class="widget-grid " :gutter="12">
         <draggable class="widget-form-list"
           v-model="data.list" 

@@ -1,6 +1,15 @@
 <template>
   <div class="form-config-container">
     <el-form label-position="top">
+
+      <el-form-item label="表单名称">
+        <el-input v-model="data.title"></el-input>
+      </el-form-item>
+
+      <el-form-item label="系统标识">
+        <el-input v-model="data.key"></el-input>
+      </el-form-item>
+
       <el-form-item label="标签对齐方式">
         <el-radio-group v-model="data.labelPosition">
           <el-radio-button label="left">左对齐</el-radio-button>
@@ -26,6 +35,11 @@
 
 <script>
 export default {
-  props: ['data']
+  props: ['data'],
+  mounted () {
+    const key = Date.parse(new Date()) + '_' + Math.ceil(Math.random() * 99999)
+    if(this.data.title === '') this.data.title = 'Title_' + key
+    if(this.data.key === '') this.data.key = 'Key_' + key
+  }
 }
 </script>
