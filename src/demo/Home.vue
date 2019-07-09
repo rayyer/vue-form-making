@@ -14,9 +14,6 @@
     generate-json
     generate-code
     clearable> -->
-    <template slot="action" slot-scope="props">
-      <el-button type="text" size="medium" icon="el-icon-document" @click="handleSubmitForm(props.formData)">保存表单</el-button>
-    </template>
   </fm-making-form>
 </template>
 
@@ -202,16 +199,6 @@ export default {
       const config = {'config': config}
       this.jsonData = Object.assign({}, this.jsonData, title, list, config, deleted)
       // console.log(this.jsonData)
-    },
-    handleSubmitForm (formData) {
-      // console.log(formData)
-      request.post('/user', formData)
-        .then(function (response) {
-          console.log(response)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
     }
   }
 }
