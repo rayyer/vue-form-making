@@ -214,7 +214,7 @@ export default {
           size: 'small'
         },
       },
-      configTab: 'widget',
+      configTab: 'form',
       widgetFormSelect: null,
       previewVisible: false,
       jsonVisible: false,
@@ -407,10 +407,16 @@ export default {
     }
   },
   watch: {
-    widgetForm: {
+    // widgetForm: {
+    //   deep: true,
+    //   handler: function (val) {
+    //     // console.log('111',this.$refs.widgetForm)
+    //   }
+    // },
+    widgetFormSelect: {
       deep: true,
       handler: function (val) {
-        // console.log('111',this.$refs.widgetForm)
+        this.configTab = 'widget'
       }
     }
   }
