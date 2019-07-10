@@ -197,6 +197,7 @@ export default {
     formatJson () {
       this.jsonData = Object.assign(
         {},
+        // {'list': formList},
         {'list': formList.filter(item => item.is_delete!==1 )}, // 表单字段
         {'deleted': formList.filter(item => item.is_delete===1 )},  // 表单已删除字段
         {'config': config} // 表单配置项
