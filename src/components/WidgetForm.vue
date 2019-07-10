@@ -2,7 +2,7 @@
   <div class="widget-form-container">
     <div v-if="data.list.length == 0" class="form-empty">从左侧拖拽来添加字段</div>
     <el-form :size="data.config.size" :label-position="data.config.labelPosition" :label-width="data.config.labelWidth + 'px'">
-      <el-row class="widget-grid " :gutter="12">
+      <el-row class="widget-grid " :gutter="24">
         <draggable class="widget-form-list"
           v-model="data.list" 
           v-bind="{group:'people', ghostClass: 'ghost'}"

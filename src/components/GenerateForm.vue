@@ -7,7 +7,7 @@
       :label-position="data.config.labelPosition"
       :label-width="data.config.labelWidth + 'px'"
       >
-      <el-row :gutter="12">
+      <el-row :gutter="24">
         <el-col
           v-for="(item, index) in data.list"
           :key="index"
