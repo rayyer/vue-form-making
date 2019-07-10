@@ -1,19 +1,19 @@
 <template>
-  <fm-making-form
+  <!-- <fm-making-form
     ref="makingForm"
     upload
     preview
     generate-json
     generate-code
     clearable
-    :loadData="jsonData">
-    <!-- <fm-making-form
+    :loadData="jsonData"> -->
+  <fm-making-form
     ref="makingForm"
     upload
     preview
     generate-json
     generate-code
-    clearable> -->
+    clearable>
   </fm-making-form>
 </template>
 
