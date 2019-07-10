@@ -1,9 +1,12 @@
 <template>
   <div>
-    <el-form ref="generateForm" 
-      label-suffix=":"
+    <el-form ref="generateForm"
       :size="data.config.size"
-      :model="models" :rules="rules" :label-position="data.config.labelPosition" :label-width="data.config.labelWidth + 'px'">
+      :model="models"
+      :rules="rules"
+      :label-position="data.config.labelPosition"
+      :label-width="data.config.labelWidth + 'px'"
+      >
       <el-row :gutter="12">
         <el-col
           v-for="(item, index) in data.list"

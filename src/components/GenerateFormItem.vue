@@ -2,7 +2,7 @@
   <el-form-item
     :label="widget.name"
     :prop="widget.model"
-    :class="{'radio_margin': widget.type==='radio'}"
+    :class="{'radio_margin_generate': widget.type==='radio'}"
     >
     <template v-if="widget.type == 'input'" >
       <el-input 
