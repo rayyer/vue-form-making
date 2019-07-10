@@ -21,7 +21,7 @@
         <el-input v-model="data.options.placeholder"></el-input>
       </el-form-item>
 
-      <el-form-item label="尾部内容" v-if="Object.keys(data.options).indexOf('suffix')>=0">
+      <el-form-item label="尾部内容" v-if="data.type!='input'">
         <el-input v-model="data.options.suffix" placeholder="可输入单位等内容后缀"></el-input>
       </el-form-item>
 
