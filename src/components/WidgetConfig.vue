@@ -20,6 +20,11 @@
       <el-form-item label="占位内容" v-if="Object.keys(data.options).indexOf('placeholder')>=0 && (data.type!='time' || data.type!='date')">
         <el-input v-model="data.options.placeholder"></el-input>
       </el-form-item>
+
+      <el-form-item label="尾部内容" v-if="Object.keys(data.options).indexOf('suffix')>=0">
+        <el-input v-model="data.options.suffix" placeholder="可输入单位等内容后缀"></el-input>
+      </el-form-item>
+
       <el-form-item label="布局方式" v-if="Object.keys(data.options).indexOf('inline')>=0">
         <el-radio-group v-model="data.options.inline">
           <el-radio-button :label="false">块级</el-radio-button>

@@ -32,7 +32,8 @@ const formList = [
         "pattern": null,
         "placeholder": null,
         "disabled": false,
-        "remoteFunc": "func_1562576523000_62589"
+        "remoteFunc": "func_1562576523000_62589",
+        "suffix":""
       },
       "icon": "icon-input",
       "key": "1562576523000_62589",
@@ -59,7 +60,8 @@ const formList = [
         "pattern": null,
         "placeholder": null,
         "disabled": false,
-        "remoteFunc": "func_1562576589000_46001"
+        "remoteFunc": "func_1562576589000_46001",
+        "suffix":""
       },
       "icon": "icon-input",
       "key": "1562576589000_46001",
@@ -86,7 +88,8 @@ const formList = [
         "pattern": null,
         "placeholder": null,
         "disabled": false,
-        "remoteFunc": "func_1562576567000_73306"
+        "remoteFunc": "func_1562576567000_73306",
+        "suffix":""
       },
       "icon": "icon-input",
       "key": "1562576567000_73306",
@@ -113,7 +116,8 @@ const formList = [
         "pattern": null,
         "placeholder": null,
         "disabled": false,
-        "remoteFunc": "func_1562576618000_36628"
+        "remoteFunc": "func_1562576618000_36628",
+        "suffix":""
       },
       "icon": "icon-input",
       "key": "1562576618000_36628",

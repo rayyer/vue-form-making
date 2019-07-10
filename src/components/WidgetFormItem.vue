@@ -12,7 +12,11 @@
             :style="{width: element.options.width}"
             :placeholder="element.options.placeholder"
             :disabled="element.options.disabled"
-          ></el-input>
+          >
+          <i slot="suffix">
+            {{element.options.suffix}}
+          </i>
+          </el-input>
         </template>
 
         <template v-if="element.type == 'textarea'">
