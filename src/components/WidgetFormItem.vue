@@ -249,10 +249,13 @@ export default {
       })
     },
     handleWidgetClone (index) {
+      const key = Date.parse(new Date()) + '_' + Math.ceil(Math.random() * 99999)
+
       let cloneData = {
         ...this.data.list[index],
         options: {...this.data.list[index].options},
-        key: Date.parse(new Date()) + '_' + Math.ceil(Math.random() * 99999)
+        key: key,
+        model: this.data.list[index].type + '_' + key
       }
 
       if (this.data.list[index].type === 'radio' || this.data.list[index].type === 'checkbox') {
@@ -266,7 +269,11 @@ export default {
         }
       }
 
-      this.data.list.splice(index, 0, cloneData)
+      // 无须复制的字段
+      if(cloneData.hasOwnProperty('id')) delete cloneData.id
+      if(cloneData.hasOwnProperty('form_id')) delete cloneData.form_id
+
+      this.data.list.splice(index+1, 0, cloneData)
 
       this.$nextTick(() => {
         this.selectWidget = this.data.list[index + 1]
