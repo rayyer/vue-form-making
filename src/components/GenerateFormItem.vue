@@ -8,7 +8,11 @@
         :placeholder="widget.options.placeholder"
         :style="{width: widget.options.width}"
         :disabled="widget.options.disabled"
-      ></el-input>
+      >
+        <i slot="suffix">
+          {{widget.options.suffix}}
+        </i>
+      </el-input>
       <el-input 
         v-else
         :type="widget.options.dataType"
@@ -16,7 +20,11 @@
         :disabled="widget.options.disabled"
         :placeholder="widget.options.placeholder"
         :style="{width: widget.options.width}"
-      ></el-input>
+      >
+        <i slot="suffix">
+          {{widget.options.suffix}}
+        </i>
+      </el-input>
     </template>
 
     <template v-if="widget.type == 'textarea'">
