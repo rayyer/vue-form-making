@@ -1,5 +1,9 @@
 <template>
-  <el-form-item :label="widget.name" :prop="widget.model">
+  <el-form-item
+    :label="widget.name"
+    :prop="widget.model"
+    :class="{'radio_margin': widget.type==='radio'}"
+    >
     <template v-if="widget.type == 'input'" >
       <el-input 
         v-if="widget.options.dataType == 'number' || widget.options.dataType == 'integer' || widget.options.dataType == 'float'"

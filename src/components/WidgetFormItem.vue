@@ -2,7 +2,7 @@
   <el-col :span="element.cols">
     <el-form-item class="widget-view "
         v-if="element && element.key" 
-        :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
+        :class="{active: selectWidget.key == element.key, 'is_req': element.options.required, 'radio_margin': element.type==='radio'}"
         :label="element.name"
         @click.native.stop="handleSelectWidget(index)"
       >
