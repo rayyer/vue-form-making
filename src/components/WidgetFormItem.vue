@@ -1,7 +1,9 @@
 <template>
-  <el-col :span="element.cols">
+  <el-col :span="element.cols"
+    v-if="element && element.key" 
+    >
+
     <el-form-item class="widget-view "
-        v-if="element && element.key" 
         :class="{active: selectWidget.key == element.key, 'is_req': element.options.required, 'radio_margin_design': element.type==='radio'}"
         :label="element.name"
         @click.native.stop="handleSelectWidget(index)"
@@ -137,6 +139,16 @@
           </el-switch>
         </template>
 
+        <template v-if="element.type === 'image'">
+          <el-image
+            :style="{width: element.options.size.width+'px', height: element.options.size.height+'px', backgroundColor: '#ccc'}"
+            :src="element.options.image_url"
+            fit="fill">
+            <div slot="error" class="image-slot">
+              <i class="el-icon-picture-outline"></i>
+            </div>
+          </el-image>
+        </template>
         <template v-if="element.type=='slider'">
           <el-slider 
             v-model="element.options.defaultValue"

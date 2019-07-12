@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <template v-if="widget.type === 'input' && widget.name === ''" >
       <el-input
         :type="widget.options.dataType"
@@ -12,6 +13,17 @@
           {{widget.options.suffix}}
         </i>
       </el-input>
+    </template>
+
+    <template v-else-if="widget.type === 'image'">
+      <el-image
+        :style="{width: widget.options.size.width+'px', height: widget.options.size.height+'px', marginLeft: '20%'}"
+        :src="widget.options.image_url"
+        fit="fill">
+        <div slot="error" class="image-slot">
+          <i class="el-icon-picture-outline"></i>
+        </div>
+      </el-image>
     </template>
 
     <template v-else>

@@ -248,6 +248,20 @@ export const basicComponents = [
     cols: 3,
     options: {
     }
+  },
+  {
+    type: 'image',
+    name: '图片占位',
+    icon: 'icon-tupian',
+    cols: 24,
+    options: {
+      defaultValue: [],
+      image_url:'',
+      size: {
+        width: '100',
+        height: '100'
+      }
+    }
   }
 ]
 

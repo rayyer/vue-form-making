@@ -25,6 +25,10 @@
         <el-input v-model="data.options.suffix" placeholder="可输入单位等内容后缀"></el-input>
       </el-form-item>
 
+      <el-form-item label="图片url" v-if="data.type === 'image'">
+        <el-input v-model="data.options.image_url" placeholder="http://"></el-input>
+      </el-form-item>
+
       <el-form-item label="布局方式" v-if="Object.keys(data.options).indexOf('inline')>=0">
         <el-radio-group v-model="data.options.inline">
           <el-radio-button :label="false">块级</el-radio-button>
