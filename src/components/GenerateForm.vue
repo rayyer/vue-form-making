@@ -48,13 +48,14 @@ export default {
     return {
       models: {},
       rules: {},
-      dependences: {},
-      dependenceShow: [],
+      dependences: {}, // 依赖字段
+      dependenceShow: [], // 字段是否显示
       colsAmount: 0
     }
   },
   created () {
     this.generateModle(this.data.list)
+    console.log('dependences', this.dependences)
   },
   mounted () {
   },
@@ -76,7 +77,7 @@ export default {
             }
           }
 
-          this.getDependences(genList[i])
+          this.getDependences(genList[i]) // 整理出需要的依赖项
 
           if (this.rules[genList[i].model]) {
             
@@ -128,16 +129,16 @@ export default {
       
     },
     filedHidden (models) {
-      console.log(models)
-      this.dependenceShow = [] //初始化禁止显示的组件
+      this.dependenceShow = [] // 初始化禁止显示的组件
       for (var index in this.dependences)
       {
         for(var item of this.dependences[index])
         {
-          if(models.hasOwnProperty(item[0]))
+          if(models.hasOwnProperty(item[0]))  // item[0]是要依赖的表单key
           {
-            var field_value = models[item[0]]
-            if((typeof field_value)==='string') field_value = [...models[item[0]]] // 将单选框整理成数组
+            var field_value = models[item[0]]  // 被依赖项当前选中的值
+
+            if((typeof field_value)==='string') field_value = [models[item[0]]] // 将单选框整理成数组
 
             if(field_value.indexOf(item[1]) > -1) 
             {

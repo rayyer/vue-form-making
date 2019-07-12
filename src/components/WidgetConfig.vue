@@ -420,7 +420,6 @@ export default {
         )
       }
       return dependItems
-      // this.dependItems = dependItems
     },
     handleOptionsRemove (index) {
       if (this.data.type === 'grid') {
