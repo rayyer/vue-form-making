@@ -1,13 +1,5 @@
 export const basicComponents = [
   {
-    type: 'text',
-    name: '文本标签',
-    icon: '',
-    cols: 3,
-    options: {
-    }
-  },
-  {
     type: 'input',
     name: '单行文本',
     icon: 'icon-input',
@@ -247,6 +239,14 @@ export const basicComponents = [
       showInput: false,
       range: false,
       width: ''
+    }
+  },
+  {
+    type: 'text',
+    name: '文本标签',
+    icon: 'icon-fuwenbenkuang',
+    cols: 3,
+    options: {
     }
   }
 ]
