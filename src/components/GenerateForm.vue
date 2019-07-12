@@ -16,9 +16,37 @@
           :md="item.cols"
           :sm="24"
           :xs="24" >
+          <!-- 自定义组件 -->
           <el-form-item v-if="item.type=='blank'" :label="item.name" :prop="item.model" :key="item.key">
             <slot :name="item.model" :model="models"></slot>
           </el-form-item>
+
+          <!-- 图片组件 -->
+          <el-image
+            v-else-if="item.type === 'image'"
+            :style="{width: item.options.size.width+'px', height: item.options.size.height+'px', marginLeft: '20%'}"
+            :src="item.options.image_url"
+            fit="fill">
+            <div slot="error" class="image-slot">
+              <i class="el-icon-picture-outline"></i>
+            </div>
+          </el-image>
+
+          <!-- 无标签文本框 -->
+          <el-input
+            v-else-if="item.type === 'input' && item.name === ''"
+            :type="item.options.dataType"
+            v-model="dataModel"
+            :disabled="item.options.disabled"
+            :placeholder="item.options.placeholder"
+            :style="{width: item.options.width}"
+          >
+            <i slot="suffix">
+              {{item.options.suffix}}
+            </i>
+          </el-input>
+
+          <!-- 其他 -->
           <genetate-form-item 
             v-else 
             :key="item.key" 

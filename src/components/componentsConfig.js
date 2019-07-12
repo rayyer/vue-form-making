@@ -255,7 +255,6 @@ export const basicComponents = [
     icon: 'icon-tupian',
     cols: 24,
     options: {
-      defaultValue: [],
       image_url:'',
       size: {
         width: '100',
