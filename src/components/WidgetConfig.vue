@@ -385,7 +385,6 @@ export default {
   computed: {
     show () {
       if (this.data && Object.keys(this.data).length > 0) {
-        this.formatDepentCascader()
         return true
       }
       return false
@@ -393,16 +392,16 @@ export default {
   },
   methods: {
     formatDepentCascader () {
-      this.dependItems = []
+      var dependItems = []
       const dependableType = ['radio', 'checkbox', 'select', 'switch']
-      // 在先拖计数器，然后拖进单行文本，控制台会报错Error in nextTick: "TypeError: Cannot read property 'getCheckedNodes',不影响业务，尚未修复
-      for(var item of this.widgetFormList)
+      for(let item of this.widgetFormList)
       {
         if(dependableType.indexOf(item.type) === -1) continue
         if(item.model === this.data.model) continue // 自己无需依赖自己
 
         // 格式化options的格式为value:v,label:b
         var childList = []
+
         for(let child of item.options.options)
         {
           child = Object.assign(
@@ -412,7 +411,7 @@ export default {
           childList.push(child)
         }
 
-        this.dependItems.push(
+        dependItems.push(
           {
             'value': item.model,
             'label': item.name, 
@@ -420,6 +419,8 @@ export default {
           }
         )
       }
+      return dependItems
+      // this.dependItems = dependItems
     },
     handleOptionsRemove (index) {
       if (this.data.type === 'grid') {
@@ -513,6 +514,9 @@ export default {
     }
   },
   watch: {
+    data: function (val) {
+        this.dependItems = this.formatDepentCascader()
+    },
     'data.options.isRange': function(val) {
       if (typeof val !== 'undefined') {
         if (val) {
