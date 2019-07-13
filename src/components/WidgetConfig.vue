@@ -299,6 +299,19 @@
         </el-form-item>
       </template>
 
+      <template v-if="data.type=='divider'">
+        <el-form-item label="分割文字">
+          <el-input v-model="data.options.text"></el-input>
+        </el-form-item>
+        <el-form-item label="文字位置">
+          <el-select v-model="data.options.position">
+            <el-option value="left" label="左"></el-option>
+            <el-option value="center" label="居中"></el-option>
+            <el-option value="right" label="右"></el-option>
+          </el-select>
+        </el-form-item>
+      </template>
+
       <template v-if="data.type=='blank'">
         <el-form-item label="绑定数据类型">
           <el-select v-model="data.options.defaultType">

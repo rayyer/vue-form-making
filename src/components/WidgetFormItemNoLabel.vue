@@ -42,6 +42,10 @@
       </div>
     </template>
 
+    <template v-if="element.type === 'divider'">
+      <el-divider :content-position="element.options.position">{{element.options.text}}</el-divider>
+    </template>
+
     <div class="widget-view-action" v-if="selectWidget.key == element.key">
       <i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>
       <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"></i>

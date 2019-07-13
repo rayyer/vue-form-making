@@ -264,6 +264,16 @@ export const basicComponents = [
         height: '100'
       }
     }
+  },
+  {
+    type: 'divider',
+    name: '分割线',
+    icon: 'icon-tupian',
+    cols: 24,
+    options: {
+      text: '',
+      position: 'left'
+    }
   }
 ]
 

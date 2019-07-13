@@ -39,6 +39,11 @@
             {{item.name}}
           </div>
 
+          <!-- 文本框组件 -->
+          <div v-else-if="item.type === 'divider'">
+            <el-divider :content-position="item.options.position">{{item.options.text}}</el-divider>
+          </div>
+
           <!-- 其他 -->
           <genetate-form-item 
             v-else 
