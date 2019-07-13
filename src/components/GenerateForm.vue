@@ -32,20 +32,6 @@
             </div>
           </el-image>
 
-          <!-- 无标签文本框 -->
-          <el-input
-            v-else-if="item.type === 'input' && item.name === ''"
-            :type="item.options.dataType"
-            v-model="dataModel"
-            :disabled="item.options.disabled"
-            :placeholder="item.options.placeholder"
-            :style="{width: item.options.width}"
-          >
-            <i slot="suffix">
-              {{item.options.suffix}}
-            </i>
-          </el-input>
-
           <!-- 其他 -->
           <genetate-form-item 
             v-else 
