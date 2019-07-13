@@ -276,6 +276,29 @@
         </template>
       </template>
 
+      <template v-if="data.type=='text'">
+        <el-form-item label="字体大小">
+          <el-input v-model="data.options.fontSize">
+            <i slot="suffix">
+            px
+          </i>
+          </el-input>
+        </el-form-item>
+        <el-form-item label="字体粗细">
+          <el-select v-model="data.options.fontWeight">
+            <el-option value="bold" label="粗体"></el-option>
+            <el-option value="normal" label="正常"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="对齐">
+          <el-select v-model="data.options.align">
+            <el-option value="left" label="左对齐"></el-option>
+            <el-option value="center" label="居中"></el-option>
+            <el-option value="right" label="右对齐"></el-option>
+          </el-select>
+        </el-form-item>
+      </template>
+
       <template v-if="data.type=='blank'">
         <el-form-item label="绑定数据类型">
           <el-select v-model="data.options.defaultType">

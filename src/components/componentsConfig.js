@@ -245,8 +245,11 @@ export const basicComponents = [
     type: 'text',
     name: '文本标签',
     icon: 'icon-fuwenbenkuang',
-    cols: 3,
+    cols: 24,
     options: {
+      fontSize: '12',
+      fontWeight: 'normal',
+      align: 'left'
     }
   },
   {

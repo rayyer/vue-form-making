@@ -10,16 +10,28 @@
           @add="handleWidgetAdd"
           style="height:2000px;"
         >
-          <template v-for="(element, index) in data.list">
+          <el-col v-for="(element, index) in data.list" :key="index" :span="element.cols" >
+            <template v-if="element && element.key">
+              <!-- 图片、文本、没有标签的文本框 -->
+            <widget-form-item-no-label
+              v-if="element.type==='image' || element.type==='text' || (element.type==='input' && element.name==='')"
+              :key="element.key"
+              :element="element"
+              :select.sync="selectWidget"
+              :index="index"
+              :data="data">
+            </widget-form-item-no-label>
+            
             <widget-form-item
-              v-if="element && element.key" 
-              :key="element.key" 
-              :element="element" 
-              :select.sync="selectWidget" 
-              :index="index" 
+              v-else
+              :key="element.key"
+              :element="element"
+              :select.sync="selectWidget"
+              :index="index"
               :data="data">
             </widget-form-item>
-          </template>
+            </template>
+          </el-col>
         </draggable>
       </el-row>
     </el-form>
@@ -29,11 +41,13 @@
 <script>
 import Draggable from 'vuedraggable'
 import WidgetFormItem from './WidgetFormItem'
+import WidgetFormItemNoLabel from './WidgetFormItemNoLabel'
 
 export default {
   components: {
     Draggable,
-    WidgetFormItem
+    WidgetFormItem,
+    WidgetFormItemNoLabel
   },
   props: ['data', 'select'],
   data () {
