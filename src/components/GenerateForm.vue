@@ -24,13 +24,20 @@
           <!-- 图片组件 -->
           <el-image
             v-else-if="item.type === 'image'"
-            :style="{width: item.options.size.width+'px', height: item.options.size.height+'px', marginLeft: '20%'}"
+            :style="{width: item.options.size.width+'px', height: item.options.size.height+'px', marginLeft: '20%', backgroundColor: '#f0f0f0'}"
             :src="item.options.image_url"
             fit="fill">
             <div slot="error" class="image-slot">
               <i class="el-icon-picture-outline"></i>
             </div>
           </el-image>
+
+          <!-- 文本框组件 -->
+          <div 
+            v-else-if="item.type === 'text'"
+            :style="{ fontSize: item.options.fontSize + 'px', fontWeight: item.options.fontWeight, textAlign: item.options.align }">
+            {{item.name}}
+          </div>
 
           <!-- 其他 -->
           <genetate-form-item 
