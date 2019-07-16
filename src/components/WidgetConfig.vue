@@ -51,7 +51,7 @@
       <el-form-item label="依赖显示">
         <el-cascader
           :options="dependItems"
-          v-model="data.dependences"
+          v-model="data.option.dependences"
           :props="{ multiple: true}"
           clearable
           placeholder="请选择依赖项"
