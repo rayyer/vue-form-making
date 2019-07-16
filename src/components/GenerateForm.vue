@@ -32,14 +32,14 @@
             </div>
           </el-image>
 
-          <!-- 文本框组件 -->
+          <!-- 文本组件 -->
           <div 
             v-else-if="item.type === 'text'"
             :style="{ fontSize: item.options.fontSize + 'px', fontWeight: item.options.fontWeight, textAlign: item.options.align }">
             {{item.name}}
           </div>
 
-          <!-- 文本框组件 -->
+          <!-- 分割线组件 -->
           <div v-else-if="item.type === 'divider'">
             <el-divider :content-position="item.options.position">{{item.options.text}}</el-divider>
           </div>
@@ -52,7 +52,7 @@
             :remote="remote" 
             :rules="rules" 
             :widget="item" 
-            v-show="!dependences.hasOwnProperty(item.model) || dependenceShow[item.model] === true"
+            v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
           ></genetate-form-item>
         </el-col>
       </el-row>
@@ -74,14 +74,14 @@ export default {
     return {
       models: {},
       rules: {},
-      dependences: {}, // 依赖字段
-      dependenceShow: [], // 字段是否显示
+      dependents: {}, // 依赖字段
+      dependentShow: [], // 字段是否显示
       colsAmount: 0
     }
   },
   created () {
     this.generateModle(this.data.list)
-    console.log('dependences', this.dependences)
+    // console.log('dependences', this.dependences)
   },
   mounted () {
   },
@@ -103,7 +103,7 @@ export default {
             }
           }
 
-          this.getDependences(genList[i]) // 整理出需要的依赖项
+          this.getDependents(genList[i]) // 整理出需要的依赖项
 
           if (this.rules[genList[i].model]) {
             
@@ -127,13 +127,14 @@ export default {
         }
       }
     },
-    getDependences (item, models) {
-      if(item.dependences)
+    getDependents (item) {
+      if(item.options.dependents)
       {
-        this.dependences[item.model] = []
-        for(var m of item.dependences)
+        const dependents = item.options.dependents
+        this.dependents[item.model] = []
+        for(var m of dependents)
         {
-          this.dependences[item.model].push(m)
+          this.dependents[item.model].push(m)
         }
       }
     },
@@ -155,10 +156,10 @@ export default {
       
     },
     filedHidden (models) {
-      this.dependenceShow = [] // 初始化禁止显示的组件
-      for (var index in this.dependences)
+      this.dependentShow = [] // 初始化禁止显示的组件
+      for (var index in this.dependents)
       {
-        for(var item of this.dependences[index])
+        for(var item of this.dependents[index])
         {
           if(models.hasOwnProperty(item[0]))  // item[0]是要依赖的表单key
           {
@@ -168,7 +169,7 @@ export default {
 
             if(field_value.indexOf(item[1]) > -1) 
             {
-              this.dependenceShow[index] = true
+              this.dependentShow[index] = true
               break
             }
           }
