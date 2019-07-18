@@ -81,7 +81,6 @@ export default {
   },
   created () {
     this.generateModle(this.data.list)
-    // console.log('dependences', this.dependences)
   },
   mounted () {
   },
@@ -193,8 +192,8 @@ export default {
     value: {
       deep: true,
       handler (val) {
-        console.log(JSON.stringify(val))
         this.models = {...this.models, ...val}
+        this.generateModle(this.data.list)
       }
     }
   }
