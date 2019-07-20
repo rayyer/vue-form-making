@@ -6,6 +6,7 @@
     generate-json
     generate-code
     clearable
+    :tableList="tableList"
     :loadData="jsonData"> -->
   <fm-making-form
     ref="makingForm"
@@ -13,11 +14,13 @@
     preview
     generate-json
     generate-code
+    :tableList="tableList"
     clearable>
   </fm-making-form>
 </template>
 
 <script>
+
 const formList = [
     {
       "id": 32,
@@ -191,7 +194,11 @@ export default {
     return {
       visible: false,
       confirmLoading: false,
-      jsonData: {}
+      jsonData: {},
+      tableList: [
+        {value: '123123', key: "base_archive_form15", label: "基本信息表15"},
+        {value: 'adfa', key: "base_archive_form16", label: "基本信息表16"}
+      ] // 子表单列表
     }
   },
   created () {

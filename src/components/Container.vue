@@ -76,7 +76,7 @@
               <div class="config-tab" :class="{active: configTab=='form'}" @click="handleConfigSelect('form')">表单属性</div>
             </el-header>
             <el-main class="config-content">
-              <widget-config v-show="configTab=='widget'" :data="widgetFormSelect" :widgetFormList="widgetForm.list"></widget-config>
+              <widget-config v-show="configTab=='widget'" :data="widgetFormSelect" :widgetFormList="widgetForm.list" :tableList="tableList"></widget-config>
               <form-config v-show="configTab=='form'" :data="widgetForm.config"></form-config>
             </el-main>
           </el-container>
@@ -203,6 +203,12 @@ export default {
       type: Object,
       default: function () {
         return {}
+      }
+    },
+    tableList: {
+      type: Array,
+      default: function () {
+        return []
       }
     }
   },

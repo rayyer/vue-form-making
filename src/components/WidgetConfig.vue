@@ -56,7 +56,18 @@
           clearable
           placeholder="请选择依赖项"
           ></el-cascader>
-      </el-form-item>      
+      </el-form-item>  
+
+      <el-form-item label="子表单" v-if="data.type === 'childTable'">
+        <el-select v-model="data.options.relatedTable" clearable placeholder="请选择要关联的表单">
+          <el-option
+            v-for="item in tableList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>     
 
       <el-form-item label="最小值" v-if="Object.keys(data.options).indexOf('min')>=0">
         <el-input-number v-model="data.options.min" :min="0" :max="100" :step="1"></el-input-number>
@@ -409,7 +420,7 @@ export default {
   components: {
     Draggable
   },
-  props: ['data', 'widgetFormList'],
+  props: ['data', 'widgetFormList', 'tableList'],
   data () {
     return {
       dependItems: [],

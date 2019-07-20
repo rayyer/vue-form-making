@@ -279,6 +279,16 @@ export const basicComponents = [
 
 export const advanceComponents = [
   {
+    type: 'childTable',
+    name: '子表单',
+    icon: 'icon-grid-',
+    cols: 24,
+    options: {
+      defaultValue: 'Object'
+	    // relatedTable: 
+    }
+  },
+  {
     type: 'blank',
     name: '自定义',
     icon: 'icon-ic',
