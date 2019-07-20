@@ -43,6 +43,15 @@
           <div v-else-if="item.type === 'divider'">
             <el-divider :content-position="item.options.position">{{item.options.text}}</el-divider>
           </div>
+          
+          <!-- 子表单 -->
+          <el-form-item
+            v-else-if="item.type == 'childTable'"
+            :label="item.name"
+            :prop="item.model"
+            >
+            <el-button type="text" @click="handleChildTableShow(item)">+ 添加</el-button>
+          </el-form-item>
 
           <!-- 其他 -->
           <genetate-form-item 
@@ -57,26 +66,47 @@
         </el-col>
       </el-row>
     </el-form>
+
+    <cus-dialog
+      :visible="childTableVisible"
+      @on-close="childTableVisible = false"
+      ref="childTable"
+      width="700px"
+      form
+    >
+      <fm-generate-form insite="true" :data="childTable">
+      </fm-generate-form>
+
+      <template slot="action">
+        <el-button type="primary">添加</el-button>
+        <el-button @click="childTableVisible = false">取消</el-button>
+      </template>
+    </cus-dialog>
+
   </div>
 </template>
 
 <script>
 import GenetateFormItem from './GenerateFormItem'
 import {loadJs} from '../util/index.js'
+import CusDialog from './CusDialog'
 
 export default {
   name: 'fm-generate-form',
   components: {
-    GenetateFormItem
+    GenetateFormItem,
+    CusDialog
   },
-  props: ['data', 'remote', 'value', 'insite'],
+  props: ['data', 'remote', 'value', 'insite', 'childTables'],
   data () {
     return {
       models: {},
       rules: {},
       dependents: {}, // 依赖字段
       dependentShow: [], // 字段是否显示
-      colsAmount: 0
+      colsAmount: 0,
+      childTableVisible: false,
+      childTable: {}
     }
   },
   created () {
@@ -85,6 +115,22 @@ export default {
   mounted () {
   },
   methods: {
+    handleChildTableShow (relatedTable) {
+      if(relatedTable.options.hasOwnProperty('relatedTable') && relatedTable.options.relatedTable !== '')
+      {
+        this.childTableVisible = true
+        this.childTable = this.childTables[0]
+        console.log(relatedTable)
+      }
+      else
+      {
+        this.$notify({
+          title: '提示',
+          message: '未发现子表单字段',
+          type: 'warning'
+        })
+      }
+    },
     generateModle (genList) {
       for (let i = 0; i < genList.length; i++) {
         if (genList[i].type === 'grid') {
