@@ -1,0 +1,5 @@
+/doc
+/node_modules
+/public
+/src
+vue.config.js
