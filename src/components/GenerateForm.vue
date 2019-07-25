@@ -15,7 +15,7 @@
           :lg="item.cols"
           :md="item.cols"
           :sm="24"
-          :xs="24" >
+          :xs="24">
           <!-- 自定义组件 -->
           <el-form-item v-if="item.type=='blank'" :label="item.name" :prop="item.model" :key="item.key">
             <slot :name="item.model" :model="models"></slot>
@@ -43,13 +43,20 @@
           <div v-else-if="item.type === 'divider'">
             <el-divider :content-position="item.options.position">{{item.options.text}}</el-divider>
           </div>
-          
-          <!-- 子表单 -->
+
+          <!-- 子表单,此处应该是设计器和数据关联 -->
           <el-form-item
             v-else-if="item.type == 'childTable'"
             :label="item.name"
             :prop="item.model"
             >
+            <!-- <div v-for="(childItem, index) in models[item.model]" :key="index">
+              <span v-for="(v, k) in childItem" :key="k" style="margin-right:10px"> <b>{{k | filtersGetName(childTableList)}}</b> : {{v}}  </span>
+            </!-->
+            <div v-for="(childItem, index) in childTableList[item.model]" :key="index">
+              <span v-for="(v, k) in childItem" :key="k" style="margin-right:10px" v-if="v!==''"> <b>{{k}}</b> : {{v}}  </span>
+              <el-button type="text" @click="handleChildTableDelete(item.model, index)"><i class="el-icon-delete"></i></el-button>
+            </div>
             <el-button type="text" @click="handleChildTableShow(item)">+ 添加</el-button>
           </el-form-item>
 
@@ -68,18 +75,16 @@
     </el-form>
 
     <cus-dialog
-      :visible="childTableVisible"
-      @on-close="childTableVisible = false"
-      ref="childTable"
+      :visible="childTableModalVisible"
+      @on-close="childTableModalVisible = false"
       width="700px"
-      form
     >
-      <fm-generate-form insite="true" :data="childTable">
+      <fm-generate-form insite="true" :data="currentChildTableDesigner" ref="childFrom">
       </fm-generate-form>
 
       <template slot="action">
-        <el-button type="primary">添加</el-button>
-        <el-button @click="childTableVisible = false">取消</el-button>
+        <el-button type="primary" @click="handleChildTableAdd">添加</el-button>
+        <el-button @click="childTableModalVisible = false">取消</el-button>
       </template>
     </cus-dialog>
 
@@ -97,7 +102,7 @@ export default {
     GenetateFormItem,
     CusDialog
   },
-  props: ['data', 'remote', 'value', 'insite', 'childTables'],
+  props: ['data', 'remote', 'value', 'insite', 'childTableData'],
   data () {
     return {
       models: {},
@@ -105,8 +110,9 @@ export default {
       dependents: {}, // 依赖字段
       dependentShow: [], // 字段是否显示
       colsAmount: 0,
-      childTableVisible: false,
-      childTable: {}
+      childTableModalVisible: false, 
+      currentChildTableDesigner: {}, // 当前用到的子表单设计器
+      childTableList: {}  // 所有子表单的内容, key=>value，用于显示
     }
   },
   created () {
@@ -115,12 +121,16 @@ export default {
   mounted () {
   },
   methods: {
-    handleChildTableShow (relatedTable) {
-      if(relatedTable.options.hasOwnProperty('relatedTable') && relatedTable.options.relatedTable !== '')
+    /**
+     * 生成当前子表单设计器，this.currentChildTableDesigner
+     */
+    handleChildTableShow (childTable) {
+      if(childTable.options.hasOwnProperty('relatedTable') && childTable.options.relatedTable !== '')
       {
-        this.childTableVisible = true
-        this.childTable = this.childTables[0]
-        console.log(relatedTable)
+        // 过滤id=关联表字段的对象
+        const childTableDesigner = this.childTableData.filter(item => item.id === childTable.options.relatedTable)
+        this.currentChildTableDesigner = Object.assign({}, childTableDesigner[0], {'parentModel': childTable.model})
+        this.childTableModalVisible = true
       }
       else
       {
@@ -130,6 +140,40 @@ export default {
           type: 'warning'
         })
       }
+    },
+    /**
+     * 生成当前子表单数据清单，this.childTableList
+     * 生成用于向后台提交的model，this.models
+     */
+    handleChildTableAdd () {
+      this.$refs.childFrom.getData().then(data => {
+        let model = {}
+        for (var item of this.currentChildTableDesigner.list) {
+          // 循环，生成表单的label:value的格式
+          model = Object.assign({}, model, {[item.name]: data[item.model]})
+        }
+
+        if(!this.childTableList.hasOwnProperty(this.currentChildTableDesigner.parentModel)) { 
+          // 子表数据，判断字段是否存在，不存在创建
+          this.childTableList = Object.assign(
+            {},
+            this.childTableList,
+            {[this.currentChildTableDesigner.parentModel]: []}
+          )
+        }
+          
+        this.childTableList[this.currentChildTableDesigner.parentModel].push(model) // 显示列表更新
+        this.models[this.currentChildTableDesigner.parentModel].push(data) // 子表单数据更新
+        this.childTableModalVisible = false
+        // 数据校验成功
+        // data 为获取的表单数据
+      }).catch(e => {
+        // 数据校验失败
+      })
+    },
+    handleChildTableDelete (model, index) {
+      this.models[model].splice(index, 1)
+      this.childTableList[model].splice(index, 1)
     },
     generateModle (genList) {
       for (let i = 0; i < genList.length; i++) {

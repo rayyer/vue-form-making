@@ -284,8 +284,7 @@ export const advanceComponents = [
     icon: 'icon-grid-',
     cols: 24,
     options: {
-      defaultValue: 'Object'
-	    // relatedTable: 
+      defaultValue: []
     }
   },
   {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <fm-generate-form :data="jsonData" :remote="remoteFuncs" :value="editData" ref="generateForm" :childTables="childTables">
+    <fm-generate-form :data="jsonData" :remote="remoteFuncs" :value="editData" ref="generateForm" :childTableData="childTableData">
 
         <template slot="blank" slot-scope="scope">
           <!-- 自定义 -->
@@ -33,11 +33,11 @@ const jsonData = {
     },
     {
       "type": "childTable",
-      "name": "子表单",
+      "name": "疾病史",
       "icon": "icon-grid-",
       "cols": 24,
       "options": {
-        "defaultValue": "Object",
+        "defaultValue": [],
         "remoteFunc": "func_1563610030000_82402",
         "relatedTable": "1"
       },
@@ -87,6 +87,20 @@ const jsonData = {
       "rules": []
     },
     {
+      "type": "childTable",
+      "name": "子表单2",
+      "icon": "icon-grid-",
+      "cols": 24,
+      "options": {
+        "defaultValue": [],
+        "remoteFunc": "func_1563610030000_82402",
+        "relatedTable": "1"
+      },
+      "key": "1563610030000_82402",
+      "model": "childTable_1563610030011_82402",
+      "rules": []
+    },
+    {
       "type": "radio",
       "name": "单选框组",
       "icon": "icon-radio-active",
@@ -131,7 +145,7 @@ const jsonData = {
   }
 }
 
-const childTables = [
+const childTableData = [
   {
     "list": [
       {
@@ -237,7 +251,8 @@ const childTables = [
       "size": "small"
     },
     "title": "Title_1563611683000_42625",
-    "key": "Key_1563611683000_42625"
+    "key": "Key_1563611683000_42625",
+    "id": "1"
   }
 ]
 
@@ -247,7 +262,7 @@ export default {
       jsonData,
       editData: {},
       remoteFuncs: {},
-      childTables
+      childTableData
     }
   },
   methods: {
