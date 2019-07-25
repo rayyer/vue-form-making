@@ -258,7 +258,7 @@ export const basicComponents = [
     icon: 'icon-tupian',
     cols: 24,
     options: {
-      image_url:'',
+      image_url:'http://6120491.s21i.faiusr.com/2/ABUIABACGAAg0725rAUoiLv9qAQwrAI4rAI.jpg',
       size: {
         width: '100',
         height: '100'
