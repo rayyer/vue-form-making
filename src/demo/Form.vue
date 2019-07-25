@@ -1,6 +1,6 @@
 <template>
   <div>
-    <fm-generate-form :data="jsonData" :remote="remoteFuncs" :value="editData" ref="generateForm" :childTableData="childTableData">
+    <fm-generate-form :data="jsonData" :remote="remoteFuncs" :value="editData" ref="generateForm" :dependChildTable="dependChildTable">
 
         <template slot="blank" slot-scope="scope">
           <!-- 自定义 -->
@@ -145,7 +145,7 @@ const jsonData = {
   }
 }
 
-const childTableData = [
+const dependChildTable = [
   {
     "list": [
       {
@@ -262,7 +262,7 @@ export default {
       jsonData,
       editData: {},
       remoteFuncs: {},
-      childTableData
+      dependChildTable
     }
   },
   methods: {

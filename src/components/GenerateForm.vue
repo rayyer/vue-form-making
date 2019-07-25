@@ -102,7 +102,7 @@ export default {
     GenetateFormItem,
     CusDialog
   },
-  props: ['data', 'remote', 'value', 'insite', 'childTableData'],
+  props: ['data', 'remote', 'value', 'insite', 'dependChildTable'],
   data () {
     return {
       models: {},
@@ -128,7 +128,7 @@ export default {
       if(childTable.options.hasOwnProperty('relatedTable') && childTable.options.relatedTable !== '')
       {
         // 过滤id=关联表字段的对象
-        const childTableDesigner = this.childTableData.filter(item => item.id === childTable.options.relatedTable)
+        const childTableDesigner = this.dependChildTable.filter(item => item.id === childTable.options.relatedTable)
         this.currentChildTableDesigner = Object.assign({}, childTableDesigner[0], {'parentModel': childTable.model})
         this.childTableModalVisible = true
       }
