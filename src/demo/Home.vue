@@ -196,8 +196,8 @@ export default {
       confirmLoading: false,
       jsonData: {},
       tableList: [
-        {value: '123123', key: "base_archive_form15", label: "基本信息表15"},
-        {value: 'adfa', key: "base_archive_form16", label: "基本信息表16"}
+        {id: '123123',  title: "基本信息表15"},
+        {id: 'adfa', title: "基本信息表16"}
       ] // 子表单列表
     }
   },

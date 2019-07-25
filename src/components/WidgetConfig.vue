@@ -62,9 +62,9 @@
         <el-select v-model="data.options.relatedTable" clearable placeholder="请选择要关联的表单">
           <el-option
             v-for="item in tableList"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
+            :key="item.id"
+            :label="item.title"
+            :value="item.id">
           </el-option>
         </el-select>
       </el-form-item>     
