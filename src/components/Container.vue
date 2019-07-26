@@ -114,7 +114,7 @@
           <el-alert type="info" title="JSON格式如下，直接复制生成的json覆盖此处代码点击确定即可"></el-alert>
           <el-input
             type="textarea"
-            :autosize="{ minRows: 5, maxRows: 16 }"
+            :autosize="{ minRows: 5, maxRows: 20 }"
             placeholder="请输入内容"
             style="height: 400px;width: 100%;"
             v-model="uploadEditor">
@@ -346,6 +346,16 @@ export default {
     handleGenerateJson () {
       this.jsonVisible = true
       this.jsonTemplate = this.widgetForm
+
+      for(var item of Object.keys(this.jsonTemplate.list)) {
+        // 导出时清空数据库索引字段
+        if(this.jsonTemplate.list[item].hasOwnProperty('id'))
+        {
+          delete this.jsonTemplate.list[item].id
+          delete this.jsonTemplate.list[item].form_id
+        }
+      }
+
       // console.log(JSON.stringify(this.widgetForm))
       this.$nextTick(() => {
 
