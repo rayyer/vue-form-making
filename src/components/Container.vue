@@ -114,7 +114,7 @@
           <el-alert type="info" title="JSON格式如下，直接复制生成的json覆盖此处代码点击确定即可"></el-alert>
           <el-input
             type="textarea"
-            :autosize="{ minRows: 5, maxRows: 20 }"
+            :autosize="{ minRows: 5, maxRows: 22 }"
             placeholder="请输入内容"
             style="height: 400px;width: 100%;"
             v-model="uploadEditor">
@@ -133,9 +133,9 @@
           
           <div id="jsoneditor" style="height: 400px;width: 100%;">{{jsonTemplate}}</div>
           
-          <template slot="action">
+          <!-- <template slot="action">
             <el-button type="primary" class="json-btn" :data-clipboard-text="jsonCopyValue">复制数据</el-button>
-          </template>
+          </template> -->
         </cus-dialog>
 
         <cus-dialog
@@ -260,7 +260,7 @@ export default {
       htmlTemplate: '',
       jsonTemplate: '',
       uploadEditor: null,
-      jsonCopyValue: '',
+      // jsonCopyValue: '',
       jsonClipboard: null,
       jsonEg: `{
   "list": [
@@ -345,16 +345,18 @@ export default {
     },
     handleGenerateJson () {
       this.jsonVisible = true
-      this.jsonTemplate = this.widgetForm
 
-      for(var item of Object.keys(this.jsonTemplate.list)) {
-        // 导出时清空数据库索引字段
-        if(this.jsonTemplate.list[item].hasOwnProperty('id'))
-        {
-          delete this.jsonTemplate.list[item].id
-          delete this.jsonTemplate.list[item].form_id
-        }
-      }
+      this.jsonTemplate = this.jsonClear(this.widgetForm)
+      // this.jsonTemplate = this.widgetForm
+
+      // for(var item of Object.keys(this.jsonTemplate.list)) {
+      //   // 导出时清空数据库索引字段
+      //   if(this.jsonTemplate.list[item].hasOwnProperty('id'))
+      //   {
+      //     delete this.jsonTemplate.list[item].id
+      //     delete this.jsonTemplate.list[item].form_id
+      //   }
+      // }
 
       // console.log(JSON.stringify(this.widgetForm))
       this.$nextTick(() => {
@@ -368,7 +370,7 @@ export default {
             this.$message.success('复制成功')
           })
         }
-        this.jsonCopyValue = JSON.stringify(this.widgetForm)
+        // this.jsonCopyValue = JSON.stringify(this.widgetForm)
       })
     },
     handleGenerateCode () {
@@ -388,13 +390,27 @@ export default {
     },
     handleUploadJson () {
       try {
-        this.setJSON(JSON.parse(this.uploadEditor))
+        const jsonData = this.jsonClear(JSON.parse(this.uploadEditor))
+        this.setJSON(jsonData)
         // this.setJSON(JSON.parse(this.uploadEditor.getValue()))
         this.uploadVisible = false
       } catch (e) {
         this.$message.error(e.message)
         this.$refs.uploadJson.end()
       }
+    },
+    jsonClear (jsonData) {
+      // 导入导出数据时，对系统数据进行清理
+      for(var item of Object.keys(jsonData.list)) {
+        // 导出时清空数据库索引字段
+        if(jsonData.list[item].hasOwnProperty('id'))
+        {
+          delete jsonData.list[item].id
+          delete jsonData.list[item].form_id
+        }
+      }
+      if(jsonData.hasOwnProperty('deleted')) delete jsonData.deleted
+      return jsonData
     },
     handleClear () {
       this.widgetForm = {

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div style="color:#999; font-size:12px; height:30px">* 因子表单涉及到动态传值，所以暂时无法在预览中展现，可在具体业务中传值后体验。</div>
     <el-form ref="generateForm"
       :size="data.config.size"
       :model="models"
