@@ -1,22 +1,27 @@
 <template>
-  <!-- <fm-making-form
-    ref="makingForm"
-    upload
-    preview
-    generate-json
-    generate-code
-    clearable
-    :tableList="tableList"
-    :loadData="jsonData"> -->
-  <fm-making-form
-    ref="makingForm"
-    upload
-    preview
-    generate-json
-    generate-code
-    :tableList="tableList"
-    clearable>
-  </fm-making-form>
+  <div style="height:2000px">
+    <!-- <fm-making-form
+      ref="makingForm"
+      upload
+      preview
+      generate-json
+      generate-code
+      clearable
+      :tableList="tableList"
+      :loadData="jsonData"> -->
+    <fm-making-form
+      ref="makingForm"
+      upload
+      preview
+      generate-json
+      generate-code
+      :tableList="tableList"
+      clearable>
+      <template slot="action">
+        <el-button type="primary" @click="handleSubmit">提交</el-button>
+      </template>
+    </fm-making-form>
+  </div>
 </template>
 
 <script>
@@ -48,7 +53,7 @@ const formList = [
           "message": "单行文本2格式不正确"
         }
       ],
-      "is_delete": 1
+      "is_delete": 0
     },
     {
       "id": 33,
@@ -76,7 +81,7 @@ const formList = [
           "message": "单行文本1格式不正确"
         }
       ],
-      "is_delete": 1
+      "is_delete": 0
     },
     {
       "id": 34,
@@ -214,6 +219,9 @@ export default {
         {'config': config} // 表单配置项
       )
       // console.log(this.jsonData)
+    },
+    handleSubmit () {
+      console.log(this.$refs.makingForm.widgetForm)
     }
   }
 }

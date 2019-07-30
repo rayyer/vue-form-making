@@ -227,6 +227,7 @@ export default {
           labelPosition: 'left',
           size: 'small'
         },
+        deleted: []
       },
       configTab: 'form',
       widgetFormSelect: null,
@@ -313,7 +314,7 @@ export default {
   },
   mounted () {
     // 如果有传值，则初始化传值
-    if(!(Object.keys(this.loadData).length === 0 && this.loadData.constructor === Object)) this.setJSON(this.loadData)
+    if(this.loadData.constructor === Object && Object.keys(this.loadData).length > 0) this.setJSON(this.loadData)
   },
   methods: {
     handleConfigSelect (value) {
@@ -347,23 +348,10 @@ export default {
       this.jsonVisible = true
 
       this.jsonTemplate = this.jsonClear(this.widgetForm)
-      // this.jsonTemplate = this.widgetForm
 
-      // for(var item of Object.keys(this.jsonTemplate.list)) {
-      //   // 导出时清空数据库索引字段
-      //   if(this.jsonTemplate.list[item].hasOwnProperty('id'))
-      //   {
-      //     delete this.jsonTemplate.list[item].id
-      //     delete this.jsonTemplate.list[item].form_id
-      //   }
-      // }
-
-      // console.log(JSON.stringify(this.widgetForm))
       this.$nextTick(() => {
-
         // const editor = ace.edit('jsoneditor')
         // editor.session.setMode("ace/mode/json")
-
         if (!this.jsonClipboard) {
           this.jsonClipboard = new Clipboard('.json-btn')
           this.jsonClipboard.on('success', (e) => {
@@ -390,9 +378,23 @@ export default {
     },
     handleUploadJson () {
       try {
-        const jsonData = this.jsonClear(JSON.parse(this.uploadEditor))
+        var jsonData = this.jsonClear(JSON.parse(this.uploadEditor))
+        var deleted = []
+
+        // 删除之前系统存在的字段
+        for(var item of Object.keys(this.widgetForm.list)) {
+          if(this.widgetForm.list[item].hasOwnProperty('id'))
+          {
+            this.widgetForm.list[item].is_delete = 1 //对当前组件进行软删除标记
+            deleted.push(this.widgetForm.list[item])
+          }
+        }
+
+        jsonData = Object.assign({}, jsonData, {deleted: deleted})
+
+        this.handleClear()
+
         this.setJSON(jsonData)
-        // this.setJSON(JSON.parse(this.uploadEditor.getValue()))
         this.uploadVisible = false
       } catch (e) {
         this.$message.error(e.message)
@@ -421,8 +423,8 @@ export default {
           size: 'small',
           customClass: ''
         },
+        deleted: []
       }
-
       this.widgetFormSelect = {}
     },
     getJSON () {
