@@ -28,6 +28,20 @@
 
 const formList = [
     {
+      "type": "childTable",
+      "name": "子表单",
+      "icon": "icon-grid-",
+      "cols": 24,
+      "options": {
+        "defaultValue": [],
+        "remoteFunc": "func_1564456216000_26178",
+        "relatedTable": "1"
+      },
+      "key": "1564456216000_26178",
+      "model": "childTable_1564456216000_26178",
+      "rules": []
+    },
+    {
       "id": 32,
       "form_id": 13,
       "name": "单行文本2",
@@ -201,8 +215,8 @@ export default {
       confirmLoading: false,
       jsonData: {},
       tableList: [
-        {id: '123123',  title: "基本信息表15"},
-        {id: 'adfa', title: "基本信息表16"}
+        {id: '1',  title: "既往史子表单"},
+        {id: '2', title: "基本信息表16"}
       ] // 子表单列表
     }
   },

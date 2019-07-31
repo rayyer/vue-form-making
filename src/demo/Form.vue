@@ -149,10 +149,150 @@ const dependChildTable = [
   {
     "list": [
       {
+        "type": "select",
+        "name": "既往史",
+        "icon": "icon-select",
+        "cols": 24,
+        "options": {
+          "defaultValue": "",
+          "multiple": false,
+          "disabled": false,
+          "clearable": true,
+          "placeholder": "请选择既往史",
+          "required": false,
+          "showLabel": false,
+          "width": "",
+          "options": [
+            {
+              "value": "疾病"
+            },
+            {
+              "value": "手术"
+            },
+            {
+              "value": "外伤"
+            },
+            {
+              "value": "输血"
+            }
+          ],
+          "remote": false,
+          "filterable": false,
+          "remoteOptions": [],
+          "props": {
+            "value": "value",
+            "label": "label"
+          },
+          "remoteFunc": "func_1564366641000_55903"
+        },
+        "key": "1564366641000_55903",
+        "model": "select_1564366641000_55903",
+        "rules": []
+      },
+      {
+        "type": "select",
+        "name": "疾病",
+        "icon": "icon-select",
+        "cols": 12,
+        "options": {
+          "defaultValue": "",
+          "multiple": false,
+          "disabled": false,
+          "clearable": true,
+          "placeholder": "请选择所患疾病",
+          "required": false,
+          "showLabel": false,
+          "width": "",
+          "options": [
+            {
+              "value": "无"
+            },
+            {
+              "value": "高血压"
+            },
+            {
+              "value": "糖尿病"
+            },
+            {
+              "value": "冠心病"
+            },
+            {
+              "value": "慢性阻塞性肺病"
+            },
+            {
+              "value": "恶性肿瘤"
+            },
+            {
+              "value": "脑卒中"
+            },
+            {
+              "value": "严重精神障碍"
+            },
+            {
+              "value": "肺结核"
+            },
+            {
+              "value": "肝炎"
+            },
+            {
+              "value": "其他法定传染病"
+            }
+          ],
+          "remote": false,
+          "filterable": false,
+          "remoteOptions": [],
+          "props": {
+            "value": "value",
+            "label": "label"
+          },
+          "remoteFunc": "func_1564366343000_72254",
+          "dependents": [
+            [
+              "select_1564366641000_55903",
+              "疾病"
+            ]
+          ]
+        },
+        "key": "1564366343000_72254",
+        "model": "select_1564366343000_72254",
+        "rules": []
+      },
+      {
+        "type": "date",
+        "name": "确诊时间",
+        "icon": "icon-date",
+        "cols": 12,
+        "options": {
+          "defaultValue": "",
+          "readonly": false,
+          "disabled": false,
+          "editable": true,
+          "clearable": true,
+          "placeholder": "",
+          "startPlaceholder": "",
+          "endPlaceholder": "",
+          "type": "date",
+          "format": "yyyy-MM-dd",
+          "timestamp": false,
+          "required": false,
+          "width": "",
+          "remoteFunc": "func_1564366777000_91330",
+          "dependents": [
+            [
+              "select_1564366641000_55903",
+              "疾病"
+            ]
+          ]
+        },
+        "key": "1564366777000_91330",
+        "model": "date_1564366777000_91330",
+        "rules": []
+      },
+      {
         "type": "radio",
         "name": "手术",
         "icon": "icon-radio-active",
-        "cols": 6,
+        "cols": 12,
         "options": {
           "inline": true,
           "defaultValue": "",
@@ -173,18 +313,24 @@ const dependChildTable = [
             "value": "value",
             "label": "label"
           },
-          "remoteFunc": "func_1563611702000_87397",
-          "disabled": false
+          "remoteFunc": "func_1564366952000_17057",
+          "disabled": false,
+          "dependents": [
+            [
+              "select_1564366641000_55903",
+              "手术"
+            ]
+          ]
         },
-        "key": "1563611702000_87397",
-        "model": "radio_1563611702000_87397",
+        "key": "1564366952000_17057",
+        "model": "radio_1564366952000_17057",
         "rules": []
       },
       {
         "type": "input",
         "name": "名称",
         "icon": "icon-input",
-        "cols": 6,
+        "cols": 12,
         "options": {
           "width": "100%",
           "defaultValue": "",
@@ -194,16 +340,16 @@ const dependChildTable = [
           "placeholder": "",
           "disabled": false,
           "suffix": "",
-          "remoteFunc": "func_1563611759000_22446",
+          "remoteFunc": "func_1564367047000_68069",
           "dependents": [
             [
-              "radio_1563611702000_87397",
+              "radio_1564366952000_17057",
               "有"
             ]
           ]
         },
-        "key": "1563611759000_22446",
-        "model": "input_1563611759000_22446",
+        "key": "1564367047000_68069",
+        "model": "input_1564367047000_68069",
         "rules": [
           {
             "type": "string",
@@ -212,10 +358,10 @@ const dependChildTable = [
         ]
       },
       {
-        "type": "time",
+        "type": "date",
         "name": "时间",
-        "icon": "icon-time",
-        "cols": 12,
+        "icon": "icon-date",
+        "cols": 18,
         "options": {
           "defaultValue": "",
           "readonly": false,
@@ -225,28 +371,228 @@ const dependChildTable = [
           "placeholder": "",
           "startPlaceholder": "",
           "endPlaceholder": "",
-          "isRange": false,
-          "arrowControl": true,
-          "format": "HH:mm:ss",
+          "type": "date",
+          "format": "yyyy-MM-dd",
+          "timestamp": false,
           "required": false,
           "width": "",
-          "remoteFunc": "func_1563611794000_70235",
+          "remoteFunc": "func_1564367141000_76963",
           "dependents": [
             [
-              "radio_1563611702000_87397",
+              "radio_1564366952000_17057",
               "有"
             ]
           ]
         },
-        "key": "1563611794000_70235",
-        "model": "time_1563611794000_70235",
+        "key": "1564367141000_76963",
+        "model": "date_1564367141000_76963",
+        "rules": []
+      },
+      {
+        "type": "radio",
+        "name": "外伤",
+        "icon": "icon-radio-active",
+        "cols": 12,
+        "options": {
+          "inline": true,
+          "defaultValue": "",
+          "showLabel": false,
+          "options": [
+            {
+              "value": "无"
+            },
+            {
+              "value": "有"
+            }
+          ],
+          "required": false,
+          "width": "",
+          "remote": false,
+          "remoteOptions": [],
+          "props": {
+            "value": "value",
+            "label": "label"
+          },
+          "remoteFunc": "func_1564367404000_10365",
+          "disabled": false,
+          "dependents": [
+            [
+              "select_1564366641000_55903",
+              "外伤"
+            ]
+          ]
+        },
+        "key": "1564367404000_10365",
+        "model": "radio_1564367404000_10365",
+        "rules": []
+      },
+      {
+        "type": "input",
+        "name": "名称",
+        "icon": "icon-input",
+        "cols": 12,
+        "options": {
+          "width": "100%",
+          "defaultValue": "",
+          "required": false,
+          "dataType": "string",
+          "pattern": "",
+          "placeholder": "",
+          "disabled": false,
+          "suffix": "",
+          "remoteFunc": "func_1564367432000_22185",
+          "dependents": [
+            [
+              "radio_1564367404000_10365",
+              "有"
+            ]
+          ]
+        },
+        "key": "1564367432000_22185",
+        "model": "input_1564367432000_22185",
+        "rules": [
+          {
+            "type": "string",
+            "message": "名称格式不正确"
+          }
+        ]
+      },
+      {
+        "type": "date",
+        "name": "时间",
+        "icon": "icon-date",
+        "cols": 18,
+        "options": {
+          "defaultValue": "",
+          "readonly": false,
+          "disabled": false,
+          "editable": true,
+          "clearable": true,
+          "placeholder": "",
+          "startPlaceholder": "",
+          "endPlaceholder": "",
+          "type": "date",
+          "format": "yyyy-MM-dd",
+          "timestamp": false,
+          "required": false,
+          "width": "",
+          "remoteFunc": "func_1564367445000_90053",
+          "dependents": [
+            [
+              "radio_1564367404000_10365",
+              "有"
+            ]
+          ]
+        },
+        "key": "1564367445000_90053",
+        "model": "date_1564367445000_90053",
+        "rules": []
+      },
+      {
+        "type": "radio",
+        "name": "输血",
+        "icon": "icon-radio-active",
+        "cols": 12,
+        "options": {
+          "inline": true,
+          "defaultValue": "",
+          "showLabel": false,
+          "options": [
+            {
+              "value": "无"
+            },
+            {
+              "value": "有"
+            }
+          ],
+          "required": false,
+          "width": "",
+          "remote": false,
+          "remoteOptions": [],
+          "props": {
+            "value": "value",
+            "label": "label"
+          },
+          "remoteFunc": "func_1564367635000_33034",
+          "disabled": false,
+          "dependents": [
+            [
+              "select_1564366641000_55903",
+              "输血"
+            ]
+          ]
+        },
+        "key": "1564367635000_33034",
+        "model": "radio_1564367635000_33034",
+        "rules": []
+      },
+      {
+        "type": "input",
+        "name": "原因",
+        "icon": "icon-input",
+        "cols": 12,
+        "options": {
+          "width": "100%",
+          "defaultValue": "",
+          "required": false,
+          "dataType": "string",
+          "pattern": "",
+          "placeholder": "",
+          "disabled": false,
+          "suffix": "",
+          "remoteFunc": "func_1564367648000_15514",
+          "dependents": [
+            [
+              "radio_1564367635000_33034",
+              "有"
+            ]
+          ]
+        },
+        "key": "1564367648000_15514",
+        "model": "input_1564367648000_15514",
+        "rules": [
+          {
+            "type": "string",
+            "message": "原因格式不正确"
+          }
+        ]
+      },
+      {
+        "type": "date",
+        "name": "时间",
+        "icon": "icon-date",
+        "cols": 18,
+        "options": {
+          "defaultValue": "",
+          "readonly": false,
+          "disabled": false,
+          "editable": true,
+          "clearable": true,
+          "placeholder": "",
+          "startPlaceholder": "",
+          "endPlaceholder": "",
+          "type": "date",
+          "format": "yyyy-MM-dd",
+          "timestamp": false,
+          "required": false,
+          "width": "",
+          "remoteFunc": "func_1564367665000_50718",
+          "dependents": [
+            [
+              "radio_1564367635000_33034",
+              "有"
+            ]
+          ]
+        },
+        "key": "1564367665000_50718",
+        "model": "date_1564367665000_50718",
         "rules": []
       }
     ],
     "config": {
-      "title": "Title_1563611683000_42625",
-      "key": "Key_1563611683000_42625",
-      "labelWidth": 50,
+      "title": "既往史子表单",
+      "key": "Key_1564366019000_60954",
+      "labelWidth": 90,
       "labelPosition": "left",
       "size": "small"
     },

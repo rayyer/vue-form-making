@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div style="color:#999; font-size:12px; height:30px">* 因子表单涉及到动态传值，所以暂时无法在预览中展现，可在具体业务中传值后体验。</div>
     <el-form ref="generateForm"
       :size="data.config.size"
       :model="models"
@@ -150,7 +149,8 @@ export default {
       this.$refs.childFrom.getData().then(data => {
         let model = {}
         for (var item of this.currentChildTableDesigner.list) {
-          // 循环，生成表单的label:value的格式
+          // 循环子表单设计器，生成表单的label:value的格式
+          if(data[item.model] === "") continue
           model = Object.assign({}, model, {[item.name]: data[item.model]})
         }
 
@@ -243,24 +243,35 @@ export default {
       this.$refs.generateForm.resetFields()
     },
     refresh () {
-      
     },
     filedHidden (models) {
-      this.dependentShow = [] // 初始化禁止显示的组件
-      for (var index in this.dependents)
+      this.dependentShow = [] // 初始化被依赖显示的组件
+      // console.log('models:', models)
+      // console.log('dependents:', this.dependents)
+      for (var model_key in this.dependents)
       {
-        for(var item of this.dependents[index])
+        // 循环预设的依赖项
+        // this.dependents: {... , radio_1564366952000_17057: ["select_1564366641000_55903", "手术"], ...}
+        for(var depended_item of this.dependents[model_key])
         {
-          if(models.hasOwnProperty(item[0]))  // item[0]是要依赖的表单key
+          if(models.hasOwnProperty(depended_item[0]))  // 被依赖的字段存在并且输入的值等于被依赖的值
           {
-            var field_value = models[item[0]]  // 被依赖项当前选中的值
+            var depended_value = models[depended_item[0]]  // 被依赖项当前选中的值
 
-            if((typeof field_value)==='string') field_value = [models[item[0]]] // 将单选框整理成数组
+            // console.log(model_key + ' depended:' + depended_item[0] + ' value:' + models[depended_item[0]])
+            if((typeof depended_value) === 'string' && depended_value !== '' && depended_value !== null) depended_value = [models[depended_item[0]]] // 将单选框整理成数组
 
-            if(field_value.indexOf(item[1]) > -1) 
+            if(depended_value !== null && depended_value !== '' && depended_value.indexOf(depended_item[1]) > -1) 
             {
-              this.dependentShow[index] = true
+              this.dependentShow[model_key] = true
               break
+            }
+            else
+            {
+              this.dependentShow[model_key] = false
+              this.models[model_key] = '' // 没有依赖则将当前值清空
+              // console.log('empty key', model_key)
+              continue
             }
           }
         }
