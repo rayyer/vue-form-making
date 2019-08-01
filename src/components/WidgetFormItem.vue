@@ -1,8 +1,9 @@
 <template>
   <el-form-item
     class="widget-view "
-    :class="{active: selectWidget.key == element.key, 'is_req': element.options.required, 'radio_margin_design': element.type==='radio'}"
+    :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
     :label="element.name"
+    style="height:56px"
     @click.native.stop="handleSelectWidget(index)"
     >
     <template v-if="element.type == 'input'">
