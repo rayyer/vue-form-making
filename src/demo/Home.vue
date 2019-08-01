@@ -1,27 +1,27 @@
 <template>
-  <div style="height:2000px">
-    <!-- <fm-making-form
-      ref="makingForm"
-      upload
-      preview
-      generate-json
-      generate-code
-      clearable
-      :tableList="tableList"
-      :loadData="jsonData"> -->
-    <fm-making-form
-      ref="makingForm"
-      upload
-      preview
-      generate-json
-      generate-code
-      :tableList="tableList"
-      clearable>
-      <template slot="action">
-        <el-button type="primary" @click="handleSubmit">提交</el-button>
-      </template>
-    </fm-making-form>
-  </div>
+  <!-- <fm-making-form
+    ref="makingForm"
+    upload
+    preview
+    generate-json
+    generate-code
+    clearable
+    :tableList="tableList"
+    style="height:100%;"
+    :loadData="jsonData"> -->
+  <fm-making-form
+    ref="makingForm"
+    upload
+    preview
+    generate-json
+    generate-code
+    :tableList="tableList"
+    style="height:100%;"
+    clearable>
+    <template slot="action">
+      <el-button type="primary" @click="handleSubmit">提交</el-button>
+    </template>
+  </fm-making-form>
 </template>
 
 <script>
