@@ -151,7 +151,9 @@ export default {
         for (var item of this.currentChildTableDesigner.list) {
           // 循环子表单设计器，生成表单的label:value的格式
           if(data[item.model] === "") continue
-          model = Object.assign({}, model, {[item.name]: data[item.model]})
+          const key = item.name
+          const value = data[item.model]
+          model = {...model, ...{[key]: value}}
         }
 
         if(!this.childTableList.hasOwnProperty(this.currentChildTableDesigner.parentModel)) { 
