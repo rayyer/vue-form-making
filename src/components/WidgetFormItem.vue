@@ -3,7 +3,6 @@
     class="widget-view "
     :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
     :label="element.name"
-    style="height:56px"
     @click.native.stop="handleSelectWidget(index)"
     >
     <template v-if="element.type == 'input'">
