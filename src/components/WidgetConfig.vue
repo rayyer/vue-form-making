@@ -39,8 +39,11 @@
         <el-radio-group v-model="data.cols" size="mini">
           <el-radio-button :label="3">12.5%</el-radio-button>
           <el-radio-button :label="6">25%</el-radio-button>
+          <el-radio-button :label="9">37.5%</el-radio-button>
           <el-radio-button :label="12">50%</el-radio-button>
+          <el-radio-button :label="15">62.5%</el-radio-button>
           <el-radio-button :label="18">75%</el-radio-button>
+          <el-radio-button :label="21">87.5%</el-radio-button>
           <el-radio-button :label="24">100%</el-radio-button>
         </el-radio-group>
       </el-form-item>
