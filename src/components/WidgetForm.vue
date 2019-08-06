@@ -14,7 +14,7 @@
             <template v-if="element && element.key">
               <!-- 图片、文本、没有标签的文本框 -->
             <widget-form-item-no-label
-              v-if="element.type==='image' || element.type==='text' || element.type==='divider' || (element.type==='input' && element.name==='')"
+              v-if="element.type==='image' || element.type==='text' || element.type==='divider' || (element.type==='input' && (element.name==='' || element.name===null))"
               :key="element.key"
               :element="element"
               :select.sync="selectWidget"
