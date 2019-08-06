@@ -17,6 +17,7 @@
       v-else
       :label="widget.name"
       :prop="widget.model"
+      :label-width="(widget.options.labelWidth || 80) + 'px'"
       >
       <template v-if="widget.type == 'input'" >
         <el-input 

@@ -4,6 +4,9 @@
       <el-form-item label="标题" v-if="data.type!='grid'">
         <el-input v-model="data.name"></el-input>
       </el-form-item>
+      <el-form-item label="标题宽度" v-if="data.type!='grid'">
+        <el-input v-model="data.options.labelWidth" placeholder="默认为表单属性的字段宽度值"></el-input>
+      </el-form-item>
       <el-form-item label="宽度" v-if="Object.keys(data.options).indexOf('width')>=0">
         <el-input v-model="data.options.width"></el-input>
       </el-form-item>

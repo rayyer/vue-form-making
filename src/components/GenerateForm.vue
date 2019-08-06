@@ -35,7 +35,13 @@
           <!-- 文本组件 -->
           <div 
             v-else-if="item.type === 'text'"
-            :style="{ fontSize: item.options.fontSize + 'px', fontWeight: item.options.fontWeight, textAlign: item.options.align }">
+            :style="{ 
+              fontSize: item.options.fontSize + 'px', 
+              fontWeight: item.options.fontWeight, 
+              textAlign: item.options.align, 
+              height:  item.options.height,
+              lineHeight:  item.options.height
+              }">
             {{item.name}}
           </div>
 

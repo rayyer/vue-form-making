@@ -4,6 +4,7 @@
     :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
     :label="element.name"
     @click.native.stop="handleSelectWidget(index)"
+    :label-width="(element.options.labelWidth || 80) + 'px'"
     >
     <template v-if="element.type == 'input'">
       <el-input
