@@ -5,7 +5,7 @@
     label-width="0px"
     @click.native.stop="handleSelectWidget(index)"
     >
-    <template v-if="element.type == 'input'">
+    <template v-if="element.type === 'input'">
       <el-input
         v-model="element.options.defaultValue"
         :style="{width: element.options.width}"
@@ -35,7 +35,9 @@
         :style="{ 
           fontSize: element.options.fontSize + 'px', 
           fontWeight: element.options.fontWeight, 
-          textAlign: element.options.align
+          textAlign: element.options.align,
+          height:  element.options.height,
+          lineHeight:  element.options.height,
           }"
       >
         {{element.name}}
@@ -92,9 +94,10 @@ export default {
 
       this.$nextTick(() => {
         // 存在id属性，可能是从服务器上返回，在修改表单的场景下进行删除，则不删除当前字段对象
-          // 如果没有id属性，则是新增字段，删除无需保存
+        // 如果没有id属性，则是新增字段，删除无需保存
         if(this.data.list[index].hasOwnProperty('id'))
         {
+          this.data.list[index].is_delete = 1 //对当前组件进行软删除标记
           if(!this.data.hasOwnProperty('deleted'))  this.data = Object.assign(this.data, {deleted: []})
           this.data.deleted.push(this.data.list[index])
         }
