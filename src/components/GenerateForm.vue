@@ -204,7 +204,6 @@ export default {
           this.getDependents(genList[i]) // 整理出需要的依赖项
 
           if (this.rules[genList[i].model]) {
-            
             this.rules[genList[i].model] = [...this.rules[genList[i].model], ...genList[i].rules.map(item => {
               if (item.pattern) {
                 return {...item, pattern: eval(item.pattern)}
@@ -213,7 +212,6 @@ export default {
               }
             })]
           } else {
-            
             this.rules[genList[i].model] = [...genList[i].rules.map(item => {
               if (item.pattern) {
                 return {...item, pattern: eval(item.pattern)}
@@ -221,7 +219,7 @@ export default {
                 return {...item}
               }
             })]
-          }      
+          }
         }
       }
     },
@@ -229,11 +227,19 @@ export default {
       if(item.options.dependents)
       {
         const dependents = item.options.dependents
-        this.dependents[item.model] = []
+        var data = {}
         for(var m of dependents)
         {
-          this.dependents[item.model].push(m)
+          if(data.hasOwnProperty(m[0])) 
+          {
+            data[m[0]].push(m[1])
+          }
+          else
+          {
+            data = Object.assign({}, data, {[m[0]]: [m[1]]})
+          }
         }
+        this.dependents[item.model] = data
       }
     },
     getData () {
@@ -254,44 +260,63 @@ export default {
     },
     filedHidden (models) {
       this.dependentShow = [] // 初始化被依赖显示的组件
-      // console.log('models:', models)
       // console.log('dependents:', this.dependents)
-      for (var model_key in this.dependents)
+      // console.log('models', models) // 表单内容
+      for (var modelKey in this.dependents)
       {
+        // console.log('modelKey', modelKey) // 本身的字段key
+        const modelValue = models[modelKey]
+
         // 循环预设的依赖项
-        // this.dependents: {... , radio_1564366952000_17057: ["select_1564366641000_55903", "手术"], ...}
-        for(var depended_item of this.dependents[model_key])
+        for(var dependKey in this.dependents[modelKey])
         {
-          if(models.hasOwnProperty(depended_item[0]))  // 被依赖的字段存在并且输入的值等于被依赖的值
+          if(!models.hasOwnProperty(dependKey))
           {
-            var depended_value = models[depended_item[0]]  // 被依赖项当前选中的值
+            this.dependentShow[modelKey] = false
+            this.models[modelKey] = '' // 没有依赖则将当前值清空
+            continue
+          }
 
-            // console.log(model_key + ' depended:' + depended_item[0] + ' value:' + models[depended_item[0]])
-            if((typeof depended_value) === 'string' && depended_value !== '' && depended_value !== null) depended_value = [models[depended_item[0]]] // 将单选框整理成数组
+          var dependModelValue = models[dependKey] // 被依赖项的当前值
+          if(dependModelValue === null || dependModelValue === '') {
+            this.dependentShow[modelKey] = false
+            this.models[modelKey] = '' // 没有依赖则将当前值清空
+            continue
+          }
 
-            if(depended_value !== null && depended_value !== '' && depended_value.indexOf(depended_item[1]) > -1) 
+          const dependItems = this.dependents[modelKey][dependKey] // 被依赖项期望值
+          if((typeof dependModelValue) === 'string') dependModelValue = [dependModelValue] // 将单选框整理成数组
+
+          // console.log('dependKey', dependKey, 'dependItems', dependItems) // 被依赖的字段Key
+          // console.log('dependKey value:', dependModelValue)
+
+          for(var item in dependModelValue)
+          {
+            // 对比两个数组，如果存在则显示并跳出
+            if(dependItems.indexOf(dependModelValue[item]) > -1)
             {
-              this.dependentShow[model_key] = true
+              this.dependentShow[modelKey] = true
               break
             }
-            else
-            {
-              this.dependentShow[model_key] = false
-              this.models[model_key] = '' // 没有依赖则将当前值清空
-              // console.log('empty key', model_key)
-              continue
-            }
+          }
+
+          if(this.dependentShow[modelKey] === true)
+          {
+            break
+          }
+          else
+          {
+            this.dependentShow[modelKey] = false
+            this.models[modelKey] = '' // 没有依赖则将当前值清空
+            continue
           }
         }
       }
     }
   },
   watch: {
-    models: {
-      deep: true,
-      handler (val) {
-        this.filedHidden(val)
-      }
+    models: function (val) {
+      this.filedHidden(val)
     },
     data: {
       deep: true,
