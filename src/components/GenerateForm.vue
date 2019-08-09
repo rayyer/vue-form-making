@@ -26,7 +26,9 @@
             v-else-if="item.type === 'image'"
             :style="{width: item.options.size.width+'px', height: item.options.size.height+'px', marginLeft: '20%', backgroundColor: '#f0f0f0'}"
             :src="item.options.image_url"
-            fit="fill">
+            fit="fill"
+            v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
+            >
             <div slot="error" class="image-slot">
               <i class="el-icon-picture-outline"></i>
             </div>
@@ -41,7 +43,9 @@
               textAlign: item.options.align, 
               height:  item.options.height + 'px',
               lineHeight:  item.options.height + 'px'
-              }">
+              }"
+              v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
+              >
             {{item.name}}
           </div>
 
@@ -55,6 +59,7 @@
             v-else-if="item.type == 'childTable'"
             :label="item.name"
             :prop="item.model"
+            v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
             >
             <!-- <div v-for="(childItem, index) in models[item.model]" :key="index">
               <span v-for="(v, k) in childItem" :key="k" style="margin-right:10px"> <b>{{k | filtersGetName(childTableList)}}</b> : {{v}}  </span>
