@@ -248,7 +248,7 @@ export const basicComponents = [
     cols: 24,
     options: {
       fontSize: '12',
-      height: '3',
+      height: '50',
       fontWeight: 'normal',
       align: 'left'
     }
