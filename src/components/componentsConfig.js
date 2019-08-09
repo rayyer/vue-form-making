@@ -288,50 +288,50 @@ export const advanceComponents = [
       defaultValue: []
     }
   },
-  {
-    type: 'blank',
-    name: '自定义',
-    icon: 'icon-ic',
-    cols: 24,
-    options: {
-      defaultType: 'Object'
-    }
-  },
-  {
-    type: 'imgupload',
-    name: '图片',
-    icon: 'icon-tupian',
-    cols: 24,
-    options: {
-      defaultValue: [],
-      size: {
-        width: 100,
-        height: 100,
-      },
-      width: '',
-      tokenFunc: 'funcGetToken',
-      token: '',
-      domain: 'http://pfp81ptt6.bkt.clouddn.com/',
-      disabled: false,
-      length: 8,
-      multiple: false,
-      isQiniu: false,
-      isDelete: false,
-      min: 0,
-      isEdit: false,
-      action: 'https://jsonplaceholder.typicode.com/photos/'
-    }
-  },
-  {
-    type: 'editor',
-    name: '编辑器',
-    icon: 'icon-fuwenbenkuang',
-    cols: 24,
-    options: {
-      defaultValue: '',
-      width: ''
-    }
-  },
+  // {
+  //   type: 'blank',
+  //   name: '自定义',
+  //   icon: 'icon-ic',
+  //   cols: 24,
+  //   options: {
+  //     defaultType: 'Object'
+  //   }
+  // },
+  // {
+  //   type: 'imgupload',
+  //   name: '图片',
+  //   icon: 'icon-tupian',
+  //   cols: 24,
+  //   options: {
+  //     defaultValue: [],
+  //     size: {
+  //       width: 100,
+  //       height: 100,
+  //     },
+  //     width: '',
+  //     tokenFunc: 'funcGetToken',
+  //     token: '',
+  //     domain: 'http://pfp81ptt6.bkt.clouddn.com/',
+  //     disabled: false,
+  //     length: 8,
+  //     multiple: false,
+  //     isQiniu: false,
+  //     isDelete: false,
+  //     min: 0,
+  //     isEdit: false,
+  //     action: 'https://jsonplaceholder.typicode.com/photos/'
+  //   }
+  // },
+  // {
+  //   type: 'editor',
+  //   name: '编辑器',
+  //   icon: 'icon-fuwenbenkuang',
+  //   cols: 24,
+  //   options: {
+  //     defaultValue: '',
+  //     width: ''
+  //   }
+  // },
   {
     type: 'cascader',
     name: '级联选择器',

@@ -36,8 +36,8 @@
           fontSize: element.options.fontSize + 'px', 
           fontWeight: element.options.fontWeight, 
           textAlign: element.options.align,
-          height:  element.options.height,
-          lineHeight:  element.options.height,
+          height:  element.options.height + 'px',
+          lineHeight:  element.options.height + 'px',
           }"
       >
         {{element.name}}
@@ -61,13 +61,13 @@
 </template>
 
 <script>
-import FmUpload from './Upload'
-import FmEditor from './Editor/tinymce'
+// import FmUpload from './Upload'
+// import FmEditor from './Editor/tinymce'
 export default {
   props: ['element', 'select', 'index', 'data'],
   components: {
-    FmUpload,
-    FmEditor
+    // FmUpload,
+    // FmEditor
   },
   data () {
     return {

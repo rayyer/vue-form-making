@@ -39,8 +39,8 @@
               fontSize: item.options.fontSize + 'px', 
               fontWeight: item.options.fontWeight, 
               textAlign: item.options.align, 
-              height:  item.options.height,
-              lineHeight:  item.options.height
+              height:  item.options.height + 'px',
+              lineHeight:  item.options.height + 'px'
               }">
             {{item.name}}
           </div>
@@ -85,7 +85,7 @@
       @on-close="childTableModalVisible = false"
       width="700px"
     >
-      <fm-generate-form insite="true" :data="currentChildTableDesigner" ref="childFrom">
+      <fm-generate-form :data="currentChildTableDesigner" ref="childFrom">
       </fm-generate-form>
 
       <template slot="action">
@@ -170,13 +170,23 @@ export default {
             {[this.currentChildTableDesigner.parentModel]: []}
           )
         }
-          
+
+        if((typeof this.models[this.currentChildTableDesigner.parentModel]) !== 'object')  {
+          this.models[this.currentChildTableDesigner.parentModel] = []
+        }
+
         this.childTableList[this.currentChildTableDesigner.parentModel].push(model) // 显示列表更新
         this.models[this.currentChildTableDesigner.parentModel].push(data) // 子表单数据更新
+
         this.childTableModalVisible = false
         // 数据校验成功
         // data 为获取的表单数据
       }).catch(e => {
+        this.$notify({
+          title: '添加失败',
+          message: e,
+          duration: 0
+        })
         // 数据校验失败
       })
     },

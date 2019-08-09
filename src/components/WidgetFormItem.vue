@@ -150,7 +150,7 @@
       ></el-slider>
     </template>
 
-    <template v-if="element.type=='imgupload'">
+    <!-- <template v-if="element.type=='imgupload'">
       <fm-upload
         v-model="element.options.defaultValue"
         :disabled="element.options.disabled"
@@ -162,7 +162,7 @@
       >
         
       </fm-upload>
-    </template>
+    </template> -->
 
     <template v-if="element.type == 'cascader'">
       <el-cascader
@@ -177,7 +177,7 @@
       </el-cascader>
     </template>
 
-    <template v-if="element.type == 'editor'">
+    <!-- <template v-if="element.type == 'editor'">
       <fm-editor
         v-model="element.options.defaultValue"
         :width="element.options.width"
@@ -185,7 +185,7 @@
       >
 
       </fm-editor>
-    </template>
+    </template> -->
 
     <template v-if="element.type=='blank'">
       <div style="height: 50px;color: #999;background: #eee;line-height:50px;text-align:center;">自定义区域</div>
@@ -208,13 +208,13 @@
 </template>
 
 <script>
-import FmUpload from './Upload'
-import FmEditor from './Editor/tinymce'
+// import FmUpload from './Upload'
+// import FmEditor from './Editor/tinymce'
 export default {
   props: ['element', 'select', 'index', 'data'],
   components: {
-    FmUpload,
-    FmEditor
+    // FmUpload,
+    // FmEditor
   },
   data () {
     return {

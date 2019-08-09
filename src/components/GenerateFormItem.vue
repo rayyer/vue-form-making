@@ -183,7 +183,7 @@
         ></el-slider>
       </template>
 
-      <template v-if="widget.type=='imgupload'">
+      <!-- <template v-if="widget.type=='imgupload'">
         <fm-upload
           v-model="dataModel"
           :disabled="widget.options.disabled"
@@ -201,9 +201,9 @@
           :action="widget.options.action"
         >
         </fm-upload>
-      </template>
+      </template> -->
 
-      <template v-if="widget.type == 'editor'">
+      <!-- <template v-if="widget.type == 'editor'">
         <fm-editor
           v-model="dataModel"
           :width="widget.options.width"
@@ -211,7 +211,7 @@
         >
 
         </fm-editor>
-      </template>
+      </template> -->
 
       <template v-if="widget.type == 'cascader'">
         <el-cascader
@@ -230,14 +230,14 @@
 </template>
 
 <script>
-import FmUpload from './Upload'
-import FmEditor from './Editor/tinymce'
+// import FmUpload from './Upload'
+// import FmEditor from './Editor/tinymce'
 
 export default {
   props: ['widget', 'models', 'rules', 'remote'],
   components: {
-    FmUpload,
-    FmEditor
+    // FmUpload,
+    // FmEditor
   },
   data () {
     return {

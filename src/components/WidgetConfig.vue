@@ -12,7 +12,11 @@
       </el-form-item>
 
       <el-form-item label="高度" v-if="Object.keys(data.options).indexOf('height')>=0">
-        <el-input v-model="data.options.height"></el-input>
+        <el-input v-model="data.options.height">
+          <i slot="suffix">
+            px
+          </i>
+        </el-input>
       </el-form-item>
 
       <el-form-item label="大小" v-if="Object.keys(data.options).indexOf('size')>=0">
