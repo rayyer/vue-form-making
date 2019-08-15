@@ -379,11 +379,21 @@ export default {
     handleUploadJson () {
       try {
         var jsonData = this.jsonClear(JSON.parse(this.uploadEditor))
-        var deleted = []
+        var deleted = [] // 被删除的字段组
+        var oldModelExist = [] // 原json中已经存在的model
 
-        // 删除之前系统存在的字段
+        if(!jsonData.hasOwnProperty('list')) return false
+
+        // 通过model判断之前存在的字段，存在则从旧的list中清空
+        for(var item of jsonData.list) {
+          const fieldExist = this.widgetForm.list.filter(field => field.model === item.model)
+          if(fieldExist.length === 1) oldModelExist.push(fieldExist[0].model)
+        }
+
+        // 删除之前系统存在的字段(有id字段并且model不在新导入的数组)进行删除标记，以便告知服务器
         for(var item of Object.keys(this.widgetForm.list)) {
-          if(this.widgetForm.list[item].hasOwnProperty('id'))
+          if(oldModelExist.indexOf(this.widgetForm.list[item].model) === -1 && this.widgetForm.list[item].hasOwnProperty('id'))
+          // if(this.widgetForm.list[item].hasOwnProperty('id'))
           {
             this.widgetForm.list[item].is_delete = 1 //对当前组件进行软删除标记
             deleted.push(this.widgetForm.list[item])
@@ -402,7 +412,7 @@ export default {
       }
     },
     jsonClear (jsonData) {
-      // 导入导出数据时，对系统数据进行清理
+      // 导入导出数据时，对系统数据进行清理，清除无效字段
       for(var item of Object.keys(jsonData.list)) {
         // 导出时清空数据库索引字段
         if(jsonData.list[item].hasOwnProperty('id'))
