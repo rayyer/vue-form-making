@@ -61,12 +61,11 @@
             :prop="item.model"
             v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
             >
-            <!-- <div v-for="(childItem, index) in models[item.model]" :key="index">
-              <span v-for="(v, k) in childItem" :key="k" style="margin-right:10px"> <b>{{k | filtersGetName(childTableList)}}</b> : {{v}}  </span>
-            </!-->
-            <div v-for="(childItem, index) in childTableList[item.model]" :key="index">
-              <span v-for="(v, k) in childItem" :key="k" style="margin-right:10px" v-if="v!==''"> <b>{{k}}</b> : {{v}}  </span>
-              <el-button type="text" @click="handleChildTableDelete(item.model, index)"><i class="el-icon-delete"></i></el-button>
+            <div v-for="(v, index) in models[item.model]" :key="index" style="margin-right:10px">
+              <span v-for="(childItem, i) in dependChildTable[item.options.relatedTable].list" :key="i">
+                {{ childItem.name }}: {{ models[item.model][index][childItem.model] }}
+              </span>
+              <el-button type="text" @click="handleChildTableDelete(item.model, i)"><i class="el-icon-delete"></i></el-button>
             </div>
             <el-button type="text" @click="handleChildTableShow(item)">+ 添加</el-button>
           </el-form-item>
@@ -122,8 +121,7 @@ export default {
       dependentShow: [], // 字段是否显示
       colsAmount: 0,
       childTableModalVisible: false, 
-      currentChildTableDesigner: {}, // 当前用到的子表单设计器
-      childTableList: {}  // 所有子表单的内容, key=>value，用于显示
+      currentChildTableDesigner: {} // 当前用到的子表单设计器
     }
   },
   created () {
@@ -152,7 +150,6 @@ export default {
       }
     },
     /**
-     * 生成当前子表单数据清单，this.childTableList
      * 生成用于向后台提交的model，this.models
      */
     handleChildTableAdd () {
@@ -166,25 +163,13 @@ export default {
           model = {...model, ...{[key]: value}}
         }
 
-        if(!this.childTableList.hasOwnProperty(this.currentChildTableDesigner.parentModel)) { 
-          // 子表数据，判断字段是否存在，不存在创建
-          this.childTableList = Object.assign(
-            {},
-            this.childTableList,
-            {[this.currentChildTableDesigner.parentModel]: []}
-          )
-        }
-
         if((typeof this.models[this.currentChildTableDesigner.parentModel]) !== 'object')  {
           this.models[this.currentChildTableDesigner.parentModel] = []
         }
 
-        this.childTableList[this.currentChildTableDesigner.parentModel].push(model) // 显示列表更新
         this.models[this.currentChildTableDesigner.parentModel].push(data) // 子表单数据更新
 
         this.childTableModalVisible = false
-        // console.log(model)
-        console.log(data)
         // 数据校验成功
         // data 为获取的表单数据
       }).catch(e => {
@@ -198,7 +183,6 @@ export default {
     },
     handleChildTableDelete (model, index) {
       this.models[model].splice(index, 1)
-      this.childTableList[model].splice(index, 1)
     },
     generateModle (genList) {
       for (let i = 0; i < genList.length; i++) {
