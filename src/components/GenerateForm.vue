@@ -63,9 +63,9 @@
             >
             <div v-for="(v, index) in models[item.model]" :key="index" style="margin-right:10px">
               <span v-for="(childItem, i) in dependChildTable[item.options.relatedTable].list" :key="i">
-                {{ childItem.name }}: {{ models[item.model][index][childItem.model] }}
+                <b>{{ childItem.name }}</b>: {{ models[item.model][index][childItem.model] }} 
               </span>
-              <el-button type="text" @click="handleChildTableDelete(item.model, i)"><i class="el-icon-delete"></i></el-button>
+              <el-button type="text" @click="handleChildTableDelete(item.model, index)"><i class="el-icon-delete"></i></el-button>
             </div>
             <el-button type="text" @click="handleChildTableShow(item)">+ 添加</el-button>
           </el-form-item>
