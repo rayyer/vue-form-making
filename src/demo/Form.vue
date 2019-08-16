@@ -39,7 +39,7 @@ const jsonData = {
       "options": {
         "defaultValue": [],
         "remoteFunc": "func_1563610030000_82402",
-        "relatedTable": "1"
+        "relatedTable": "table_input_1"
       },
       "key": "1563610030000_82402",
       "model": "childTable_1563610030000_82402",
@@ -94,7 +94,7 @@ const jsonData = {
       "options": {
         "defaultValue": [],
         "remoteFunc": "func_1563610030000_82402",
-        "relatedTable": "2"
+        "relatedTable": "table_input_1"
       },
       "key": "1563610030000_82402",
       "model": "childTable_1563610030011_82402",
@@ -141,39 +141,72 @@ const jsonData = {
   "config": {
     "labelWidth": 90,
     "labelPosition": "left",
-    "size": "small"
+    "size": "small",
+    "key": "Key_1565935807000_89360"
   }
 }
 
-const dependChildTable = [
-  {
+const dependChildTable = {
+  "table_input_1": {
     "list": [
       {
-        "type": "select",
-        "name": "既往史",
-        "icon": "icon-select",
-        "cols": 24,
+        "name": "家族史",
+        "type": "radio",
         "options": {
-          "defaultValue": "",
-          "multiple": false,
-          "disabled": false,
-          "clearable": true,
-          "placeholder": "请选择既往史",
-          "required": false,
+          "inline": true,
+          "defaultValue": null,
           "showLabel": false,
-          "width": "",
           "options": [
             {
-              "value": "疾病"
+              "value": "无"
             },
             {
-              "value": "手术"
+              "value": "有"
+            }
+          ],
+          "required": false,
+          "width": null,
+          "remote": false,
+          "remoteOptions": [],
+          "props": {
+            "value": "value",
+            "label": "label"
+          },
+          "remoteFunc": "func_1564384522000_9914",
+          "disabled": false
+        },
+        "icon": "icon-radio-active",
+        "key": "1564384522000_9914",
+        "model": "radio_1564384522000_9914",
+        "cols": 24,
+        "rules": [],
+        "is_delete": 0,
+        "sort": 0
+      },
+      {
+        "name": "成员",
+        "type": "select",
+        "options": {
+          "defaultValue": "父亲",
+          "multiple": false,
+          "disabled": false,
+          "clearable": false,
+          "placeholder": "请选择",
+          "required": false,
+          "showLabel": false,
+          "width": null,
+          "options": [
+            {
+              "value": "父亲"
             },
             {
-              "value": "外伤"
+              "value": "母亲"
             },
             {
-              "value": "输血"
+              "value": "兄弟姐妹"
+            },
+            {
+              "value": "子女"
             }
           ],
           "remote": false,
@@ -183,26 +216,34 @@ const dependChildTable = [
             "value": "value",
             "label": "label"
           },
-          "remoteFunc": "func_1564366641000_55903"
+          "remoteFunc": "func_1564384598000_85312",
+          "dependents": [
+            [
+              "radio_1564384522000_9914",
+              "有"
+            ]
+          ]
         },
-        "key": "1564366641000_55903",
-        "model": "select_1564366641000_55903",
-        "rules": []
+        "icon": "icon-select",
+        "key": "1564384598000_85312",
+        "model": "select_1564384598000_85312",
+        "cols": 24,
+        "rules": [],
+        "is_delete": 0,
+        "sort": 1
       },
       {
-        "type": "select",
         "name": "疾病",
-        "icon": "icon-select",
-        "cols": 12,
+        "type": "select",
         "options": {
-          "defaultValue": "",
-          "multiple": false,
+          "defaultValue": [],
+          "multiple": true,
           "disabled": false,
-          "clearable": true,
+          "clearable": false,
           "placeholder": "请选择所患疾病",
           "required": false,
           "showLabel": false,
-          "width": "",
+          "width": null,
           "options": [
             {
               "value": "无"
@@ -235,7 +276,10 @@ const dependChildTable = [
               "value": "肝炎"
             },
             {
-              "value": "其他法定传染病"
+              "value": "先天畸形"
+            },
+            {
+              "value": "其他"
             }
           ],
           "remote": false,
@@ -245,532 +289,35 @@ const dependChildTable = [
             "value": "value",
             "label": "label"
           },
-          "remoteFunc": "func_1564366343000_72254",
+          "remoteFunc": "func_1564384722000_46717",
           "dependents": [
             [
-              "select_1564366641000_55903",
-              "疾病"
-            ]
-          ]
-        },
-        "key": "1564366343000_72254",
-        "model": "select_1564366343000_72254",
-        "rules": []
-      },
-      {
-        "type": "date",
-        "name": "确诊时间",
-        "icon": "icon-date",
-        "cols": 12,
-        "options": {
-          "defaultValue": "",
-          "readonly": false,
-          "disabled": false,
-          "editable": true,
-          "clearable": true,
-          "placeholder": "",
-          "startPlaceholder": "",
-          "endPlaceholder": "",
-          "type": "date",
-          "format": "yyyy-MM-dd",
-          "timestamp": false,
-          "required": false,
-          "width": "",
-          "remoteFunc": "func_1564366777000_91330",
-          "dependents": [
-            [
-              "select_1564366641000_55903",
-              "疾病"
-            ]
-          ]
-        },
-        "key": "1564366777000_91330",
-        "model": "date_1564366777000_91330",
-        "rules": []
-      },
-      {
-        "type": "radio",
-        "name": "手术",
-        "icon": "icon-radio-active",
-        "cols": 12,
-        "options": {
-          "inline": true,
-          "defaultValue": "",
-          "showLabel": false,
-          "options": [
-            {
-              "value": "无"
-            },
-            {
-              "value": "有"
-            }
-          ],
-          "required": false,
-          "width": "",
-          "remote": false,
-          "remoteOptions": [],
-          "props": {
-            "value": "value",
-            "label": "label"
-          },
-          "remoteFunc": "func_1564366952000_17057",
-          "disabled": false,
-          "dependents": [
-            [
-              "select_1564366641000_55903",
-              "手术"
-            ]
-          ]
-        },
-        "key": "1564366952000_17057",
-        "model": "radio_1564366952000_17057",
-        "rules": []
-      },
-      {
-        "type": "input",
-        "name": "名称",
-        "icon": "icon-input",
-        "cols": 12,
-        "options": {
-          "width": "100%",
-          "defaultValue": "",
-          "required": false,
-          "dataType": "string",
-          "pattern": "",
-          "placeholder": "",
-          "disabled": false,
-          "suffix": "",
-          "remoteFunc": "func_1564367047000_68069",
-          "dependents": [
-            [
-              "radio_1564366952000_17057",
+              "radio_1564384522000_9914",
               "有"
             ]
           ]
         },
-        "key": "1564367047000_68069",
-        "model": "input_1564367047000_68069",
-        "rules": [
-          {
-            "type": "string",
-            "message": "名称格式不正确"
-          }
-        ]
-      },
-      {
-        "type": "date",
-        "name": "时间",
-        "icon": "icon-date",
-        "cols": 18,
-        "options": {
-          "defaultValue": "",
-          "readonly": false,
-          "disabled": false,
-          "editable": true,
-          "clearable": true,
-          "placeholder": "",
-          "startPlaceholder": "",
-          "endPlaceholder": "",
-          "type": "date",
-          "format": "yyyy-MM-dd",
-          "timestamp": false,
-          "required": false,
-          "width": "",
-          "remoteFunc": "func_1564367141000_76963",
-          "dependents": [
-            [
-              "radio_1564366952000_17057",
-              "有"
-            ]
-          ]
-        },
-        "key": "1564367141000_76963",
-        "model": "date_1564367141000_76963",
-        "rules": []
-      },
-      {
-        "type": "radio",
-        "name": "外伤",
-        "icon": "icon-radio-active",
-        "cols": 12,
-        "options": {
-          "inline": true,
-          "defaultValue": "",
-          "showLabel": false,
-          "options": [
-            {
-              "value": "无"
-            },
-            {
-              "value": "有"
-            }
-          ],
-          "required": false,
-          "width": "",
-          "remote": false,
-          "remoteOptions": [],
-          "props": {
-            "value": "value",
-            "label": "label"
-          },
-          "remoteFunc": "func_1564367404000_10365",
-          "disabled": false,
-          "dependents": [
-            [
-              "select_1564366641000_55903",
-              "外伤"
-            ]
-          ]
-        },
-        "key": "1564367404000_10365",
-        "model": "radio_1564367404000_10365",
-        "rules": []
-      },
-      {
-        "type": "input",
-        "name": "名称",
-        "icon": "icon-input",
-        "cols": 12,
-        "options": {
-          "width": "100%",
-          "defaultValue": "",
-          "required": false,
-          "dataType": "string",
-          "pattern": "",
-          "placeholder": "",
-          "disabled": false,
-          "suffix": "",
-          "remoteFunc": "func_1564367432000_22185",
-          "dependents": [
-            [
-              "radio_1564367404000_10365",
-              "有"
-            ]
-          ]
-        },
-        "key": "1564367432000_22185",
-        "model": "input_1564367432000_22185",
-        "rules": [
-          {
-            "type": "string",
-            "message": "名称格式不正确"
-          }
-        ]
-      },
-      {
-        "type": "date",
-        "name": "时间",
-        "icon": "icon-date",
-        "cols": 18,
-        "options": {
-          "defaultValue": "",
-          "readonly": false,
-          "disabled": false,
-          "editable": true,
-          "clearable": true,
-          "placeholder": "",
-          "startPlaceholder": "",
-          "endPlaceholder": "",
-          "type": "date",
-          "format": "yyyy-MM-dd",
-          "timestamp": false,
-          "required": false,
-          "width": "",
-          "remoteFunc": "func_1564367445000_90053",
-          "dependents": [
-            [
-              "radio_1564367404000_10365",
-              "有"
-            ]
-          ]
-        },
-        "key": "1564367445000_90053",
-        "model": "date_1564367445000_90053",
-        "rules": []
-      },
-      {
-        "type": "radio",
-        "name": "输血",
-        "icon": "icon-radio-active",
-        "cols": 12,
-        "options": {
-          "inline": true,
-          "defaultValue": "",
-          "showLabel": false,
-          "options": [
-            {
-              "value": "无"
-            },
-            {
-              "value": "有"
-            }
-          ],
-          "required": false,
-          "width": "",
-          "remote": false,
-          "remoteOptions": [],
-          "props": {
-            "value": "value",
-            "label": "label"
-          },
-          "remoteFunc": "func_1564367635000_33034",
-          "disabled": false,
-          "dependents": [
-            [
-              "select_1564366641000_55903",
-              "输血"
-            ]
-          ]
-        },
-        "key": "1564367635000_33034",
-        "model": "radio_1564367635000_33034",
-        "rules": []
-      },
-      {
-        "type": "input",
-        "name": "原因",
-        "icon": "icon-input",
-        "cols": 12,
-        "options": {
-          "width": "100%",
-          "defaultValue": "",
-          "required": false,
-          "dataType": "string",
-          "pattern": "",
-          "placeholder": "",
-          "disabled": false,
-          "suffix": "",
-          "remoteFunc": "func_1564367648000_15514",
-          "dependents": [
-            [
-              "radio_1564367635000_33034",
-              "有"
-            ]
-          ]
-        },
-        "key": "1564367648000_15514",
-        "model": "input_1564367648000_15514",
-        "rules": [
-          {
-            "type": "string",
-            "message": "原因格式不正确"
-          }
-        ]
-      },
-      {
-        "type": "date",
-        "name": "时间",
-        "icon": "icon-date",
-        "cols": 18,
-        "options": {
-          "defaultValue": "",
-          "readonly": false,
-          "disabled": false,
-          "editable": true,
-          "clearable": true,
-          "placeholder": "",
-          "startPlaceholder": "",
-          "endPlaceholder": "",
-          "type": "date",
-          "format": "yyyy-MM-dd",
-          "timestamp": false,
-          "required": false,
-          "width": "",
-          "remoteFunc": "func_1564367665000_50718",
-          "dependents": [
-            [
-              "radio_1564367635000_33034",
-              "有"
-            ]
-          ]
-        },
-        "key": "1564367665000_50718",
-        "model": "date_1564367665000_50718",
-        "rules": []
+        "icon": "icon-select",
+        "key": "1564384722000_46717",
+        "model": "select_1564384722000_46717",
+        "cols": 24,
+        "rules": [],
+        "is_delete": 0,
+        "sort": 2
       }
     ],
     "config": {
-      "title": "既往史子表单",
-      "key": "Key_1564366019000_60954",
+      "title": "家族史",
+      "key": "Key_1564384514000_80645",
       "labelWidth": 90,
       "labelPosition": "left",
       "size": "small"
     },
     "title": "Title_1563611683000_42625",
     "key": "Key_1563611683000_42625",
-    "id": "1"
-  },
-  {
-  "list": [
-    {
-      "name": "家族史",
-      "type": "radio",
-      "options": {
-        "inline": true,
-        "defaultValue": null,
-        "showLabel": false,
-        "options": [
-          {
-            "value": "无"
-          },
-          {
-            "value": "有"
-          }
-        ],
-        "required": false,
-        "width": null,
-        "remote": false,
-        "remoteOptions": [],
-        "props": {
-          "value": "value",
-          "label": "label"
-        },
-        "remoteFunc": "func_1564384522000_9914",
-        "disabled": false
-      },
-      "icon": "icon-radio-active",
-      "key": "1564384522000_9914",
-      "model": "radio_1564384522000_9914",
-      "cols": 24,
-      "rules": [],
-      "is_delete": 0,
-      "sort": 0
-    },
-    {
-      "name": '成员',
-      "type": "select",
-      "options": {
-        "defaultValue": "父亲",
-        "multiple": false,
-        "disabled": false,
-        "clearable": false,
-        "placeholder": "请选择",
-        "required": false,
-        "showLabel": false,
-        "width": null,
-        "options": [
-          {
-            "value": "父亲"
-          },
-          {
-            "value": "母亲"
-          },
-          {
-            "value": "兄弟姐妹"
-          },
-          {
-            "value": "子女"
-          }
-        ],
-        "remote": false,
-        "filterable": false,
-        "remoteOptions": [],
-        "props": {
-          "value": "value",
-          "label": "label"
-        },
-        "remoteFunc": "func_1564384598000_85312",
-        "dependents": [
-          [
-            "radio_1564384522000_9914",
-            "有"
-          ]
-        ]
-      },
-      "icon": "icon-select",
-      "key": "1564384598000_85312",
-      "model": "select_1564384598000_85312",
-      "cols": 24,
-      "rules": [],
-      "is_delete": 0,
-      "sort": 1
-    },
-    {
-      "name": '疾病',
-      "type": "select",
-      "options": {
-        "defaultValue": [],
-        "multiple": true,
-        "disabled": false,
-        "clearable": false,
-        "placeholder": "请选择所患疾病",
-        "required": false,
-        "showLabel": false,
-        "width": null,
-        "options": [
-          {
-            "value": "无"
-          },
-          {
-            "value": "高血压"
-          },
-          {
-            "value": "糖尿病"
-          },
-          {
-            "value": "冠心病"
-          },
-          {
-            "value": "慢性阻塞性肺病"
-          },
-          {
-            "value": "恶性肿瘤"
-          },
-          {
-            "value": "脑卒中"
-          },
-          {
-            "value": "严重精神障碍"
-          },
-          {
-            "value": "肺结核"
-          },
-          {
-            "value": "肝炎"
-          },
-          {
-            "value": "先天畸形"
-          },
-          {
-            "value": "其他"
-          }
-        ],
-        "remote": false,
-        "filterable": false,
-        "remoteOptions": [],
-        "props": {
-          "value": "value",
-          "label": "label"
-        },
-        "remoteFunc": "func_1564384722000_46717",
-        "dependents": [
-          [
-            "radio_1564384522000_9914",
-            "有"
-          ]
-        ]
-      },
-      "icon": "icon-select",
-      "key": "1564384722000_46717",
-      "model": "select_1564384722000_46717",
-      "cols": 24,
-      "rules": [],
-      "is_delete": 0,
-      "sort": 2
-    }
-  ],
-  "config": {
-    "title": "家族史",
-    "key": "Key_1564384514000_80645",
-    "labelWidth": 90,
-    "labelPosition": "left",
-    "size": "small"
-  },
-    "title": "Title_1563611683000_42625",
-    "key": "Key_1563611683000_42625",
     "id": "2"
   }
-]
+}
 
 export default {
   data () {

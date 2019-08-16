@@ -215,8 +215,8 @@ export default {
       confirmLoading: false,
       jsonData: {},
       tableList: [
-        {id: '1',  title: "既往史子表单"},
-        {id: '2', title: "基本信息表16"}
+        {key: 'table_input_1',  title: "既往史子表单"},
+        {key: 'table_input_2', title: "基本信息表16"}
       ] // 子表单列表
     }
   },

@@ -136,11 +136,10 @@ export default {
      * 生成当前子表单设计器，this.currentChildTableDesigner
      */
     handleChildTableShow (childTable) {
-      if(childTable.options.hasOwnProperty('relatedTable') && childTable.options.relatedTable !== '')
+      if(childTable.options.hasOwnProperty('relatedTable') && this.dependChildTable.hasOwnProperty(childTable.options.relatedTable))
       {
-        // 过滤id=关联表字段的对象
-        const childTableDesigner = this.dependChildTable.filter(item => item.id === childTable.options.relatedTable)
-        this.currentChildTableDesigner = Object.assign({}, childTableDesigner[0], {'parentModel': childTable.model})
+        const childTableDesigner = this.dependChildTable[childTable.options.relatedTable]
+        this.currentChildTableDesigner = {...childTableDesigner, ...{parentModel: childTable.model}}
         this.childTableModalVisible = true
       }
       else
@@ -184,6 +183,8 @@ export default {
         this.models[this.currentChildTableDesigner.parentModel].push(data) // 子表单数据更新
 
         this.childTableModalVisible = false
+        // console.log(model)
+        console.log(data)
         // 数据校验成功
         // data 为获取的表单数据
       }).catch(e => {
