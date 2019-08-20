@@ -240,41 +240,6 @@ export const basicComponents = [
       range: false,
       width: ''
     }
-  },
-  {
-    type: 'text',
-    name: '文本标签',
-    icon: 'icon-fuwenbenkuang',
-    cols: 24,
-    options: {
-      fontSize: '12',
-      height: '50',
-      fontWeight: 'normal',
-      align: 'left'
-    }
-  },
-  {
-    type: 'image',
-    name: '图片占位',
-    icon: 'icon-tupian',
-    cols: 24,
-    options: {
-      image_url:'http://6120491.s21i.faiusr.com/2/ABUIABACGAAg0725rAUoiLv9qAQwrAI4rAI.jpg',
-      size: {
-        width: '100',
-        height: '100'
-      }
-    }
-  },
-  {
-    type: 'divider',
-    name: '分割线',
-    icon: 'icon-tupian',
-    cols: 24,
-    options: {
-      text: '',
-      position: 'left'
-    }
   }
 ]
 
@@ -332,30 +297,65 @@ export const advanceComponents = [
   //     width: ''
   //   }
   // },
-  {
-    type: 'cascader',
-    name: '级联选择器',
-    icon: 'icon-jilianxuanze',
-    cols: 12,
-    options: {
-      defaultValue: [],
-      width: '',
-      placeholder: '',
-      disabled: false,
-      clearable: false,
-      remote: true,
-      remoteOptions: [],
-      props: {
-        value: 'value',
-        label: 'label',
-        children: 'children'
-      },
-      remoteFunc: ''
-    }
-  }
+  // {
+  //   type: 'cascader',
+  //   name: '级联选择器',
+  //   icon: 'icon-jilianxuanze',
+  //   cols: 12,
+  //   options: {
+  //     defaultValue: [],
+  //     width: '',
+  //     placeholder: '',
+  //     disabled: false,
+  //     clearable: false,
+  //     remote: true,
+  //     remoteOptions: [],
+  //     props: {
+  //       value: 'value',
+  //       label: 'label',
+  //       children: 'children'
+  //     },
+  //     remoteFunc: ''
+  //   }
+  // }
 ]
 
 export const layoutComponents = [
+  {
+    type: 'text',
+    name: '文本标签',
+    icon: 'icon-fuwenbenkuang',
+    cols: 24,
+    options: {
+      fontSize: '12',
+      height: '50',
+      fontWeight: 'normal',
+      align: 'left'
+    }
+  },
+  {
+    type: 'image',
+    name: '图片占位',
+    icon: 'icon-tupian',
+    cols: 24,
+    options: {
+      image_url:'http://6120491.s21i.faiusr.com/2/ABUIABACGAAg0725rAUoiLv9qAQwrAI4rAI.jpg',
+      size: {
+        width: '100',
+        height: '100'
+      }
+    }
+  },
+  {
+    type: 'divider',
+    name: '分割线',
+    icon: 'icon-tupian',
+    cols: 24,
+    options: {
+      text: '',
+      position: 'left'
+    }
+  }
   // {
   //   type: 'grid',
   //   name: '栅格布局',

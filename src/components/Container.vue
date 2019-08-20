@@ -226,11 +226,11 @@ export default {
     },
     advanceFields: {
       type: Array,
-      default: () => ['blank', 'imgupload', 'editor', 'cascader']
+      default: () => ['childTable']
     },
     layoutFields: {
       type: Array,
-      default: () => ['grid']
+      default: () => ['text', 'image', 'divider']
     }
   },
   data () {
