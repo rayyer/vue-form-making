@@ -61,9 +61,9 @@
             :prop="item.model"
             v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
             >
-            <div v-for="(v, index) in models[item.model]" :key="index" style="margin-right:10px">
-              <span v-for="(childItem, i) in dependChildTable[item.options.relatedTable].list" :key="i">
-                <b>{{ childItem.name }}</b>: {{ models[item.model][index][childItem.model] }} 
+            <div v-for="(list, index) in models[item.model]" :key="index" style="margin-right:10px">
+              <span v-for="(v, k) in list" :key="k" v-if="v!==''">
+                <b>{{k | filtersGetName(dependChildTable[item.options.relatedTable].list)}}</b>: {{v}}
               </span>
               <el-button type="text" @click="handleChildTableDelete(item.model, index)"><i class="el-icon-delete"></i></el-button>
             </div>
@@ -113,6 +113,13 @@ export default {
     CusDialog
   },
   props: ['data', 'remote', 'value', 'insite', 'dependChildTable'],
+  filters: {
+    filtersGetName:function(model, list){
+      const modelItem = list.filter(item => item.model === model)
+      if(modelItem.length>0) return modelItem[0].name
+      return '-'
+    }
+  },
   data () {
     return {
       models: {},
