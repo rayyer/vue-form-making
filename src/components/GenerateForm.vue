@@ -232,7 +232,7 @@ export default {
       }
     },
     getDependents (item) {
-      if(item.options.dependents)
+      if(item.options.dependents && item.options.dependents.length>0)
       {
         const dependents = item.options.dependents
         var data = {}
@@ -248,6 +248,7 @@ export default {
           }
         }
         this.dependents[item.model] = data
+        this.filedHidden(this.models)
       }
     },
     getData () {
