@@ -22,25 +22,6 @@
               </draggable>
             </template>
             
-            <template v-if="advanceFields.length">
-              <div class="widget-cate">高级字段</div>
-              <draggable tag="ul" :list="advanceComponents" 
-                v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
-                @end="handleMoveEnd"
-                @start="handleMoveStart"
-                :move="handleMove"
-              >
-                
-                <li v-if="advanceFields.indexOf(item.type) >= 0" class="form-edit-widget-label" :class="{'no-put': item.type == 'table'}" v-for="(item, index) in advanceComponents" :key="index">
-                  <a>
-                    <i class="icon iconfont" :class="item.icon"></i>
-                    <span>{{item.name}}</span>
-                  </a>
-                </li>
-              </draggable>
-            </template>
-
-            
             <template v-if="layoutFields.length">
               <div class="widget-cate">布局字段</div>
               <draggable tag="ul" :list="layoutComponents" 
@@ -51,6 +32,24 @@
               >
                 
                 <li v-if="layoutFields.indexOf(item.type) >=0" class="form-edit-widget-label no-put" v-for="(item, index) in layoutComponents" :key="index">
+                  <a>
+                    <i class="icon iconfont" :class="item.icon"></i>
+                    <span>{{item.name}}</span>
+                  </a>
+                </li>
+              </draggable>
+            </template>
+
+            <template v-if="advanceFields.length">
+              <div class="widget-cate">高级字段</div>
+              <draggable tag="ul" :list="advanceComponents" 
+                v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
+                @end="handleMoveEnd"
+                @start="handleMoveStart"
+                :move="handleMove"
+              >
+                
+                <li v-if="advanceFields.indexOf(item.type) >= 0" class="form-edit-widget-label" :class="{'no-put': item.type == 'table'}" v-for="(item, index) in advanceComponents" :key="index">
                   <a>
                     <i class="icon iconfont" :class="item.icon"></i>
                     <span>{{item.name}}</span>
