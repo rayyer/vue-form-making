@@ -5,8 +5,8 @@
       <div class="fm-title" @click="handleHome">表单设计器</div>
 
       <div class="fm-link">
-        <a class="ad" target="_blank" href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=x5oqy0nh">阿里云限量红包</a>
-        <a target="_blank" href="https://www.yuque.com/zhulei-sbpfz/ua9nar">开始使用</a>
+        <a target="_blank" href="https://www.yuque.com/zhulei-sbpfz/ua9nar/mdgwki">使用文档</a>
+        <a target="_blank" href="https://www.yuque.com/zhulei-sbpfz/ua9nar/umgwk6">教程</a>
         <a target="_blank" href="#/price">商业授权</a>
         <a target="_blank" href="#/form">效果演示</a>
         <a href="https://github.com/GavinZhuLei/vue-form-making">GitHub</a>

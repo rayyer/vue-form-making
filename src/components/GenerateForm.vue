@@ -78,6 +78,7 @@
             :remote="remote" 
             :rules="rules" 
             :widget="item" 
+            @input-change="onInputChange"
             v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
           ></genetate-form-item>
         </el-col>
@@ -262,6 +263,9 @@ export default {
     },
     reset () {
       this.$refs.generateForm.resetFields()
+    },
+    onInputChange (value, field) {
+      this.$emit('on-change', field, value, this.models)
     },
     refresh () {
     },
