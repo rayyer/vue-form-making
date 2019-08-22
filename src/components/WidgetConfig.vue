@@ -68,7 +68,7 @@
           ></el-cascader>
       </el-form-item>  
 
-      <el-form-item label="子表单" v-if="data.type === 'childTable'">
+      <el-form-item label="被关联子表单" v-if="data.type === 'childTable'">
         <el-select v-model="data.options.relatedTable" clearable placeholder="请选择要关联的表单">
           <el-option
             v-for="item in tableList"
@@ -77,6 +77,7 @@
             :value="item.key">
           </el-option>
         </el-select>
+        <el-checkbox v-model="data.options.addRemoveHandle" style="margin-left:10px">可增删</el-checkbox>
       </el-form-item>     
 
       <el-form-item label="最小值" v-if="Object.keys(data.options).indexOf('min')>=0">

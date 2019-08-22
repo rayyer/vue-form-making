@@ -250,9 +250,10 @@ export const advanceComponents = [
     icon: 'icon-grid-',
     cols: 24,
     options: {
-      defaultValue: []
+      defaultValue: [''],
+      addRemoveHandle: true
     }
-  },
+  }
   // {
   //   type: 'blank',
   //   name: '自定义',

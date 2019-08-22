@@ -55,7 +55,7 @@
           </div>
 
           <!-- 子表单,此处应该是设计器和数据关联 -->
-          <el-form-item
+          <!-- <el-form-item
             v-else-if="item.type == 'childTable'"
             :label="item.name"
             :prop="item.model"
@@ -68,7 +68,26 @@
               <el-button type="text" @click="handleChildTableDelete(item.model, index)"><i class="el-icon-delete"></i></el-button>
             </div>
             <el-button type="text" @click="handleChildTableShow(item)">+ 添加</el-button>
+          </el-form-item> -->
+
+          <el-form-item
+            v-else-if="item.type == 'childTable'"
+            :label="item.name"
+            :prop="item.model"
+            v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
+            >
+          <!-- <template v-else-if="item.type == 'childTable'" v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"> -->
+            <!-- <h3>{{item.name}}</h3> -->
+            <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
+            <!-- <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" ref="childFrom"> -->
+              <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('addRemoveHandle') && item.options.addRemoveHandle">
+                <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
+              </template>
+            </fm-generate-form>
+            <el-button @click="getChildModels(item.model)" icon="el-icon-plus"  v-if="item.options.hasOwnProperty('addRemoveHandle') && item.options.addRemoveHandle">新增</el-button>
+          <!-- </template> -->
           </el-form-item>
+
 
           <!-- 其他 -->
           <genetate-form-item 
@@ -82,10 +101,14 @@
             v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
           ></genetate-form-item>
         </el-col>
+        <el-col :span="4">
+          <slot name="dynamicFormDel"></slot>
+        </el-col>
       </el-row>
+      <!-- <slot name="dynamicFormAdd"></slot> -->
     </el-form>
 
-    <cus-dialog
+    <!-- <cus-dialog
       :visible="childTableModalVisible"
       @on-close="childTableModalVisible = false"
       width="700px"
@@ -97,7 +120,7 @@
         <el-button type="primary" @click="handleChildTableAdd">添加</el-button>
         <el-button @click="childTableModalVisible = false">取消</el-button>
       </template>
-    </cus-dialog>
+    </cus-dialog> -->
 
   </div>
 </template>
@@ -138,6 +161,20 @@ export default {
   mounted () {
   },
   methods: {
+    /*
+    * index=-1 && model=''则用来添加一行空的子表单
+    * 或者为指定一个索引index的item替换表单内容model
+    */
+    getChildModels (item, index=-1, model='') {
+      if (model==='') {
+        this.models[item].push(model)
+      } else {
+        this.models[item][index] = model
+      }
+    },
+    removeChildTableRecord (item, index) {
+      this.models[item].splice(index, 1)
+    },
     /**
      * 生成当前子表单设计器，this.currentChildTableDesigner
      */
@@ -328,6 +365,7 @@ export default {
   },
   watch: {
     models: function (val) {
+      this.$emit('childFromModels', val)
       this.filedHidden(val)
     },
     data: {

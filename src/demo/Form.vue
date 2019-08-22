@@ -37,7 +37,7 @@ const jsonData = {
       "icon": "icon-grid-",
       "cols": 24,
       "options": {
-        "defaultValue": [],
+        "defaultValue": [''],
         "remoteFunc": "func_1563610030000_82402",
         "relatedTable": "table_input_1"
       },
@@ -92,9 +92,10 @@ const jsonData = {
       "icon": "icon-grid-",
       "cols": 24,
       "options": {
-        "defaultValue": [],
+        "defaultValue": [''],
         "remoteFunc": "func_1563610030000_82402",
-        "relatedTable": "table_input_1"
+        "relatedTable": "table_input_2",
+        "addRemoveHandle": true
       },
       "key": "1563610030000_82402",
       "model": "childTable_1563610030011_82402",
@@ -316,6 +317,176 @@ const dependChildTable = {
     "title": "Title_1563611683000_42625",
     "key": "Key_1563611683000_42625",
     "id": "2"
+  },
+  "table_input_2":{
+    "list": [
+      {
+        "name": "222家族22史",
+        "type": "radio",
+        "options": {
+          "inline": true,
+          "defaultValue": null,
+          "showLabel": false,
+          "options": [
+            {
+              "value": "无"
+            },
+            {
+              "value": "有"
+            }
+          ],
+          "required": false,
+          "width": null,
+          "remote": false,
+          "remoteOptions": [],
+          "props": {
+            "value": "value",
+            "label": "label"
+          },
+          "remoteFunc": "func_1564384522000_9914",
+          "disabled": false
+        },
+        "icon": "icon-radio-active",
+        "key": "1564384522000_9914",
+        "model": "radio_1564384522000_9914",
+        "cols": 6,
+        "rules": [],
+        "is_delete": 0,
+        "sort": 0
+      },
+      {
+        "name": "成员",
+        "type": "select",
+        "options": {
+          "defaultValue": "父亲",
+          "multiple": false,
+          "disabled": false,
+          "clearable": false,
+          "placeholder": "请选择",
+          "required": false,
+          "showLabel": false,
+          "width": null,
+          "options": [
+            {
+              "value": "父亲"
+            },
+            {
+              "value": "母亲"
+            },
+            {
+              "value": "兄弟姐妹"
+            },
+            {
+              "value": "子女"
+            }
+          ],
+          "remote": false,
+          "filterable": false,
+          "remoteOptions": [],
+          "props": {
+            "value": "value",
+            "label": "label"
+          },
+          "remoteFunc": "func_1564384598000_85312",
+          "dependents": [
+            [
+              "radio_1564384522000_9914",
+              "有"
+            ]
+          ]
+        },
+        "icon": "icon-select",
+        "key": "1564384598000_85312",
+        "model": "select_1564384598000_85312",
+        "cols": 6,
+        "rules": [],
+        "is_delete": 0,
+        "sort": 1
+      },
+      {
+        "name": "疾病",
+        "type": "select",
+        "options": {
+          "defaultValue": [],
+          "multiple": true,
+          "disabled": false,
+          "clearable": false,
+          "placeholder": "请选择所患疾病",
+          "required": false,
+          "showLabel": false,
+          "width": null,
+          "options": [
+            {
+              "value": "无"
+            },
+            {
+              "value": "高血压"
+            },
+            {
+              "value": "糖尿病"
+            },
+            {
+              "value": "冠心病"
+            },
+            {
+              "value": "慢性阻塞性肺病"
+            },
+            {
+              "value": "恶性肿瘤"
+            },
+            {
+              "value": "脑卒中"
+            },
+            {
+              "value": "严重精神障碍"
+            },
+            {
+              "value": "肺结核"
+            },
+            {
+              "value": "肝炎"
+            },
+            {
+              "value": "先天畸形"
+            },
+            {
+              "value": "其他"
+            }
+          ],
+          "remote": false,
+          "filterable": false,
+          "remoteOptions": [],
+          "props": {
+            "value": "value",
+            "label": "label"
+          },
+          "remoteFunc": "func_1564384722000_46717",
+          "dependents": [
+            [
+              "radio_1564384522000_9914",
+              "有"
+            ]
+          ]
+        },
+        "icon": "icon-select",
+        "key": "1564384722000_46717",
+        "model": "select_1564384722000_46717",
+        "cols": 6,
+        "rules": [],
+        "is_delete": 0,
+        "sort": 2
+      }
+    ],
+    "config": {
+      "title": "家族史",
+      "key": "Key_1564384514000_80645",
+      "labelWidth": 90,
+      "labelPosition": "left",
+      "size": "small"
+    },
+    "title": "Title_1563611683000_42625",
+    "key": "Key_1563611683000_42625",
+    "id": "2"
   }
 }
 
@@ -323,7 +494,12 @@ export default {
   data () {
     return {
       jsonData,
-      editData: {},
+      editData: {
+        "childTable_1563610030011_82402": [
+          {"radio_1564384522000_9914": '有', "select_1564384598000_85312": '父亲',"select_1564384722000_46717": ['高血压']},
+          {"radio_1564384522000_9914": '有', "select_1564384598000_85312": '母亲',"select_1564384722000_46717": ['糖尿病']}
+        ]
+      },
       remoteFuncs: {},
       dependChildTable
     }
