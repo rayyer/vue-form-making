@@ -1,11 +1,5 @@
 <template>
-  <el-form-item
-    class="widget-view "
-    :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
-    :label="element.name"
-    @click.native.stop="handleSelectWidget(index)"
-    :label-width="(element.options.labelWidth || 80) + 'px'"
-    >
+  <div>
     <template v-if="element.type == 'input'">
       <el-input
         v-model="element.options.defaultValue"
@@ -187,24 +181,45 @@
       </fm-editor>
     </template> -->
 
+    <template v-if="element.type === 'image'">
+      <el-image
+        :style="{width: element.options.size.width+'px', height: element.options.size.height+'px', backgroundColor: '#ccc'}"
+        :src="element.options.image_url"
+        fit="fill">
+        <div slot="error" class="image-slot">
+          <i class="el-icon-picture-outline"></i>
+        </div>
+      </el-image>
+    </template>
+
+    <!-- 文本框组件 -->
+    <template v-if="element.type === 'text'">
+      <div
+        :style="{ 
+          fontSize: element.options.fontSize + 'px', 
+          fontWeight: element.options.fontWeight, 
+          textAlign: element.options.align,
+          height:  element.options.height + 'px',
+          lineHeight:  element.options.height + 'px',
+          }"
+      >
+        {{element.name}}
+      </div>
+    </template>
+
+    <template v-if="element.type === 'divider'">
+      <el-divider :content-position="element.options.position">{{element.options.text}}</el-divider>
+    </template>
+
     <template v-if="element.type=='blank'">
       <div style="height: 50px;color: #999;background: #eee;line-height:50px;text-align:center;">自定义区域</div>
     </template>
 
     <template v-if="element.type=='childTable'">
-      <div style="height: 50px;color: #999;background: #eee;line-height:50px;text-align:center;">子表单</div>
+      <div style="height: 50px;color: #999;background: #eee;line-height:50px;text-align:center;">{{ element.name }}子表单</div>
     </template>
 
-    <div class="widget-view-action" v-if="selectWidget.key == element.key">
-      <i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>
-      <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"></i>
-    </div>
-
-    <div class="widget-view-drag" v-if="selectWidget.key == element.key">
-      <i class="iconfont icon-drag drag-widget"></i>
-    </div>
-    
-  </el-form-item>
+  </div>
 </template>
 
 <script>

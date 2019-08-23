@@ -97,6 +97,7 @@
           width="1000px"
           form
         >
+          <div style="color:#ccc">* 预览功能暂不支持子表单内容的预览</div>
           <generate-form insite="true" @on-change="handleDataChange" v-if="previewVisible" :data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm">
 
             <template v-slot:blank="scope">

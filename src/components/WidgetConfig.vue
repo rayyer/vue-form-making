@@ -3,6 +3,7 @@
     <el-form label-position="top">
       <el-form-item label="标题" v-if="data.type!='grid'">
         <el-input v-model="data.name"></el-input>
+        <el-checkbox v-model="data.options.showName" style="margin-left:10px" v-if="data.type === 'childTable' || Object.keys(data.options).indexOf('showName')>=0">显示标题</el-checkbox>
       </el-form-item>
       <el-form-item label="标题宽度" v-if="data.type!='grid'">
         <el-input v-model="data.options.labelWidth" placeholder="默认为表单属性的字段宽度值"></el-input>

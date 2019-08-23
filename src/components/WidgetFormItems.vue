@@ -1,52 +1,45 @@
 <template>
   <el-form-item
+    v-if="element.options.hasOwnProperty('showName') && element.options.showName===false"
     class="widget-view "
     :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
     label-width="0px"
     @click.native.stop="handleSelectWidget(index)"
     >
-    <template v-if="element.type === 'input'">
-      <el-input
-        v-model="element.options.defaultValue"
-        :style="{width: element.options.width}"
-        :placeholder="element.options.placeholder"
-        :disabled="element.options.disabled"
-      >
-      <i slot="suffix">
-        {{element.options.suffix}}
-      </i>
-      </el-input>
-    </template>
+    <widget-form-item
+      :key="element.key"
+      :element="element"
+      :select.sync="selectWidget"
+      :index="index"
+      :data="data">
+    </widget-form-item>
 
-    <template v-if="element.type === 'image'">
-      <el-image
-        :style="{width: element.options.size.width+'px', height: element.options.size.height+'px', backgroundColor: '#ccc'}"
-        :src="element.options.image_url"
-        fit="fill">
-        <div slot="error" class="image-slot">
-          <i class="el-icon-picture-outline"></i>
-        </div>
-      </el-image>
-    </template>
+    <div class="widget-view-action" v-if="selectWidget.key == element.key">
+      <i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>
+      <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"></i>
+    </div>
 
-    <!-- 文本框组件 -->
-    <template v-if="element.type === 'text'">
-      <div
-        :style="{ 
-          fontSize: element.options.fontSize + 'px', 
-          fontWeight: element.options.fontWeight, 
-          textAlign: element.options.align,
-          height:  element.options.height + 'px',
-          lineHeight:  element.options.height + 'px',
-          }"
-      >
-        {{element.name}}
-      </div>
-    </template>
+    <div class="widget-view-drag" v-if="selectWidget.key == element.key">
+      <i class="iconfont icon-drag drag-widget"></i>
+    </div>
+  </el-form-item>
 
-    <template v-if="element.type === 'divider'">
-      <el-divider :content-position="element.options.position">{{element.options.text}}</el-divider>
-    </template>
+  <el-form-item
+    v-else
+    class="widget-view "
+    :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
+    :label="element.name"
+    @click.native.stop="handleSelectWidget(index)"
+    :label-width="(element.options.labelWidth || 80) + 'px'"
+    >
+    
+    <widget-form-item
+      :key="element.key"
+      :element="element"
+      :select.sync="selectWidget"
+      :index="index"
+      :data="data">
+    </widget-form-item>
 
     <div class="widget-view-action" v-if="selectWidget.key == element.key">
       <i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>
@@ -61,11 +54,13 @@
 </template>
 
 <script>
+import WidgetFormItem from './WidgetFormItem'
 // import FmUpload from './Upload'
 // import FmEditor from './Editor/tinymce'
 export default {
   props: ['element', 'select', 'index', 'data'],
   components: {
+    WidgetFormItem
     // FmUpload,
     // FmEditor
   },

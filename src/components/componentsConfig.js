@@ -12,7 +12,8 @@ export const basicComponents = [
       pattern: '',
       placeholder: '',
       disabled: false,
-      suffix: ''
+      suffix: '',
+      showName: true
     }
   },
   {
@@ -251,7 +252,8 @@ export const advanceComponents = [
     cols: 24,
     options: {
       defaultValue: [''],
-      addRemoveHandle: true
+      addRemoveHandle: true,
+      showName: false
     }
   }
   // {
@@ -331,7 +333,8 @@ export const layoutComponents = [
       fontSize: '12',
       height: '50',
       fontWeight: 'normal',
-      align: 'left'
+      align: 'left',
+      showName: false
     }
   },
   {
@@ -344,7 +347,8 @@ export const layoutComponents = [
       size: {
         width: '100',
         height: '100'
-      }
+      },
+      showName: false
     }
   },
   {
@@ -354,7 +358,8 @@ export const layoutComponents = [
     cols: 24,
     options: {
       text: '',
-      position: 'left'
+      position: 'left',
+      showName: false
     }
   }
   // {
