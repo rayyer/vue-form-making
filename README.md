@@ -14,6 +14,46 @@
 4. 对字段的删除进行特殊处理（对新加字段的删除和原有字段删除进行区别）
 5. 增加分割线、纯文字、图片展示
 
+# 规范化子表单结构说明
+```json
+# 默认子表单model格式
+{
+  ......
+  "childTable":[
+    {"input_name_model":"疾病", "value_model":"高血压"},
+    {"input_name_model":"家族史", "value_model":"高血压"},
+  ],
+  ......
+}
+````
+## 不可增减的子表单
+  建议将不可增减的子表单将和父表单合并，因为不可增减的本来就一层，合并之后减少业务量。例如
+  ```json
+# 默认子表单model格式
+{
+  ......
+  "name": "张三",
+  "gender": "男",
+  "childTable":[
+    {"input_name_model":"家庭住址", "value_model":"广东省深圳市"}
+  ],
+  ......
+}
+
+# 新的子表单model
+{
+  ......
+  "name": "张三",
+  "gender": "男",
+  "input_name_model":"家庭住址", 
+  "value_model":"广东省深圳市"
+  //"childTable":[
+  //  {"input_name_model":"家庭住址", "value_model":"广东省深圳市"}
+  //],
+  ......
+}
+````
+
 # form-making
 基于Vue,ElementUI开发的一款表单设计器，提高表单开发效率的利器，让开发者从枯燥的表单代码编写中解放出来
 

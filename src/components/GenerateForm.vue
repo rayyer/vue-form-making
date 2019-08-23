@@ -54,40 +54,29 @@
             <el-divider :content-position="item.options.position">{{item.options.text}}</el-divider>
           </div>
 
-          <!-- 子表单,此处应该是设计器和数据关联 -->
-          <!-- <el-form-item
-            v-else-if="item.type == 'childTable'"
-            :label="item.name"
-            :prop="item.model"
-            v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
-            >
-            <div v-for="(list, index) in models[item.model]" :key="index" style="margin-right:10px">
-              <span v-for="(v, k) in list" :key="k" v-if="v!==''">
-                <b>{{k | filtersGetName(dependChildTable[item.options.relatedTable].list)}}</b>: {{v}}
-              </span>
-              <el-button type="text" @click="handleChildTableDelete(item.model, index)"><i class="el-icon-delete"></i></el-button>
-            </div>
-            <el-button type="text" @click="handleChildTableShow(item)">+ 添加</el-button>
-          </el-form-item> -->
-
-          <el-form-item
-            v-else-if="item.type == 'childTable'"
-            :label="item.name"
-            :prop="item.model"
-            v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
-            >
-          <!-- <template v-else-if="item.type == 'childTable'" v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"> -->
-            <!-- <h3>{{item.name}}</h3> -->
-            <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
-            <!-- <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" ref="childFrom"> -->
-              <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('addRemoveHandle') && item.options.addRemoveHandle">
-                <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
-              </template>
-            </fm-generate-form>
-            <el-button @click="getChildModels(item.model)" icon="el-icon-plus"  v-if="item.options.hasOwnProperty('addRemoveHandle') && item.options.addRemoveHandle">新增</el-button>
-          <!-- </template> -->
-          </el-form-item>
-
+          <template v-else-if="item.type == 'childTable'">
+            <template v-if="item.name===''">
+              <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
+                <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('addRemoveHandle') && item.options.addRemoveHandle">
+                  <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
+                </template>
+              </fm-generate-form>
+              <el-button @click="getChildModels(item.model)" icon="el-icon-plus"  v-if="item.options.hasOwnProperty('addRemoveHandle') && item.options.addRemoveHandle">新增</el-button>
+            </template>
+            <el-form-item
+              v-else
+              :label="item.name"
+              :prop="item.model"
+              v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
+              >
+              <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
+                <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('addRemoveHandle') && item.options.addRemoveHandle">
+                  <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
+                </template>
+              </fm-generate-form>
+              <el-button @click="getChildModels(item.model)" icon="el-icon-plus"  v-if="item.options.hasOwnProperty('addRemoveHandle') && item.options.addRemoveHandle">新增</el-button>
+            </el-form-item>
+          </template>
 
           <!-- 其他 -->
           <genetate-form-item 
@@ -105,22 +94,7 @@
           <slot name="dynamicFormDel"></slot>
         </el-col>
       </el-row>
-      <!-- <slot name="dynamicFormAdd"></slot> -->
     </el-form>
-
-    <!-- <cus-dialog
-      :visible="childTableModalVisible"
-      @on-close="childTableModalVisible = false"
-      width="700px"
-    >
-      <fm-generate-form :data="currentChildTableDesigner" ref="childFrom">
-      </fm-generate-form>
-
-      <template slot="action">
-        <el-button type="primary" @click="handleChildTableAdd">添加</el-button>
-        <el-button @click="childTableModalVisible = false">取消</el-button>
-      </template>
-    </cus-dialog> -->
 
   </div>
 </template>
@@ -174,60 +148,6 @@ export default {
     },
     removeChildTableRecord (item, index) {
       this.models[item].splice(index, 1)
-    },
-    /**
-     * 生成当前子表单设计器，this.currentChildTableDesigner
-     */
-    handleChildTableShow (childTable) {
-      if(childTable.options.hasOwnProperty('relatedTable') && this.dependChildTable.hasOwnProperty(childTable.options.relatedTable))
-      {
-        const childTableDesigner = this.dependChildTable[childTable.options.relatedTable]
-        this.currentChildTableDesigner = {...childTableDesigner, ...{parentModel: childTable.model}}
-        this.childTableModalVisible = true
-      }
-      else
-      {
-        this.$notify({
-          title: '提示',
-          message: '未发现子表单字段',
-          type: 'warning'
-        })
-      }
-    },
-    /**
-     * 生成用于向后台提交的model，this.models
-     */
-    handleChildTableAdd () {
-      this.$refs.childFrom.getData().then(data => {
-        let model = {}
-        for (var item of this.currentChildTableDesigner.list) {
-          // 循环子表单设计器，生成表单的label:value的格式
-          if(data[item.model] === "") continue
-          const key = item.name
-          const value = data[item.model]
-          model = {...model, ...{[key]: value}}
-        }
-
-        if((typeof this.models[this.currentChildTableDesigner.parentModel]) !== 'object')  {
-          this.models[this.currentChildTableDesigner.parentModel] = []
-        }
-
-        this.models[this.currentChildTableDesigner.parentModel].push(data) // 子表单数据更新
-
-        this.childTableModalVisible = false
-        // 数据校验成功
-        // data 为获取的表单数据
-      }).catch(e => {
-        this.$notify({
-          title: '添加失败',
-          message: e,
-          duration: 0
-        })
-        // 数据校验失败
-      })
-    },
-    handleChildTableDelete (model, index) {
-      this.models[model].splice(index, 1)
     },
     generateModle (genList) {
       for (let i = 0; i < genList.length; i++) {

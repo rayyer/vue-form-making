@@ -88,7 +88,7 @@ const jsonData = {
     },
     {
       "type": "childTable",
-      "name": "子表单2",
+      "name": "",
       "icon": "icon-grid-",
       "cols": 24,
       "options": {
@@ -321,7 +321,7 @@ const dependChildTable = {
   "table_input_2":{
     "list": [
       {
-        "name": "222家族22史",
+        "name": "无name的子表单",
         "type": "radio",
         "options": {
           "inline": true,
