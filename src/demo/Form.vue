@@ -95,7 +95,8 @@ const jsonData = {
         "defaultValue": [''],
         "remoteFunc": "func_1563610030000_82402",
         "relatedTable": "table_input_2",
-        "addRemoveHandle": true
+        "addRemoveHandle": true,
+        "showName": false
       },
       "key": "1563610030000_82402",
       "model": "childTable_1563610030011_82402",

@@ -55,7 +55,7 @@
           </div>
 
           <template v-else-if="item.type == 'childTable'">
-            <template v-if="item.name===''">
+            <template v-if="item.options.showName===false">
               <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
                 <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('addRemoveHandle') && item.options.addRemoveHandle">
                   <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
@@ -78,17 +78,43 @@
             </el-form-item>
           </template>
 
-          <!-- 其他 -->
-          <genetate-form-item 
-            v-else 
-            :key="item.key" 
-            :models.sync="models" 
-            :remote="remote" 
-            :rules="rules" 
-            :widget="item" 
-            @input-change="onInputChange"
-            v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
-          ></genetate-form-item>
+          <template v-else-if="item.options.showName===false">
+            <el-form-item
+              :prop="item.model"
+              label-width="0px"
+              v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
+              >
+              <genetate-form-item
+                :key="item.key" 
+                :models.sync="models" 
+                :remote="remote" 
+                :rules="rules" 
+                :widget="item" 
+                @input-change="onInputChange"
+              ></genetate-form-item>
+            </el-form-item>
+          </template>
+          <template v-else>
+            <el-form-item
+              :label="item.name"
+              :prop="item.model"
+              :label-width="(item.options.labelWidth || 80) + 'px'"
+              v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
+              >
+              <genetate-form-item
+                :key="item.key" 
+                :models.sync="models" 
+                :remote="remote" 
+                :rules="rules" 
+                :widget="item" 
+                @input-change="onInputChange"
+              ></genetate-form-item>
+            </el-form-item>
+          </template>
+          
+
+
+          
         </el-col>
         <el-col :span="4">
           <slot name="dynamicFormDel"></slot>
