@@ -252,7 +252,7 @@ export const advanceComponents = [
     cols: 24,
     options: {
       defaultValue: [''],
-      addRemoveHandle: true,
+      islists: false,
       showName: false
     }
   }

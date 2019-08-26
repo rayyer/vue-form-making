@@ -3,12 +3,12 @@
     <el-form label-position="top">
       <el-form-item label="标题" v-if="data.type!='grid'">
         <el-input v-model="data.name"></el-input>
-        <el-checkbox v-model="data.options.showName" style="margin-left:10px" v-if="data.type === 'childTable' || Object.keys(data.options).indexOf('showName')>=0">显示标题</el-checkbox>
+        <el-checkbox v-model="data.options.showName" style="margin-left:10px">显示标题</el-checkbox>
       </el-form-item>
       <el-form-item label="标题宽度" v-if="data.type!='grid'">
         <el-input v-model="data.options.labelWidth" placeholder="默认为表单属性的字段宽度值"></el-input>
       </el-form-item>
-      <el-form-item label="宽度" v-if="Object.keys(data.options).indexOf('width')>=0">
+      <el-form-item label="输入框宽度" v-if="Object.keys(data.options).indexOf('width')>=0">
         <el-input v-model="data.options.width"></el-input>
       </el-form-item>
 
@@ -78,7 +78,7 @@
             :value="item.key">
           </el-option>
         </el-select>
-        <el-checkbox v-model="data.options.addRemoveHandle" style="margin-left:10px">可增删</el-checkbox>
+        <el-checkbox v-model="data.options.islists" style="margin-left:10px">多记录</el-checkbox>
       </el-form-item>     
 
       <el-form-item label="最小值" v-if="Object.keys(data.options).indexOf('min')>=0">

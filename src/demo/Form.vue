@@ -88,14 +88,14 @@ const jsonData = {
     },
     {
       "type": "childTable",
-      "name": "",
+      "name": "子表单2",
       "icon": "icon-grid-",
       "cols": 24,
       "options": {
         "defaultValue": [''],
         "remoteFunc": "func_1563610030000_82402",
         "relatedTable": "table_input_2",
-        "addRemoveHandle": true,
+        "islists": true,
         "showName": false
       },
       "key": "1563610030000_82402",
@@ -497,8 +497,8 @@ export default {
       jsonData,
       editData: {
         "childTable_1563610030011_82402": [
-          {"radio_1564384522000_9914": '有', "select_1564384598000_85312": '父亲',"select_1564384722000_46717": ['高血压']},
-          {"radio_1564384522000_9914": '有', "select_1564384598000_85312": '母亲',"select_1564384722000_46717": ['糖尿病']}
+          // {"radio_1564384522000_9914": '有', "select_1564384598000_85312": '父亲',"select_1564384722000_46717": ['高血压']},
+          // {"radio_1564384522000_9914": '有', "select_1564384598000_85312": '母亲',"select_1564384722000_46717": ['糖尿病']}
         ]
       },
       remoteFuncs: {},
