@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-28 12:03:12
+ * @LastEditTime: 2019-08-29 14:12:16
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div>
     <template v-if="element.type == 'input'">
@@ -13,10 +20,10 @@
       <i slot="suffix">
         {{element.options.suffix}}
       </i>
-      <i slot="prepend" v-if="element.options.prepend !== ''">
+      <i slot="prepend" v-if="element.options.prepend">
         {{element.options.prepend}}
       </i>
-      <i slot="append" v-if="element.options.append !== ''">
+      <i slot="append" v-if="element.options.append">
         {{element.options.append}}
       </i>
       </el-input>
