@@ -266,7 +266,6 @@ export default {
       {
         // console.log('modelKey', modelKey) // 本身的字段key
         const modelValue = models[modelKey]
-
         // 循环预设的依赖项
         for(var dependKey in this.dependents[modelKey])
         {
@@ -276,7 +275,7 @@ export default {
             dependentShow[modelKey] = false
             // 没有依赖则将当前值清空， 避免在循环中更新models，否则和watch models容易成死循环
             if(typeof(this.models[modelKey])==='string' && this.models[modelKey] !== '') value[modelKey]=''
-            if(typeof(this.models[modelKey])==='object' && this.models[modelKey].length !== 0) value[modelKey]=[]
+            if(typeof(this.models[modelKey])==='object' && this.models[modelKey]!==null && this.models[modelKey].length !== 0) value[modelKey]=[]
             continue
           }
 
@@ -285,7 +284,7 @@ export default {
           if(dependModelValue === null || dependModelValue === '') {
             dependentShow[modelKey] = false
             if(typeof(this.models[modelKey])==='string' && this.models[modelKey] !== '') value[modelKey]=''
-            if(typeof(this.models[modelKey])==='object' && this.models[modelKey].length !== 0) value[modelKey]=[]
+            if(typeof(this.models[modelKey])==='object' && this.models[modelKey]!==null && this.models[modelKey].length !== 0) value[modelKey]=[]
             continue
           }
 
@@ -307,7 +306,7 @@ export default {
 
           dependentShow[modelKey] = false
           if(typeof(this.models[modelKey])==='string' && this.models[modelKey] !== '') value[modelKey]=''
-          if(typeof(this.models[modelKey])==='object' && this.models[modelKey].length !== 0) value[modelKey]=[] // 没有依赖则将当前值清空
+          if(typeof(this.models[modelKey])==='object' && this.models[modelKey]!==null && this.models[modelKey].length !== 0) value[modelKey]=[] // 没有依赖则将当前值清空
         }
       }
       
