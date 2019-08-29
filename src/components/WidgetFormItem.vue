@@ -7,8 +7,17 @@
         :placeholder="element.options.placeholder"
         :disabled="element.options.disabled"
       >
+      <i slot="prefix">
+        {{element.options.prefix}}
+      </i>
       <i slot="suffix">
         {{element.options.suffix}}
+      </i>
+      <i slot="prepend" v-if="element.options.prepend !== ''">
+        {{element.options.prepend}}
+      </i>
+      <i slot="append" v-if="element.options.append !== ''">
+        {{element.options.append}}
       </i>
       </el-input>
     </template>
