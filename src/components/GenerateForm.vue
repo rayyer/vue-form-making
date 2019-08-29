@@ -269,17 +269,19 @@ export default {
         // 循环预设的依赖项
         for(var dependKey in this.dependents[modelKey])
         {
+          // 如果没有找到被依赖的属性则跳出
           if(!models.hasOwnProperty(dependKey))
           {
             this.dependentShow[modelKey] = false
-            this.models[modelKey] = '' // 没有依赖则将当前值清空
+            this.models[modelKey] = typeof(this.models[modelKey])==='string' ? '' : [] // 没有依赖则将当前值清空,checkbox是数组对象，其他是空
             continue
           }
 
+          // 被依赖的值是空也跳出
           var dependModelValue = models[dependKey] // 被依赖项的当前值
-          if(dependModelValue === null || dependModelValue === '') {
+          if(dependModelValue === null || dependModelValue === '' || dependModelValue.length === 0) {
             this.dependentShow[modelKey] = false
-            this.models[modelKey] = '' // 没有依赖则将当前值清空
+            this.models[modelKey] = typeof(this.models[modelKey])==='string' ? '' : []  // 没有依赖则将当前值清空
             continue
           }
 
@@ -299,16 +301,11 @@ export default {
             }
           }
 
-          if(this.dependentShow[modelKey] === true)
-          {
-            break
-          }
-          else
-          {
-            this.dependentShow[modelKey] = false
-            this.models[modelKey] = '' // 没有依赖则将当前值清空
-            continue
-          }
+          // 只要有一个条件成立就显示，后面的不用判断
+          if(this.dependentShow[modelKey] === true) break
+
+          this.dependentShow[modelKey] = false
+          this.models[modelKey] = typeof(this.models[modelKey])==='string' ? '' : []  // 没有依赖则将当前值清空
         }
       }
     }
