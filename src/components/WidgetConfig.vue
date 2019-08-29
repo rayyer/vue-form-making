@@ -29,8 +29,20 @@
         <el-input v-model="data.options.placeholder"></el-input>
       </el-form-item>
 
-      <el-form-item label="尾部内容" v-if="data.type === 'input'">
-        <el-input v-model="data.options.suffix" placeholder="可输入单位等内容后缀"></el-input>
+      <el-form-item label="输入框头部" v-if="data.type === 'input'">
+        <el-input v-model="data.options.prefix" placeholder="文本框内前面显示的文字"></el-input>
+      </el-form-item>
+
+      <el-form-item label="输入框尾部" v-if="data.type === 'input'">
+        <el-input v-model="data.options.suffix" placeholder="文本框内后面显示的文字"></el-input>
+      </el-form-item>
+
+      <el-form-item label="输入框前置" v-if="data.type === 'input'">
+        <el-input v-model="data.options.prepend" placeholder="文本框外前面显示的文字"></el-input>
+      </el-form-item>
+
+      <el-form-item label="输入框后置" v-if="data.type === 'input'">
+        <el-input v-model="data.options.append" placeholder="文本框外后面显示的文字"></el-input>
       </el-form-item>
 
       <el-form-item label="图片url" v-if="data.type === 'image'">

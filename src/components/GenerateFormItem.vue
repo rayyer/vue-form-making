@@ -20,9 +20,18 @@
         :disabled="widget.options.disabled"
         :placeholder="widget.options.placeholder"
         :style="{width: widget.options.width}"
-      >
+      >=
+        <i slot="prefix">
+          {{widget.options.prefix}}
+        </i>
         <i slot="suffix">
           {{widget.options.suffix}}
+        </i>
+        <i slot="prepend" v-if="widget.options.prepend !== ''">
+          {{widget.options.prepend}}
+        </i>
+        <i slot="append" v-if="widget.options.append !== ''">
+          {{widget.options.append}}
         </i>
       </el-input>
     </template>

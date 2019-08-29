@@ -12,7 +12,10 @@ export const basicComponents = [
       pattern: '',
       placeholder: '',
       disabled: false,
+      prefix: '',
       suffix: '',
+      prepend: '',
+      append: '',
       showName: true
     }
   },
