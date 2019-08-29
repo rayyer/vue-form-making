@@ -270,6 +270,7 @@ export default {
         // 循环预设的依赖项
         for(var dependKey in this.dependents[modelKey])
         {
+          // 如果没有找到被依赖的属性则跳出
           if(!models.hasOwnProperty(dependKey))
           {
             dependentShow[modelKey] = false
@@ -279,6 +280,7 @@ export default {
             continue
           }
 
+          // 被依赖的值是空也跳出
           var dependModelValue = models[dependKey] // 被依赖项的当前值
           if(dependModelValue === null || dependModelValue === '') {
             dependentShow[modelKey] = false
