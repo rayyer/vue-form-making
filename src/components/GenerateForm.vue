@@ -148,7 +148,7 @@ export default {
       models: {},
       rules: {},
       dependents: {}, // 依赖字段
-      dependentShow: [], // 字段是否显示
+      dependentShow: {}, // 字段是否显示
       colsAmount: 0,
       childTableModalVisible: false, 
       currentChildTableDesigner: {} // 当前用到的子表单设计器
@@ -258,7 +258,8 @@ export default {
     refresh () {
     },
     filedHidden (models) {
-      this.dependentShow = [] // 初始化被依赖显示的组件
+      let dependentShow = {} // 初始化被依赖显示的组件
+      let value = {}
       // console.log('dependents:', this.dependents)
       // console.log('models', models) // 表单内容
       for (var modelKey in this.dependents)
@@ -271,15 +272,18 @@ export default {
         {
           if(!models.hasOwnProperty(dependKey))
           {
-            this.dependentShow[modelKey] = false
-            this.models[modelKey] = '' // 没有依赖则将当前值清空
+            dependentShow[modelKey] = false
+            // 没有依赖则将当前值清空， 避免在循环中更新models，否则和watch models容易成死循环
+            if(typeof(this.models[modelKey])==='string' && this.models[modelKey] !== '') value[modelKey]=''
+            if(typeof(this.models[modelKey])==='object' && this.models[modelKey].length !== 0) value[modelKey]=[]
             continue
           }
 
           var dependModelValue = models[dependKey] // 被依赖项的当前值
           if(dependModelValue === null || dependModelValue === '') {
-            this.dependentShow[modelKey] = false
-            this.models[modelKey] = '' // 没有依赖则将当前值清空
+            dependentShow[modelKey] = false
+            if(typeof(this.models[modelKey])==='string' && this.models[modelKey] !== '') value[modelKey]=''
+            if(typeof(this.models[modelKey])==='object' && this.models[modelKey].length !== 0) value[modelKey]=[]
             continue
           }
 
@@ -289,33 +293,30 @@ export default {
           // console.log('dependKey', dependKey, 'dependItems', dependItems) // 被依赖的字段Key
           // console.log('dependKey value:', dependModelValue)
 
-          for(var item in dependModelValue)
-          {
+          for(var item in dependModelValue) {
             // 对比两个数组，如果存在则显示并跳出
-            if(dependItems.indexOf(dependModelValue[item]) > -1)
-            {
-              this.dependentShow[modelKey] = true
+            if(dependItems.indexOf(dependModelValue[item]) > -1) {
+              dependentShow[modelKey] = true
               break
             }
           }
 
-          if(this.dependentShow[modelKey] === true)
-          {
-            break
-          }
-          else
-          {
-            this.dependentShow[modelKey] = false
-            this.models[modelKey] = '' // 没有依赖则将当前值清空
-            continue
-          }
+          if(dependentShow[modelKey] === true) break
+
+          dependentShow[modelKey] = false
+          if(typeof(this.models[modelKey])==='string' && this.models[modelKey] !== '') value[modelKey]=''
+          if(typeof(this.models[modelKey])==='object' && this.models[modelKey].length !== 0) value[modelKey]=[] // 没有依赖则将当前值清空
         }
       }
+      
+      if(Object.keys(dependentShow).length>0) this.dependentShow = dependentShow
+      if(Object.keys(value).length>0) this.models = {...this.models, ...value}
     }
   },
   watch: {
     models: function (val) {
       this.$emit('childFromModels', val)
+      console.log('models', val)
       this.filedHidden(val)
     },
     data: {

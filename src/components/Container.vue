@@ -480,7 +480,7 @@ export default {
       this.blank = val
     },
     handleDataChange (field, value, data) {
-      console.log(field, value, data)
+      // console.log(field, value, data)
     }
   },
   watch: {

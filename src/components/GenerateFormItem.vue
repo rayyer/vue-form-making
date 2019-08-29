@@ -83,7 +83,6 @@
         :disabled="widget.options.disabled"
       >
         <el-checkbox
-          
           :style="{display: widget.options.inline ? 'inline-block' : 'block'}"
           :label="item.value" v-for="(item, index) in (widget.options.remote ? widget.options.remoteOptions : widget.options.options)" :key="index"
         >
