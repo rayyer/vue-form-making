@@ -27,11 +27,11 @@
         :disabled="widget.options.disabled"
         :placeholder="widget.options.placeholder"
         :style="{width: widget.options.width}"
-      >=
-        <i slot="prefix">
+      >
+        <i slot="prefix" v-if="widget.options.prefix">
           {{widget.options.prefix}}
         </i>
-        <i slot="suffix">
+        <i slot="suffix" v-if="widget.options.suffix">
           {{widget.options.suffix}}
         </i>
         <i slot="prepend" v-if="widget.options.prepend">
