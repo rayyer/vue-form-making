@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-28 12:03:12
+ * @LastEditTime: 2019-08-29 11:50:46
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div v-if="show">
     <el-form label-position="top">
@@ -44,16 +51,13 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="布局占比" v-if="Object.keys(data).indexOf('cols')>=0">
-        <el-radio-group v-model="data.cols" size="mini">
-          <el-radio-button :label="3">12.5%</el-radio-button>
-          <el-radio-button :label="6">25%</el-radio-button>
-          <el-radio-button :label="9">37.5%</el-radio-button>
-          <el-radio-button :label="12">50%</el-radio-button>
-          <el-radio-button :label="15">62.5%</el-radio-button>
-          <el-radio-button :label="18">75%</el-radio-button>
-          <el-radio-button :label="21">87.5%</el-radio-button>
-          <el-radio-button :label="24">100%</el-radio-button>
-        </el-radio-group>
+        <el-slider
+          v-model="data.cols"
+          :step="1"
+          :min='1'
+          :max='24'
+          show-stops>
+        </el-slider>
       </el-form-item>
       <el-form-item label="显示输入框" v-if="Object.keys(data.options).indexOf('showInput')>=0">
         <el-switch v-model="data.options.showInput" ></el-switch>
