@@ -98,7 +98,7 @@
           form
         >
           <div style="color:#ccc">* 预览功能暂不支持子表单内容的预览</div>
-          <generate-form insite="true" @on-change="handleDataChange" v-if="previewVisible" :data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm">
+          <generate-form insite="true" @on-change="handleDataChange" v-if="previewVisible" :data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm" :dependChildTable="tableList">
 
             <template v-slot:blank="scope">
               宽度：<el-input v-model="scope.model.blank.width" style="width: 100px"></el-input>
@@ -159,7 +159,6 @@
         </cus-dialog>
       </el-container>
     </el-main>
-    <el-footer height="30px" style="font-weight: 600;">Powered by <a target="_blank" href="https://github.com/GavinZhuLei/vue-form-making">GavinZhuLei</a></el-footer>
   </el-container>
   
 </template>
