@@ -20,6 +20,10 @@
   .el-rate{
     margin-top: 6px;
   }
+
+  .el-checkbox-group{
+    line-height: 28px !important;
+  }
 }
 .el-form-item--mini{
   .el-radio{
@@ -29,13 +33,21 @@
   .el-rate{
     margin-top: 4px;
   }
+
+  .el-checkbox-group{
+    line-height: 24px !important;
+  }
 }
 .el-form-item--medium{
   .el-radio{
-    line-height: 35px !important;
+    line-height: 34px !important;
   }
 
   .el-rate{
     margin-top: 8px;
+  }
+
+  .el-checkbox-group{
+    line-height: 32px !important;
   }
 }
