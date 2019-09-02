@@ -54,28 +54,25 @@
             <el-divider :content-position="item.options.position">{{item.options.text}}</el-divider>
           </div>
 
-          <template v-else-if="item.type == 'childTable'">
-            <div v-show="dependChildTable.hasOwnProperty(item.options.relatedTable) && (!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true)">
-                <template v-if="item.options.showName===false">
-                  <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
-                    <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('islists') && item.options.islists">
-                      <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
-                    </template>
-                  </fm-generate-form>
-                  <el-button @click="getChildModels(item.model)" icon="el-icon-plus"  v-if="item.options.hasOwnProperty('islists') && item.options.islists">新增{{item.name}}</el-button>
+          <div v-else-if="item.type == 'childTable'" v-show="dependChildTable.hasOwnProperty(item.options.relatedTable) && (!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true)">
+            <template v-if="item.options.showName===false">
+              <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
+                <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('islists') && item.options.islists">
+                  <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
                 </template>
-                <template v-else>
-                  <el-form-item :label="item.name" :prop="item.model">
-                    <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
-                      <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('islists') && item.options.islists">
-                        <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
-                      </template>
-                    </fm-generate-form>
-                    <el-button @click="getChildModels(item.model)" icon="el-icon-plus"  v-if="item.options.hasOwnProperty('islists') && item.options.islists">新增{{item.name}}</el-button>
-                  </el-form-item>
-                </template>
-            </div>
-          </template>
+              </fm-generate-form>
+            </template>
+            <template v-else>
+              <el-form-item :label="item.name" :prop="item.model">
+                <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
+                  <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('islists') && item.options.islists">
+                    <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
+                  </template>
+                </fm-generate-form>
+              </el-form-item>
+            </template>
+            <el-button @click="getChildModels(item.model)" icon="el-icon-plus"  v-if="item.options.hasOwnProperty('islists') && item.options.islists">新增{{item.name}}</el-button>
+          </div>
 
           <template v-else-if="item.options.showName===false">
             <el-form-item
@@ -182,8 +179,8 @@ export default {
           } else {
             if (genList[i].type === 'blank') {
               this.$set(this.models, genList[i].model, genList[i].options.defaultType === 'String' ? '' : (genList[i].options.defaultType === 'Object' ? {} : []))
-            } else if (genList[i].type === 'childTable') {
-              this.$set(this.models, genList[i].model, [""])
+            // } else if (genList[i].type === 'childTable') {
+            //   this.$set(this.models, genList[i].model, genList[i].options.defaultValue)
             } else {
               this.models[genList[i].model] = genList[i].options.defaultValue
             }
@@ -265,13 +262,16 @@ export default {
         // 循环预设的依赖项
         for(var dependKey in this.dependents[modelKey])
         {
+          // console.log('models', models)
+          // console.log('dependKey', dependKey)
+
           // 如果没有找到被依赖的属性则跳出
           if(!models.hasOwnProperty(dependKey))
           {
-            dependentShow[modelKey] = false
+            // dependentShow[modelKey] = false
             // 没有依赖则将当前值清空， 避免在循环中更新models，否则和watch models容易成死循环
-            value[modelKey] = modelDesigner[0].options.defaultValue
-            continue
+            // value[modelKey] = modelDesigner[0].options.defaultValue
+            break
           }
 
           // 被依赖的值是空也跳出

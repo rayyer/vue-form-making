@@ -404,10 +404,20 @@ export default {
 
         if(!jsonData.hasOwnProperty('list')) return false
 
-        // 通过model判断之前存在的字段，存在则从旧的list中清空
-        for(var item of jsonData.list) {
-          const fieldExist = this.widgetForm.list.filter(field => field.model === item.model)
-          if(fieldExist.length === 1) oldModelExist.push(fieldExist[0].model)
+        for(var listIndex of Object.keys(jsonData.list)) {
+          if(jsonData.list[listIndex].options.hasOwnProperty('dependents') && jsonData.list[listIndex].options.dependents.length>0) {
+            //导入时，如果相关依赖不存在，则清空依赖
+            var i = 0
+            for(var dp of jsonData.list[listIndex].options.dependents) {
+              const dependedModel = jsonData.list.filter(field => field.model === dp[0])
+              if(dependedModel.length===0) jsonData.list[listIndex].options.dependents.splice(i, 1)
+              i++
+            }
+          }
+
+          // 通过model判断之前存在的字段，存在则从旧的list中清空
+          const fieldExist = this.widgetForm.list.filter(field => field.model === jsonData.list[listIndex].model)
+          if(fieldExist.length > 0) oldModelExist.push(fieldExist[0].model)
         }
 
         // 删除之前系统存在的字段(有id字段并且model不在新导入的数组)进行删除标记，以便告知服务器
