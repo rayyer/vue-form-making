@@ -44,8 +44,8 @@
               height:  item.options.height + 'px',
               lineHeight:  item.options.height + 'px'
               }"
-              v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
-              >
+            v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
+            >
             {{item.name}}
           </div>
 
@@ -55,30 +55,26 @@
           </div>
 
           <template v-else-if="item.type == 'childTable'">
-            <template v-if="dependChildTable.hasOwnProperty(item.options.relatedTable)">
-              <template v-if="item.options.showName===false">
-                <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
-                  <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('islists') && item.options.islists">
-                    <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
-                  </template>
-                </fm-generate-form>
-                <el-button @click="getChildModels(item.model)" icon="el-icon-plus"  v-if="item.options.hasOwnProperty('islists') && item.options.islists">新增{{item.name}}</el-button>
-              </template>
-              <template v-else>
-                <el-form-item
-                  :label="item.name"
-                  :prop="item.model"
-                  v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
-                  >
+            <div v-show="dependChildTable.hasOwnProperty(item.options.relatedTable) && (!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true)">
+                <template v-if="item.options.showName===false">
                   <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
                     <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('islists') && item.options.islists">
                       <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
                     </template>
                   </fm-generate-form>
                   <el-button @click="getChildModels(item.model)" icon="el-icon-plus"  v-if="item.options.hasOwnProperty('islists') && item.options.islists">新增{{item.name}}</el-button>
-                </el-form-item>
-              </template>
-            </template>
+                </template>
+                <template v-else>
+                  <el-form-item :label="item.name" :prop="item.model">
+                    <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
+                      <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('islists') && item.options.islists">
+                        <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
+                      </template>
+                    </fm-generate-form>
+                    <el-button @click="getChildModels(item.model)" icon="el-icon-plus"  v-if="item.options.hasOwnProperty('islists') && item.options.islists">新增{{item.name}}</el-button>
+                  </el-form-item>
+                </template>
+            </div>
           </template>
 
           <template v-else-if="item.options.showName===false">
@@ -102,7 +98,6 @@
               :label="item.name"
               :prop="item.model"
               :label-width="(item.options.labelWidth || 80) + 'px'"
-              v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
               >
               <genetate-form-item
                 :key="item.key" 
@@ -187,11 +182,9 @@ export default {
           } else {
             if (genList[i].type === 'blank') {
               this.$set(this.models, genList[i].model, genList[i].options.defaultType === 'String' ? '' : (genList[i].options.defaultType === 'Object' ? {} : []))
-            }
-            else if (genList[i].type === 'childTable') {
+            } else if (genList[i].type === 'childTable') {
               this.$set(this.models, genList[i].model, [""])
-            }
-            else {
+            } else {
               this.models[genList[i].model] = genList[i].options.defaultValue
             }
           }
@@ -266,6 +259,9 @@ export default {
       {
         // console.log('modelKey', modelKey) // 本身的字段key
         const modelValue = models[modelKey]
+        const modelDesigner = this.data.list.filter(m=>m.model===modelKey)
+        if(modelDesigner.length===0) continue
+
         // 循环预设的依赖项
         for(var dependKey in this.dependents[modelKey])
         {
@@ -274,17 +270,15 @@ export default {
           {
             dependentShow[modelKey] = false
             // 没有依赖则将当前值清空， 避免在循环中更新models，否则和watch models容易成死循环
-            if(typeof(this.models[modelKey])==='string' && this.models[modelKey] !== '') value[modelKey]=''
-            if(typeof(this.models[modelKey])==='object' && this.models[modelKey]!==null && this.models[modelKey].length !== 0) value[modelKey]=[]
+            value[modelKey] = modelDesigner[0].options.defaultValue
             continue
           }
 
           // 被依赖的值是空也跳出
           var dependModelValue = models[dependKey] // 被依赖项的当前值
-          if(dependModelValue === null || dependModelValue === '') {
+          if((dependModelValue === null || dependModelValue === '') && this.models[modelKey] !== modelDesigner[0].options.defaultValue) {
             dependentShow[modelKey] = false
-            if(typeof(this.models[modelKey])==='string' && this.models[modelKey] !== '') value[modelKey]=''
-            if(typeof(this.models[modelKey])==='object' && this.models[modelKey]!==null && this.models[modelKey].length !== 0) value[modelKey]=[]
+            value[modelKey] = modelDesigner[0].options.defaultValue
             continue
           }
 
@@ -303,13 +297,11 @@ export default {
           }
 
           if(dependentShow[modelKey] === true) break
-
-          dependentShow[modelKey] = false
-          if(typeof(this.models[modelKey])==='string' && this.models[modelKey] !== '') value[modelKey]=''
-          if(typeof(this.models[modelKey])==='object' && this.models[modelKey]!==null && this.models[modelKey].length !== 0) value[modelKey]=[] // 没有依赖则将当前值清空
+          // dependentShow[modelKey] = false
+          // value[modelKey] = modelDesigner[0].options.defaultValue // 没有依赖则将当前值清空
         }
       }
-      
+
       if(Object.keys(dependentShow).length>0) this.dependentShow = dependentShow
       if(Object.keys(value).length>0) this.models = {...this.models, ...value}
     }
@@ -323,14 +315,14 @@ export default {
     data: {
       deep: true,
       handler (val) {
-        this.generateModle(val.list)
+        // this.generateModle(val.list)
       }
     },
     value: {
       deep: true,
       handler (val) {
         this.models = {...this.models, ...val}
-        this.generateModle(this.data.list)
+        // this.generateModle(this.data.list)
       }
     }
   }
