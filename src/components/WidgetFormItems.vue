@@ -98,6 +98,18 @@ export default {
         }
 
         this.data.list.splice(index, 1)
+
+        // 删除字段之后清除无效依赖项
+        for(var item of Object.keys(this.data.list)) {
+          if(this.data.list[item].options.hasOwnProperty('dependents') && this.data.list[item].options.dependents.length > 0) {
+            var i=0
+            for(var deItem of this.data.list[item].options.dependents) {
+              const itemExit = this.data.list.filter(m=>m.model===deItem[0])
+              if(itemExit.length === 0) this.data.list[item].options.dependents.splice(i, 1)
+            }
+            i++
+          }
+        }
       })
     },
     handleWidgetClone (index) {
