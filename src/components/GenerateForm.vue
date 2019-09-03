@@ -95,6 +95,7 @@
               :label="item.name"
               :prop="item.model"
               :label-width="(item.options.labelWidth || 80) + 'px'"
+              v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
               >
               <genetate-form-item
                 :key="item.key" 

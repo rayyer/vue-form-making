@@ -138,6 +138,7 @@
           ref="jsonPreview"
           width="800px"
           form
+          :action="false"
         >
           
           <div id="jsoneditor" style="height: 400px;width: 100%;">{{jsonTemplate}}</div>
@@ -208,6 +209,12 @@ export default {
       default: false
     },
     loadData: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    },
+    tableList: {
       type: Object,
       default: function () {
         return {}
