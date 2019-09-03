@@ -55,10 +55,10 @@ export default {
     handleMoveEnd ({newIndex, oldIndex}) {
       console.log('index', newIndex, oldIndex)
     },
-    handleSelectWidget (index) {
-      console.log(index, '#####')
-      this.selectWidget = this.data.list[index]
-    },
+    // handleSelectWidget (index) {
+    //   console.log(index, '#####')
+    //   this.selectWidget = this.data.list[index]
+    // },
     handleWidgetAdd (evt) {
       // console.log('add', evt)
       // console.log('end', evt)
@@ -102,68 +102,68 @@ export default {
 
       this.selectWidget = this.data.list[newIndex]
     },
-    handleWidgetColAdd ($event, row, colIndex) {
-      console.log('coladd', $event, row, colIndex)
-      const newIndex = $event.newIndex
-      const oldIndex = $event.oldIndex
-      const item = $event.item
+    // handleWidgetColAdd ($event, row, colIndex) {
+    //   console.log('coladd', $event, row, colIndex)
+    //   const newIndex = $event.newIndex
+    //   const oldIndex = $event.oldIndex
+    //   const item = $event.item
 
-      // 防止布局元素的嵌套拖拽
-      if (item.className.indexOf('data-grid') >= 0) {
+    //   // 防止布局元素的嵌套拖拽
+    //   if (item.className.indexOf('data-grid') >= 0) {
 
-        // 如果是列表中拖拽的元素需要还原到原来位置
-        item.tagName === 'DIV' && this.data.list.splice(oldIndex, 0, row.columns[colIndex].list[newIndex])
+    //     // 如果是列表中拖拽的元素需要还原到原来位置
+    //     item.tagName === 'DIV' && this.data.list.splice(oldIndex, 0, row.columns[colIndex].list[newIndex])
 
-        row.columns[colIndex].list.splice(newIndex, 1)
+    //     row.columns[colIndex].list.splice(newIndex, 1)
 
-        return false
-      }
+    //     return false
+    //   }
 
-      console.log('from', item)
+    //   console.log('from', item)
 
-      const key = Date.parse(new Date()) + '_' + Math.ceil(Math.random() * 99999)
+    //   const key = Date.parse(new Date()) + '_' + Math.ceil(Math.random() * 99999)
 
-      this.$set(row.columns[colIndex].list, newIndex, {
-        ...row.columns[colIndex].list[newIndex],
-        options: {
-          ...row.columns[colIndex].list[newIndex].options,
-          remoteFunc: 'func_' + key
-        },
-        key,
-        // 绑定键值
-        model: row.columns[colIndex].list[newIndex].type + '_' + key,
-        rules: []
-      })
+    //   this.$set(row.columns[colIndex].list, newIndex, {
+    //     ...row.columns[colIndex].list[newIndex],
+    //     options: {
+    //       ...row.columns[colIndex].list[newIndex].options,
+    //       remoteFunc: 'func_' + key
+    //     },
+    //     key,
+    //     // 绑定键值
+    //     model: row.columns[colIndex].list[newIndex].type + '_' + key,
+    //     rules: []
+    //   })
 
-      if (row.columns[colIndex].list[newIndex].type === 'radio' || row.columns[colIndex].list[newIndex].type === 'checkbox' || row.columns[colIndex].list[newIndex].type === 'select') {
-        this.$set(row.columns[colIndex].list, newIndex, {
-          ...row.columns[colIndex].list[newIndex],
-          options: {
-            ...row.columns[colIndex].list[newIndex].options,
-            options: row.columns[colIndex].list[newIndex].options.options.map(item => ({
-              ...item
-            }))
-          }
-        })
-      }
+    //   if (row.columns[colIndex].list[newIndex].type === 'radio' || row.columns[colIndex].list[newIndex].type === 'checkbox' || row.columns[colIndex].list[newIndex].type === 'select') {
+    //     this.$set(row.columns[colIndex].list, newIndex, {
+    //       ...row.columns[colIndex].list[newIndex],
+    //       options: {
+    //         ...row.columns[colIndex].list[newIndex].options,
+    //         options: row.columns[colIndex].list[newIndex].options.options.map(item => ({
+    //           ...item
+    //         }))
+    //       }
+    //     })
+    //   }
 
-      this.selectWidget = row.columns[colIndex].list[newIndex]
-    },
-    handleWidgetDelete (index) {
-      if (this.data.list.length - 1 === index) {
-        if (index === 0) {
-          this.selectWidget = {}
-        } else {
-          this.selectWidget = this.data.list[index - 1]
-        }
-      } else {
-        this.selectWidget = this.data.list[index + 1]
-      }
+    //   this.selectWidget = row.columns[colIndex].list[newIndex]
+    // },
+    // handleWidgetDelete (index) {
+    //   if (this.data.list.length - 1 === index) {
+    //     if (index === 0) {
+    //       this.selectWidget = {}
+    //     } else {
+    //       this.selectWidget = this.data.list[index - 1]
+    //     }
+    //   } else {
+    //     this.selectWidget = this.data.list[index + 1]
+    //   }
 
-      this.$nextTick(() => {
-        this.data.list.splice(index, 1)
-      })
-    },
+    //   this.$nextTick(() => {
+    //     this.data.list.splice(index, 1)
+    //   })
+    // },
   },
   watch: {
     select (val) {

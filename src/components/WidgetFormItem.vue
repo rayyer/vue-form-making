@@ -256,64 +256,64 @@ export default {
     
   },
   methods: {
-    handleSelectWidget (index) {
-      this.selectWidget = this.data.list[index]
-    },
-    handleWidgetDelete (index) {
-      if (this.data.list.length - 1 === index) {
-        if (index === 0) {
-          this.selectWidget = {}
-        } else {
-          this.selectWidget = this.data.list[index - 1]
-        }
-      } else {
-        this.selectWidget = this.data.list[index + 1]
-      }
+    // handleSelectWidget (index) {
+    //   this.selectWidget = this.data.list[index]
+    // },
+    // handleWidgetDelete (index) {
+    //   if (this.data.list.length - 1 === index) {
+    //     if (index === 0) {
+    //       this.selectWidget = {}
+    //     } else {
+    //       this.selectWidget = this.data.list[index - 1]
+    //     }
+    //   } else {
+    //     this.selectWidget = this.data.list[index + 1]
+    //   }
 
-      this.$nextTick(() => {
-        // 存在id属性，可能是从服务器上返回，在修改表单的场景下进行删除，则不删除当前字段对象
-        // 如果没有id属性，则是新增字段，删除无需保存
-        if(this.data.list[index].hasOwnProperty('id'))
-        {
-          this.data.list[index].is_delete = 1 //对当前组件进行软删除标记
-          if(!this.data.hasOwnProperty('deleted'))  this.data = Object.assign(this.data, {deleted: []})
-          this.data.deleted.push(this.data.list[index])
-        }
+    //   this.$nextTick(() => {
+    //     // 存在id属性，可能是从服务器上返回，在修改表单的场景下进行删除，则不删除当前字段对象
+    //     // 如果没有id属性，则是新增字段，删除无需保存
+    //     if(this.data.list[index].hasOwnProperty('id'))
+    //     {
+    //       this.data.list[index].is_delete = 1 //对当前组件进行软删除标记
+    //       if(!this.data.hasOwnProperty('deleted'))  this.data = Object.assign(this.data, {deleted: []})
+    //       this.data.deleted.push(this.data.list[index])
+    //     }
 
-        this.data.list.splice(index, 1)
-      })
-    },
-    handleWidgetClone (index) {
-      const key = Date.parse(new Date()) + '_' + Math.ceil(Math.random() * 99999)
+    //     this.data.list.splice(index, 1)
+    //   })
+    // },
+    // handleWidgetClone (index) {
+    //   const key = Date.parse(new Date()) + '_' + Math.ceil(Math.random() * 99999)
 
-      let cloneData = {
-        ...this.data.list[index],
-        options: {...this.data.list[index].options},
-        key: key,
-        model: this.data.list[index].type + '_' + key
-      }
+    //   let cloneData = {
+    //     ...this.data.list[index],
+    //     options: {...this.data.list[index].options},
+    //     key: key,
+    //     model: this.data.list[index].type + '_' + key
+    //   }
 
-      if (this.data.list[index].type === 'radio' || this.data.list[index].type === 'checkbox') {
+    //   if (this.data.list[index].type === 'radio' || this.data.list[index].type === 'checkbox') {
 
-        cloneData = {
-          ...cloneData,
-          options: {
-            ...cloneData.options,
-            options: cloneData.options.options.map(item => ({...item}))
-          }
-        }
-      }
+    //     cloneData = {
+    //       ...cloneData,
+    //       options: {
+    //         ...cloneData.options,
+    //         options: cloneData.options.options.map(item => ({...item}))
+    //       }
+    //     }
+    //   }
 
-      // 无须复制的字段
-      if(cloneData.hasOwnProperty('id')) delete cloneData.id
-      if(cloneData.hasOwnProperty('form_id')) delete cloneData.form_id
+    //   // 无须复制的字段
+    //   if(cloneData.hasOwnProperty('id')) delete cloneData.id
+    //   if(cloneData.hasOwnProperty('form_id')) delete cloneData.form_id
 
-      this.data.list.splice(index+1, 0, cloneData)
+    //   this.data.list.splice(index+1, 0, cloneData)
 
-      this.$nextTick(() => {
-        this.selectWidget = this.data.list[index + 1]
-      })
-    },
+    //   this.$nextTick(() => {
+    //     this.selectWidget = this.data.list[index + 1]
+    //   })
+    // },
   },
   watch: {
     select (val) {
