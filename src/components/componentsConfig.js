@@ -256,8 +256,7 @@ export const advanceComponents = [
     options: {
       defaultValue: [],
       islists: false,
-      showName: false,
-      remoteUrl: ''
+      showName: false
     }
   }
   // {

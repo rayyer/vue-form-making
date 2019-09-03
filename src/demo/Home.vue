@@ -6,6 +6,7 @@
     generate-json
     generate-code
     clearable
+    childTablesRemoteUrl="childTablesRemoteUrl"
     style="height:100%;"
     :loadData="jsonData"> -->
   <fm-making-form
@@ -14,6 +15,7 @@
     preview
     generate-json
     generate-code
+    :childTablesRemoteUrl="childTablesRemoteUrl"
     style="height:100%;"
     clearable>
     <template slot="action">
@@ -211,7 +213,8 @@ export default {
     return {
       visible: false,
       confirmLoading: false,
-      jsonData: {}
+      jsonData: {},
+      childTablesRemoteUrl: "http://ubody.guolei.com/api/forms"
     }
   },
   created () {

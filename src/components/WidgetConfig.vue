@@ -91,9 +91,10 @@
           filterable
           remote
           reserve-keyword
-          placeholder="请选择要关联的表单"
+          placeholder="请输入被关联表单的关键词"
           :remote-method="remoteChildTableList"
-          :loading="loading">
+          :loading="loading"
+          >
           <el-option
             v-for="item in childTableList"
             :key="item.key"
@@ -465,7 +466,20 @@ export default {
   components: {
     Draggable
   },
-  props: ['data', 'widgetFormList'],
+  props: {
+    data: {
+      type: Object,
+      default: () => {}
+    },
+    widgetFormList: {
+      type: Array,
+      default: () => []
+    },
+    childTablesRemoteUrl: {
+      type: String,
+      default: ''
+    }
+  },
   data () {
     return {
       dependItems: [],
@@ -483,23 +497,21 @@ export default {
   },
   computed: {
     show () {
-      if (this.data && Object.keys(this.data).length > 0) {
-        return true
-      }
+      if (this.data && Object.keys(this.data).length > 0) return true
       return false
     }
   },
   methods: {
     remoteChildTableList(query) {
-      if(this.data.options.remoteUrl === '') return false
+      if(this.childTablesRemoteUrl === '') return false
       if (query !== '') {
         this.loading = true
-        request.get(this.data.options.remoteUrl + '?keyword=' + query).then(res => {
+        request.get(this.childTablesRemoteUrl + '?keyword=' + query).then(res => {
           this.loading = false
           this.childTableList = res.data
         })
       } else {
-        this.childTableList = [];
+        this.childTableList = []
       }
     },
     formatDepentCascader () {
@@ -626,6 +638,11 @@ export default {
   watch: {
     data: function (val) {
         this.dependItems = this.formatDepentCascader()
+        if(this.data.type==="childTable" && this.data.options.hasOwnProperty('relatedTable')) 
+        {
+          const childTable = this.childTableList.filter(item=>item.key===this.data.options.relatedTable)
+          if(childTable.length===0) this.remoteChildTableList(this.data.options.relatedTable)
+        }
     },
     'data.options.isRange': function(val) {
       if (typeof val !== 'undefined') {

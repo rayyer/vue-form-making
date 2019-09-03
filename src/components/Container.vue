@@ -83,7 +83,7 @@
               <div class="config-tab" :class="{active: configTab=='form'}" @click="handleConfigSelect('form')">表单属性</div>
             </el-header>
             <el-main class="config-content">
-              <widget-config v-show="configTab=='widget'" :data="widgetFormSelect" :widgetFormList="widgetForm.list"></widget-config>
+              <widget-config v-show="configTab=='widget'" :data="widgetFormSelect" :widgetFormList="widgetForm.list" :childTablesRemoteUrl="childTablesRemoteUrl"></widget-config>
               <form-config v-show="configTab=='form'" :data="widgetForm.config"></form-config>
             </el-main>
           </el-container>
@@ -213,6 +213,10 @@ export default {
         return {}
       }
     },
+    childTablesRemoteUrl: {
+      type: String,
+      default: ''
+    },
     basicFields: {
       type: Array,
       default: () => ['input', 'textarea', 'number', 'radio', 'checkbox', 'time', 'date', 'rate', 'color', 'select', 'switch', 'slider']
@@ -244,7 +248,7 @@ export default {
         deleted: []
       },
       configTab: 'form',
-      widgetFormSelect: null,
+      widgetFormSelect: {},
       previewVisible: false,
       jsonVisible: false,
       codeVisible: false,
