@@ -4,7 +4,7 @@
     <el-form :size="data.config.size" :label-position="data.config.labelPosition" :label-width="data.config.labelWidth + 'px'">
       <el-row class="widget-grid " :gutter="24">
         <draggable class="widget-form-list"
-          v-model="data.list" 
+          v-model="data.list"
           v-bind="{group:'people', ghostClass: 'ghost'}"
           @end="handleMoveEnd"
           @add="handleWidgetAdd"

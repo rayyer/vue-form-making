@@ -6,7 +6,6 @@
     generate-json
     generate-code
     clearable
-    :tableList="tableList"
     style="height:100%;"
     :loadData="jsonData"> -->
   <fm-making-form
@@ -15,7 +14,6 @@
     preview
     generate-json
     generate-code
-    :tableList="tableList"
     style="height:100%;"
     clearable>
     <template slot="action">
@@ -213,11 +211,7 @@ export default {
     return {
       visible: false,
       confirmLoading: false,
-      jsonData: {},
-      tableList: [
-        {key: 'table_input_1',  title: "既往史子表单"},
-        {key: 'table_input_2', title: "基本信息表16"}
-      ] // 子表单列表
+      jsonData: {}
     }
   },
   created () {

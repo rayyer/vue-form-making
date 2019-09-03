@@ -86,14 +86,30 @@
       </el-form-item>  
 
       <el-form-item label="被关联子表单" v-if="data.type === 'childTable'">
-        <el-select v-model="data.options.relatedTable" clearable placeholder="请选择要关联的表单">
+        <el-select
+          v-model="data.options.relatedTable"
+          filterable
+          remote
+          reserve-keyword
+          placeholder="请选择要关联的表单"
+          :remote-method="remoteChildTableList"
+          :loading="loading">
+          <el-option
+            v-for="item in childTableList"
+            :key="item.key"
+            :label="item.title"
+            :value="item.key">
+          </el-option>
+        </el-select>
+
+        <!-- <el-select v-model="data.options.relatedTable" clearable placeholder="请选择要关联的表单">
           <el-option
             v-for="item in tableList"
             :key="item.key"
             :label="item.title"
             :value="item.key">
           </el-option>
-        </el-select>
+        </el-select> -->
         <el-checkbox v-model="data.options.islists" style="margin-left:10px">多记录</el-checkbox>
       </el-form-item>     
 
@@ -442,13 +458,14 @@
 
 <script>
 import Draggable from 'vuedraggable'
-import { continueStatement } from 'babel-types';
+import { continueStatement } from 'babel-types'
+import request from '../util/request.js'
 
 export default {
   components: {
     Draggable
   },
-  props: ['data', 'widgetFormList', 'tableList'],
+  props: ['data', 'widgetFormList'],
   data () {
     return {
       dependItems: [],
@@ -458,7 +475,10 @@ export default {
         pattern: null,
         range: null,
         length: null
-      }
+      },
+      childTableList: [],
+      value: [],
+      loading: false
     }
   },
   computed: {
@@ -470,6 +490,18 @@ export default {
     }
   },
   methods: {
+    remoteChildTableList(query) {
+      if(this.data.options.remoteUrl === '') return false
+      if (query !== '') {
+        this.loading = true
+        request.get(this.data.options.remoteUrl + '?keyword=' + query).then(res => {
+          this.loading = false
+          this.childTableList = res.data
+        })
+      } else {
+        this.childTableList = [];
+      }
+    },
     formatDepentCascader () {
       var dependItems = []
       const dependableType = ['radio', 'checkbox', 'select', 'switch']
