@@ -505,7 +505,7 @@ export default {
     //   }
     // },
     widgetFormSelect: {
-      deep: true,
+      // deep: true,
       handler: function (val) {
         this.configTab = 'widget'
       }
