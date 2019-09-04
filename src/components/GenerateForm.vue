@@ -60,6 +60,7 @@
                 <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
                   <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('islists') && item.options.islists">
                     <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
+                    <el-button type="text" @click.prevent="getChildModels(item.model, index)" icon="el-icon-plus" v-if="models[item.model].length===index+1">新增</el-button>
                   </template>
                 </fm-generate-form>
               </div>
@@ -68,11 +69,11 @@
                   <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
                     <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('islists') && item.options.islists">
                       <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
+                      <el-button type="text" @click.prevent="getChildModels(item.model, index)" icon="el-icon-plus" v-if="models[item.model].length===index+1">新增</el-button>
                     </template>
                   </fm-generate-form>
                 </el-form-item>
               </div>
-              <el-button @click="getChildModels(item.model)" icon="el-icon-plus"  v-if="item.options.hasOwnProperty('islists') && item.options.islists">新增{{item.name}}</el-button>
             </div>
           </div>
 
@@ -162,12 +163,21 @@ export default {
     getChildModels (item, index=-1, model='') {
       if (model==='') {
         this.models[item].push('')
+        // index === -1 ? this.models[item].push('') : this.models[item].splice(index+1, 0, '')
         this.$set(this.models, item, this.models[item])
       } else {
         this.models[item][index] = model
       }
     },
     removeChildTableRecord (item, index) {
+      if(this.models[item].length===1)
+      {
+        this.$notify({
+          title: '禁止删除',
+          message: '最后一条记录禁止删除',
+          type: 'warning'
+        });
+      }
       this.models[item].splice(index, 1)
     },
     generateModle (genList) {
@@ -182,12 +192,12 @@ export default {
           } else {
             if (genList[i].type === 'blank') {
               this.$set(this.models, genList[i].model, genList[i].options.defaultType === 'String' ? '' : (genList[i].options.defaultType === 'Object' ? {} : []))
-            // } else if (genList[i].type === 'childTable') {
-            //   this.$set(this.models, genList[i].model, genList[i].options.defaultValue)
             } else {
               this.models[genList[i].model] = genList[i].options.defaultValue
             }
           }
+
+          if (genList[i].type === 'childTable' && this.models[genList[i].model].length === 0) this.getChildModels(genList[i].model) // 子表单初始化
 
           this.getDependents(genList[i]) // 整理出需要的依赖项
 
@@ -216,14 +226,11 @@ export default {
       {
         const dependents = item.options.dependents
         var data = {}
-        for(var m of dependents)
+        for (var m of dependents)
         {
-          if(data.hasOwnProperty(m[0])) 
-          {
+          if (data.hasOwnProperty(m[0])) {
             data[m[0]].push(m[1])
-          }
-          else
-          {
+          } else {
             data = Object.assign({}, data, {[m[0]]: [m[1]]})
           }
         }
@@ -316,15 +323,17 @@ export default {
       this.filedHidden(val)
     },
     data: {
-      deep: true,
+      // deep: true,
       handler (val) {
+        console.log('data', val)
         this.generateModle(val.list)
       }
     },
     value: {
-      deep: true,
+      // deep: true,
       handler (val) {
         this.models = {...this.models, ...val}
+        console.log('value', val)
         this.generateModle(this.data.list)
       }
     }
