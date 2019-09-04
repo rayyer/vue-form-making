@@ -111,7 +111,7 @@
             </el-form-item>
           </template>
         </el-col>
-        <el-col :span="3">
+        <el-col :span="4">
           <slot name="dynamicFormDel"></slot>
         </el-col>
       </el-row>
@@ -176,7 +176,8 @@ export default {
           title: '禁止删除',
           message: '最后一条记录禁止删除',
           type: 'warning'
-        });
+        })
+        return false
       }
       this.models[item].splice(index, 1)
     },
