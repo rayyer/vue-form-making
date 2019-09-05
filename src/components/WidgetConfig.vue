@@ -548,6 +548,15 @@ export default {
       if (this.data.type === 'grid') {
         this.data.columns.splice(index, 1)
       } else {
+        if(this.data.options.defaultValue !== '') {
+          // 删除后清空默认值
+          if(this.data.type === 'radio' && this.data.options.defaultValue === this.data.options.options[index].value)  this.data.options.defaultValue = ''
+
+          if(this.data.type === 'checkbox' && this.data.options.defaultValue.indexOf(this.data.options.options[index].value)>-1) {
+            this.data.options.defaultValue.splice(this.data.options.defaultValue.indexOf(this.data.options.options[index].value), 1)
+          }
+        }
+        
         this.data.options.options.splice(index, 1)
       }
     },

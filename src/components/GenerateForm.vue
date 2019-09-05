@@ -189,7 +189,8 @@ export default {
           })
         } else {
           if (this.value && Object.keys(this.value).indexOf(genList[i].model) >= 0) {
-            this.models[genList[i].model] = this.value[genList[i].model]
+            this.models = Object.assign({}, this.models, {[genList[i].model]: this.value[genList[i].model]})
+            // this.models[genList[i].model] = this.value[genList[i].model]
           } else {
             if (genList[i].type === 'blank') {
               this.$set(this.models, genList[i].model, genList[i].options.defaultType === 'String' ? '' : (genList[i].options.defaultType === 'Object' ? {} : []))
