@@ -132,13 +132,13 @@ export default {
     CusDialog
   },
   props: ['data', 'remote', 'value', 'insite', 'dependChildTable'],
-  filters: {
-    filtersGetName:function(model, list){
-      const modelItem = list.filter(item => item.model === model)
-      if(modelItem.length>0) return modelItem[0].name
-      return '-'
-    }
-  },
+  // filters: {
+  //   filtersGetName:function(model, list){
+  //     const modelItem = list.filter(item => item.model === model)
+  //     if(modelItem.length>0) return modelItem[0].name
+  //     return '-'
+  //   }
+  // },
   data () {
     return {
       models: {},
@@ -194,7 +194,8 @@ export default {
             if (genList[i].type === 'blank') {
               this.$set(this.models, genList[i].model, genList[i].options.defaultType === 'String' ? '' : (genList[i].options.defaultType === 'Object' ? {} : []))
             } else {
-              this.models[genList[i].model] = genList[i].options.defaultValue
+              // this.models[genList[i].model] = genList[i].options.defaultValue
+              this.models=Object.assign({}, this.models, {[genList[i].model]: genList[i].options.defaultValue})
             }
           }
 
@@ -273,9 +274,6 @@ export default {
         // 循环预设的依赖项
         for(var dependKey in this.dependents[modelKey])
         {
-          // console.log('models', models)
-          // console.log('dependKey', dependKey)
-
           // 如果没有找到被依赖的属性则跳出
           if(!models.hasOwnProperty(dependKey))
           {
@@ -296,20 +294,20 @@ export default {
           const dependItems = this.dependents[modelKey][dependKey] // 被依赖项期望值
           if((typeof dependModelValue) === 'string') dependModelValue = [dependModelValue] // 将单选框整理成数组
 
-          // console.log('dependKey', dependKey, 'dependItems', dependItems) // 被依赖的字段Key
-          // console.log('dependKey value:', dependModelValue)
-
           for(var item in dependModelValue) {
-            // 对比两个数组，如果存在则显示并跳出
+            // 对比两个数组，如果存在被依赖选项中，则显示并跳出业务
             if(dependItems.indexOf(dependModelValue[item]) > -1) {
               dependentShow[modelKey] = true
               break
             }
           }
 
+          // 如果已经被设定为显示，则不用再进行其他业务判断，直接为显示状态
           if(dependentShow[modelKey] === true) break
-          // dependentShow[modelKey] = false
-          // value[modelKey] = modelDesigner[0].options.defaultValue // 没有依赖则将当前值清空
+
+          // 没有依赖则将有依赖关系的内容清空，并显示，此处解决了A->B,B->C，如果选择B，显示了C，此时在A中触发隐藏B，则需要清除B的内容，进而触发隐藏C
+          dependentShow[modelKey] = false
+          if( this.models[modelKey] !== modelDesigner[0].options.defaultValue) value[modelKey] = modelDesigner[0].options.defaultValue
         }
       }
 
@@ -318,10 +316,18 @@ export default {
     }
   },
   watch: {
-    models: function (val) {
-      this.$emit('childFromModels', val)
-      console.log('models', val)
-      this.filedHidden(val)
+    // models: function (val) {
+    //   this.$emit('childFromModels', val)
+    //   console.log('models', val)
+    //   this.filedHidden(val)
+    // },
+    models: {
+      // deep: true,
+      handler (val) {
+        console.log('models', val)
+        this.$emit('childFromModels', val)
+        this.filedHidden(val)
+      }
     },
     data: {
       // deep: true,
