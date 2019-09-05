@@ -34,22 +34,6 @@ export const basicComponents = [
     }
   },
   {
-    type: 'number',
-    name: '计数器',
-    icon: 'icon-number',
-    cols: 12,
-    options: {
-      width: '',
-      required: false,
-      defaultValue: 0,
-      min: '',
-      max: '',
-      step: 1,
-      disabled: false,
-      controlsPosition: ''
-    }
-  },
-  {
     type: 'radio',
     name: '单选框组',
     icon: 'icon-radio-active',
@@ -117,6 +101,61 @@ export const basicComponents = [
     }
   },
   {
+    type: 'select',
+    name: '下拉选择框',
+    icon: 'icon-select',
+    cols: 12,
+    options: {
+      defaultValue: '',
+      multiple: false,
+      disabled: false,
+      clearable: false,
+      placeholder: '',
+      required: false,
+      showLabel: false,
+      width: '',
+      options: [
+        {
+          value: '下拉框1'
+        },
+        {
+          value: '下拉框2'
+        },{
+          value: '下拉框3'
+        }
+      ],
+      remote: false,
+      filterable: false,
+      remoteOptions: [],
+      props: {
+        value: 'value',
+        label: 'label'
+      },
+      remoteFunc: ''
+    }
+  },
+  {
+    type: 'cascader',
+    name: '级联选择器',
+    icon: 'icon-jilianxuanze',
+    cols: 12,
+    options: {
+      defaultValue: [],
+      width: '',
+      placeholder: '',
+      disabled: false,
+      clearable: false,
+      remote: true,
+      remoteOptions: [],
+      props: {
+        value: 'value',
+        label: 'label',
+        children: 'children'
+      },
+      remoteFunc: ''
+    }
+  },
+  {
     type: 'time',
     name: '时间选择器',
     icon: 'icon-time',
@@ -159,6 +198,22 @@ export const basicComponents = [
     }
   },
   {
+    type: 'number',
+    name: '计数器',
+    icon: 'icon-number',
+    cols: 12,
+    options: {
+      width: '',
+      required: false,
+      defaultValue: 0,
+      min: '',
+      max: '',
+      step: 1,
+      disabled: false,
+      controlsPosition: ''
+    }
+  },
+  {
     type: 'rate',
     name: '评分',
     icon: 'icon-icon-test',
@@ -181,40 +236,6 @@ export const basicComponents = [
       disabled: false,
       showAlpha: false,
       required: false
-    }
-  },
-  {
-    type: 'select',
-    name: '下拉选择框',
-    icon: 'icon-select',
-    cols: 12,
-    options: {
-      defaultValue: '',
-      multiple: false,
-      disabled: false,
-      clearable: false,
-      placeholder: '',
-      required: false,
-      showLabel: false,
-      width: '',
-      options: [
-        {
-          value: '下拉框1'
-        },
-        {
-          value: '下拉框2'
-        },{
-          value: '下拉框3'
-        }
-      ],
-      remote: false,
-      filterable: false,
-      remoteOptions: [],
-      props: {
-        value: 'value',
-        label: 'label'
-      },
-      remoteFunc: ''
     }
   },
   {
@@ -303,27 +324,6 @@ export const advanceComponents = [
   //     width: ''
   //   }
   // },
-  // {
-  //   type: 'cascader',
-  //   name: '级联选择器',
-  //   icon: 'icon-jilianxuanze',
-  //   cols: 12,
-  //   options: {
-  //     defaultValue: [],
-  //     width: '',
-  //     placeholder: '',
-  //     disabled: false,
-  //     clearable: false,
-  //     remote: true,
-  //     remoteOptions: [],
-  //     props: {
-  //       value: 'value',
-  //       label: 'label',
-  //       children: 'children'
-  //     },
-  //     remoteFunc: ''
-  //   }
-  // }
 ]
 
 export const layoutComponents = [
