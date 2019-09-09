@@ -144,6 +144,7 @@
       <el-form-item label="是否显示标签" v-if="Object.keys(data.options).indexOf('showLabel')>=0">
         <el-switch
             v-model="data.options.showLabel"
+            @change="handleShowLabel"
           >
         </el-switch>
       </el-form-item>
@@ -502,6 +503,19 @@ export default {
     }
   },
   methods: {
+    handleShowLabel (val) {
+      if(val) {
+        for(var key of Object.keys(this.data.options.options)) {
+          this.data.options.options[key] = {label: this.data.options.options[key].value, value: Number(key)+1}
+        }
+      }
+      else
+      {
+        for(var key of Object.keys(this.data.options.options)) {
+          this.data.options.options[key] = {value: this.data.options.options[key].label}
+        }
+      }
+    },
     remoteChildTableList(query) {
       if(this.childTablesRemoteUrl === '') return false
       if (query !== '') {
