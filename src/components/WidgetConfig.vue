@@ -504,17 +504,19 @@ export default {
   },
   methods: {
     handleShowLabel (val) {
+      var data = []
       if(val) {
         for(var key of Object.keys(this.data.options.options)) {
-          this.data.options.options[key] = {label: this.data.options.options[key].value, value: Number(key)+1}
+          data.push({label: this.data.options.options[key].value, value: Number(key)+1})
         }
       }
       else
       {
         for(var key of Object.keys(this.data.options.options)) {
-          this.data.options.options[key] = {value: this.data.options.options[key].label}
+          data.push({value: this.data.options.options[key].label})
         }
       }
+      this.data.options.options = data
     },
     remoteChildTableList(query) {
       if(this.childTablesRemoteUrl === '') return false
