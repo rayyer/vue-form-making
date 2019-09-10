@@ -62,7 +62,7 @@
           <el-radio-button :label="true">行内</el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="布局占比" v-if="Object.keys(data).indexOf('cols')>=0">
+      <el-form-item label="布局占比" v-if="Object.keys(data).indexOf('cols')>=0 && data.type !== 'newLine'">
         <el-slider
           v-model="data.cols"
           :step="1"
@@ -75,7 +75,7 @@
         <el-switch v-model="data.options.showInput" ></el-switch>
       </el-form-item>
 
-      <el-form-item label="依赖显示">
+      <el-form-item label="依赖显示" v-if="data.type !== 'newLine'">
         <el-cascader
           :options="dependItems"
           v-model="data.options.dependents"

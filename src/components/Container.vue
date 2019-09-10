@@ -234,7 +234,7 @@ export default {
     },
     layoutFields: {
       type: Array,
-      default: () => ['text', 'image', 'divider']
+      default: () => ['text', 'image', 'divider', 'newLine']
     }
   },
   data () {

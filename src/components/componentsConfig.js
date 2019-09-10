@@ -364,6 +364,15 @@ export const layoutComponents = [
       position: 'left',
       showName: false
     }
+  },
+  {
+    type: 'newLine',
+    name: '换行符',
+    icon: 'icon-ic',
+    cols: 24,
+    options: {
+      showName: false
+    }
   }
   // {
   //   type: 'grid',
