@@ -15,7 +15,9 @@
           :lg="item.cols"
           :md="item.cols"
           :sm="24"
-          :xs="24">
+          :xs="24"
+          style="min-height: 50px"
+          >
           <!-- 自定义组件 -->
           <el-form-item v-if="item.type=='blank'" :label="item.name" :prop="item.model" :key="item.key">
             <slot :name="item.model" :model="models"></slot>
