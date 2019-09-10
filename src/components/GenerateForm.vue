@@ -190,7 +190,10 @@ export default {
         } else {
           if (this.value && Object.keys(this.value).indexOf(genList[i].model) >= 0) {
             var value = this.value[genList[i].model]
-            if(genList[i].type === 'select' && genList[i].options.multiple === true && this.value[genList[i].model].length>0) value = JSON.parse(this.value[genList[i].model])
+            if(typeof(this.value[genList[i].model]) === 'string') {
+              if(genList[i].type === 'select' && genList[i].options.multiple === true ) value = JSON.parse(this.value[genList[i].model])
+              if(genList[i].type === 'childTable') value = JSON.parse(this.value[genList[i].model])
+            }
             this.models = Object.assign({}, this.models, {[genList[i].model]: value})
             // this.models[genList[i].model] = this.value[genList[i].model]
           } else {
