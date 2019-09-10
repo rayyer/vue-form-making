@@ -9,6 +9,9 @@
 .el-checkbox+.el-checkbox{
   margin-left: 0 !important;
 }
+.el-checkbox-group {
+  line-height: 1;
+}
 .el-checkbox{
   margin-right: 20px;
 }
@@ -21,9 +24,9 @@
     margin-top: 6px;
   }
 
-  .el-checkbox-group{
-    margin-top: 6px;
-    line-height: 22px !important;
+  .el-checkbox {
+    margin-top: 3px;
+    line-height: 26px !important;
   }
 }
 .el-form-item--mini{
@@ -36,9 +39,9 @@
     margin-top: 4px;
   }
 
-  .el-checkbox-group{
+  .el-checkbox {
     margin-top: 5px;
-    line-height: 20px !important;
+    line-height: 27px !important;
   }
 }
 .el-form-item--medium{
@@ -51,8 +54,8 @@
     margin-top: 8px;
   }
 
-  .el-checkbox-group{
+  .el-checkbox {
     margin-top: 6px;
-    line-height: 26px !important;
+    line-height: 30px !important;
   }
 }
