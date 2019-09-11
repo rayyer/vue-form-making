@@ -566,9 +566,9 @@ export default {
       } else {
         if(this.data.options.defaultValue !== '') {
           // 删除后清空默认值
-          if(this.data.type === 'radio' && this.data.options.defaultValue === this.data.options.options[index].value)  this.data.options.defaultValue = ''
+          if((this.data.type === 'radio' || this.data.type === 'select') && this.data.options.defaultValue === this.data.options.options[index].value)  this.data.options.defaultValue = ''
 
-          if(this.data.type === 'checkbox' && this.data.options.defaultValue.indexOf(this.data.options.options[index].value)>-1) {
+          if((this.data.type === 'checkbox' || (this.data.type === 'select' && this.data.options.multiple===true )) && this.data.options.defaultValue.indexOf(this.data.options.options[index].value)>-1) {
             this.data.options.defaultValue.splice(this.data.options.defaultValue.indexOf(this.data.options.options[index].value), 1)
           }
         }
