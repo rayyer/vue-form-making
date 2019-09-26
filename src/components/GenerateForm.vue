@@ -59,8 +59,8 @@
             <el-divider :content-position="item.options.position">{{item.options.text}}</el-divider>
           </div>
 
-          <div v-else-if="item.type == 'childTable'" style="min-height:50px">
-            <div v-if="dependChildTable.hasOwnProperty(item.options.relatedTable)" v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true">
+          <div v-else-if="item.type == 'childTable'">
+            <div v-if="dependChildTable.hasOwnProperty(item.options.relatedTable)" v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true" style="min-height:50px">
               <div v-if="item.options.showName===false">
                 <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
                   <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('islists') && item.options.islists">
