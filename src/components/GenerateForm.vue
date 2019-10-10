@@ -198,6 +198,12 @@ export default {
             if(typeof(this.value[genList[i].model]) === 'string') {
               if(genList[i].type === 'select' && genList[i].options.multiple === true ) value = JSON.parse(this.value[genList[i].model])
               if(genList[i].type === 'childTable') value = JSON.parse(this.value[genList[i].model])
+              if (genList[i].type == 'radio')
+              {
+                // radio发现一个问题，对0，1，2，3这些字符串类型的value，只能识别"0"，如果都转换为int，则不能识别整型的0，所以下面代码进行转换，将0默认字符串，其他的数字转换成Int
+                var n = Number(this.value[genList[i].model]);
+                if (!isNaN(n) && n!==0) value=n
+              }
             }
             this.models = Object.assign({}, this.models, {[genList[i].model]: value})
             // this.models[genList[i].model] = this.value[genList[i].model]
