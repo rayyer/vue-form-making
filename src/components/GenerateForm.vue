@@ -47,7 +47,7 @@
               fontWeight: item.options.fontWeight, 
               textAlign: item.options.align, 
               height:  item.options.height + 'px',
-              lineHeight:  item.options.height + 'px'
+              lineHeight:  '2'
               }"
             v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
             >

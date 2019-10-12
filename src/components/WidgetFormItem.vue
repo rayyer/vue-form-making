@@ -216,7 +216,7 @@
           fontWeight: element.options.fontWeight, 
           textAlign: element.options.align,
           height:  element.options.height + 'px',
-          lineHeight:  element.options.height + 'px',
+          lineHeight:  '2'
           }"
       >
         {{element.name}}
