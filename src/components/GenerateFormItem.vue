@@ -70,6 +70,7 @@
         <el-radio
           :style="{display: widget.options.inline ? 'inline-block' : 'block'}"
           :label="item.value" v-for="(item, index) in (widget.options.remote ? widget.options.remoteOptions : widget.options.options)" :key="index"
+           @click.native.prevent="handleClickRadioitem(item.value)"
         >
           <template v-if="widget.options.remote">{{item.label}}</template>
           <template v-else>{{widget.options.showLabel ? item.label : item.value}}</template>
@@ -259,6 +260,9 @@ export default {
     }
   },
   methods: {
+    handleClickRadioitem (e) {
+      (e === this.dataModel) ? this.dataModel = '' : this.dataModel = e
+    }
   },
   watch: {
     dataModel: {
