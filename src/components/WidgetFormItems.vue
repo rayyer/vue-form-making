@@ -122,7 +122,7 @@ export default {
         model: this.data.list[index].type + '_' + key
       }
 
-      if (this.data.list[index].type === 'radio' || this.data.list[index].type === 'checkbox') {
+      if (this.data.list[index].type === 'radio' || this.data.list[index].type === 'checkbox' || this.data.list[index].type === 'select') {
 
         cloneData = {
           ...cloneData,
