@@ -94,6 +94,12 @@
 # 已知bug
 1. 表单嵌套，父表单顶部对齐，子表单左对齐的情况下，会出现子表单错误的情况，相反正常，可反过来考虑，顶部对齐使用子表单，父表单采用左对齐
 
+# 版本记录
+`v2.3.1`
+1. 更改组件文字“换行符”为“断行”
+2. 解决select复制数据没有深拷贝问题(合并原作者更新)
+3. 计数器增加最小值和最大值
+
 ## 社区资料笔记
 
 * [Vue.Draggable](https://note.youdao.com/share/?id=f525c8897d9d7f6648bc28d59f5d03f4&type=note#/) （by @[jianhunxia](https://github.com/jianhunxia) 提供)
