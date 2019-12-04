@@ -367,7 +367,7 @@ export const layoutComponents = [
   },
   {
     type: 'newLine',
-    name: '换行符',
+    name: '断行',
     icon: 'icon-ic',
     cols: 24,
     options: {
