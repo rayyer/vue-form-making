@@ -418,6 +418,11 @@
         </el-form-item>
       </template>
       
+      <template v-if="data.type=='textarea'">
+        <el-form-item label="文本框行数">
+          <el-input-number v-model="data.options.rows" :min="2" :max="100" :step="2"></el-input-number>
+        </el-form-item>
+      </template>
 
       <template v-if="data.type != 'grid'">
         

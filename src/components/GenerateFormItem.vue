@@ -44,7 +44,8 @@
     </template>
 
     <template v-if="widget.type == 'textarea'">
-      <el-input type="textarea" :rows="5"
+      <el-input type="textarea" 
+        :rows="widget.options.rows"
         v-model="dataModel"
         :disabled="widget.options.disabled"
         :placeholder="widget.options.placeholder"

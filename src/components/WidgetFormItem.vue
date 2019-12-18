@@ -30,7 +30,8 @@
     </template>
 
     <template v-if="element.type == 'textarea'">
-      <el-input type="textarea" :rows="5"
+      <el-input type="textarea" 
+        :rows="element.options.rows"
         v-model="element.options.defaultValue"
         :style="{width: element.options.width}"
         :disabled="element.options.disabled"
