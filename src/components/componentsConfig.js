@@ -30,7 +30,8 @@ export const basicComponents = [
       required: false,
       disabled: false,
       pattern: '',
-      placeholder: ''
+      placeholder: '',
+      rows: 6
     }
   },
   {
