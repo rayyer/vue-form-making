@@ -60,7 +60,7 @@
           </div>
 
           <div v-else-if="item.type == 'childTable'">
-            <div v-if="dependChildTable.hasOwnProperty(item.options.relatedTable)" v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true" style="min-height:50px">
+            <div v-if="dependChildTable.hasOwnProperty(item.options.relatedTable)" v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true" style="min-height:50px" :id="item.model">
               <div v-if="item.options.showName===false">
                 <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
                   <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('islists') && item.options.islists">
@@ -87,6 +87,7 @@
               :prop="item.model"
               label-width="0px"
               v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
+              :id="item.model"
               >
               <genetate-form-item
                 :key="item.key" 
@@ -104,6 +105,7 @@
               :prop="item.model"
               :label-width="(item.options.labelWidth || 80) + 'px'"
               v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true"
+              :id="item.model"
               >
               <genetate-form-item
                 :key="item.key" 
@@ -159,8 +161,13 @@ export default {
     this.generateModle(this.data.list)
   },
   mounted () {
+    if(this.data.hasOwnProperty('dumpPosition')) this.initPosition(this.data.dumpPosition)
   },
   methods: {
+    initPosition(dumpPosition) {
+      // 跳转到指定锚点位置
+      if(document.getElementById(dumpPosition)) document.documentElement.scrollTop = document.getElementById(dumpPosition).offsetTop
+    },
     /*
     * index=-1 && model=''则用来添加一行空的子表单
     * 或者为指定一个索引index的item替换表单内容model
