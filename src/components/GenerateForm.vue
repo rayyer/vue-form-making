@@ -6,6 +6,7 @@
       :rules="rules"
       :label-position="data.config.labelPosition"
       :label-width="data.config.labelWidth + 'px'"
+      v-loading="loading"
       >
       <el-row :gutter="16">
         <el-col
@@ -154,6 +155,7 @@ export default {
       dependentShow: {}, // 字段是否显示
       colsAmount: 0,
       childTableModalVisible: false, 
+      loading: true,
       currentChildTableDesigner: {} // 当前用到的子表单设计器
     }
   },
@@ -246,6 +248,7 @@ export default {
           }
         }
       }
+      this.loading = false
     },
     getDependents (item) {
       if(item.options.dependents && item.options.dependents.length>0)
