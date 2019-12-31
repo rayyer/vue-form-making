@@ -197,55 +197,49 @@ export default {
     },
     generateModle (genList) {
       for (let i = 0; i < genList.length; i++) {
-        if (genList[i].type === 'grid') {
-          genList[i].columns.forEach(item => {
-            this.generateModle(item.list)
-          })
+        if (this.value && Object.keys(this.value).indexOf(genList[i].model) >= 0) {
+          var value = this.value[genList[i].model]
+          if(typeof(this.value[genList[i].model]) === 'string') {
+            if(genList[i].type === 'select' && genList[i].options.multiple === true ) value = JSON.parse(this.value[genList[i].model])
+            if(genList[i].type === 'childTable') value = JSON.parse(this.value[genList[i].model])
+            if (genList[i].type == 'radio')
+            {
+              // radio发现一个问题，对0，1，2，3这些字符串类型的value，只能识别"0"，如果都转换为int，则不能识别整型的0，所以下面代码进行转换，将0默认字符串，其他的数字转换成Int
+              var n = Number(this.value[genList[i].model]);
+              if (!isNaN(n) && n!==0) value=n
+            }
+          }
+          this.models = Object.assign({}, this.models, {[genList[i].model]: value})
+          // this.models[genList[i].model] = this.value[genList[i].model]
         } else {
-          if (this.value && Object.keys(this.value).indexOf(genList[i].model) >= 0) {
-            var value = this.value[genList[i].model]
-            if(typeof(this.value[genList[i].model]) === 'string') {
-              if(genList[i].type === 'select' && genList[i].options.multiple === true ) value = JSON.parse(this.value[genList[i].model])
-              if(genList[i].type === 'childTable') value = JSON.parse(this.value[genList[i].model])
-              if (genList[i].type == 'radio')
-              {
-                // radio发现一个问题，对0，1，2，3这些字符串类型的value，只能识别"0"，如果都转换为int，则不能识别整型的0，所以下面代码进行转换，将0默认字符串，其他的数字转换成Int
-                var n = Number(this.value[genList[i].model]);
-                if (!isNaN(n) && n!==0) value=n
-              }
-            }
-            this.models = Object.assign({}, this.models, {[genList[i].model]: value})
-            // this.models[genList[i].model] = this.value[genList[i].model]
+          if (genList[i].type === 'blank') {
+            this.$set(this.models, genList[i].model, genList[i].options.defaultType === 'String' ? '' : (genList[i].options.defaultType === 'Object' ? {} : []))
           } else {
-            if (genList[i].type === 'blank') {
-              this.$set(this.models, genList[i].model, genList[i].options.defaultType === 'String' ? '' : (genList[i].options.defaultType === 'Object' ? {} : []))
+            // this.models[genList[i].model] = genList[i].options.defaultValue
+            this.models=Object.assign({}, this.models, {[genList[i].model]: genList[i].options.defaultValue})
+          }
+        }
+
+        if (genList[i].type === 'childTable' && this.models[genList[i].model].length === 0) this.getChildModels(genList[i].model) // 子表单初始化
+
+        this.getDependents(genList[i]) // 整理出需要的依赖项
+
+        if (this.rules[genList[i].model]) {
+          this.rules[genList[i].model] = [...this.rules[genList[i].model], ...genList[i].rules.map(item => {
+            if (item.pattern) {
+              return {...item, pattern: eval(item.pattern)}
             } else {
-              // this.models[genList[i].model] = genList[i].options.defaultValue
-              this.models=Object.assign({}, this.models, {[genList[i].model]: genList[i].options.defaultValue})
+              return {...item}
             }
-          }
-
-          if (genList[i].type === 'childTable' && this.models[genList[i].model].length === 0) this.getChildModels(genList[i].model) // 子表单初始化
-
-          this.getDependents(genList[i]) // 整理出需要的依赖项
-
-          if (this.rules[genList[i].model]) {
-            this.rules[genList[i].model] = [...this.rules[genList[i].model], ...genList[i].rules.map(item => {
-              if (item.pattern) {
-                return {...item, pattern: eval(item.pattern)}
-              } else {
-                return {...item}
-              }
-            })]
-          } else {
-            this.rules[genList[i].model] = [...genList[i].rules.map(item => {
-              if (item.pattern) {
-                return {...item, pattern: eval(item.pattern)}
-              } else {
-                return {...item}
-              }
-            })]
-          }
+          })]
+        } else {
+          this.rules[genList[i].model] = [...genList[i].rules.map(item => {
+            if (item.pattern) {
+              return {...item, pattern: eval(item.pattern)}
+            } else {
+              return {...item}
+            }
+          })]
         }
       }
       this.loading = false
