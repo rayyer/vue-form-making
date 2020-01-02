@@ -272,8 +272,25 @@ export default {
         })
       })
     },
-    reset () {
-      this.$refs.generateForm.resetFields()
+    // reset () {
+    //   this.$refs.generateForm.resetFields()
+    // },
+    /**
+     * key 需要清空的model，留空则清空全部表单
+     * 最终的思路是：
+     * @todo 1. 查询model对应的options.defaultValue，赋值给model
+     * 
+     * 当前仅实现对子表单（需指定key）和主表单的reset
+     */
+    reset (model = '') {
+      if(model === '') {
+        this.$refs.generateForm.resetFields()
+        for(var item of this.data.list) {
+          if(this.models.hasOwnProperty(item.model) && item.type === 'childTable') this.models[item.model]=[{}]
+        }
+      } else {
+        if(this.models.hasOwnProperty(model)) this.models[model]=[{}]
+      }
     },
     onInputChange (value, field) {
       this.$emit('on-change', field, value, this.models)

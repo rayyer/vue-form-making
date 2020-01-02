@@ -11,6 +11,7 @@
 
       </fm-generate-form>
       <el-button type="primary" @click="handleSubmit">提交</el-button>
+      <el-button type="primary" @click="handleReset">重置</el-button>
   </div>
 </template>
 
@@ -516,7 +517,8 @@ export default {
       })
     },
     handleReset () {
-      this.$refs.generateForm.reset()
+      // this.$refs.generateForm.reset() // 为空则全部清空
+      this.$refs.generateForm.reset('childTable_1563610030000_82402')
     },
   }
 }
