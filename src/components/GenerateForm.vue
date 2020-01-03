@@ -153,7 +153,6 @@ export default {
       rules: {},
       dependents: {}, // 依赖字段
       dependentShow: {}, // 字段是否显示
-      colsAmount: 0,
       childTableModalVisible: false, 
       loading: true,
       currentChildTableDesigner: {} // 当前用到的子表单设计器
@@ -163,13 +162,8 @@ export default {
     this.generateModle(this.data.list)
   },
   mounted () {
-    if(this.data.hasOwnProperty('dumpPosition')) this.initPosition(this.data.dumpPosition)
   },
   methods: {
-    initPosition(dumpPosition) {
-      // 跳转到指定锚点位置
-      if(document.getElementById(dumpPosition)) document.documentElement.scrollTop = document.getElementById(dumpPosition).offsetTop
-    },
     /*
     * index=-1 && model=''则用来添加一行空的子表单
     * 或者为指定一个索引index的item替换表单内容model
