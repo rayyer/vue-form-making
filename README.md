@@ -14,6 +14,12 @@
 
 * [快速使用](https://www.yuque.com/zhulei-sbpfz/ua9nar/mdgwki)
 * [组件](https://www.yuque.com/zhulei-sbpfz/ua9nar/vtebqs)
+* [表单字段依赖关系](docs/fieldDepend.md)
+* [子表单](docs/childForm.md)
+
+## 更多功能演示代码参考：  
+> `/src/demo/Home.vue`(表单设计时)    
+> `/src/demo/Form.vue`(表单运行时)
 
 ## 特性
 
@@ -26,56 +32,6 @@
 * 灵活的删格化配置，灵活设置一个表单元素的占用宽度
 * 结构化的表单json格式，分为配置对象和表单数组，表单数组由各个表单字段对象组成，无耦合
 * 表单内各个字段之间存在依赖属性，比如某些字段需要根据选择的性别来展示
-
-## 子表单使用
-#### 子表单使用场景：
-子表单主要用于存放模块的表单结构，用于后期重复被其他表单引入。  
-比如一个人的简历里包含基本信息（性别、姓名、出生年月）、住址信息（地址、邮编）、教育经历（多条记录）、工作经验，  
-基本信息和住址信息属于单记录性质的，但可能会被其他表单引用，比如基本信息表、中文简历、英文简历、背调表都可以用到，可以做成`基本信息子表单` 和 `住址信息子表单`，然后在以上的表单中插入子表单组件，指向对应的子表单即可。  
-还有一种复杂的，比如“教育经历”和“工作经验”可能会有多条，设计思路是组装成多记录的子表单。通过循环的形式就可以读出来。  
-
-#### 代码引入：
-```javascript
-<fm-making-form
-    ref="makingForm"
-    upload
-    preview
-    generate-json
-    generate-code
-    :childTablesRemoteUrl="childTablesRemoteUrl"
-    style="height:100%;"
-    clearable>
-```
-#### 参数说明：
-##### childTablesRemoteUrl
-`childTablesRemoteUrl` 须是一个包含表单结构的Url,  
-> e.x.   
-> 参考`src/demo/Home.vue` 中的 `childTablesRemoteUrl: "http://ubody.guolei.com/api/forms"`
-##### url返回格式要求如下：
-```
-{
-  "data":[
-    {
-      "key":"表单的key",
-      "title": "表单的标题"
-    },
-    {
-      "key":"表单的key2",
-      "title": "表单的标题2"
-    }
-    ……
-  ],
-}
-```
-> tips: 在表单设计中，建议每个表单key唯一，并且做为系统中的业务识别。
-
-
-![](http://qiniu.guolei.me/WX20191127-145556.png)
-
-
-## 更多功能演示代码参考：  
-> `/src/demo/Home.vue`(表单设计时)，  
-> `/src/demo/Form.vue`(表单运行时)
 
 # 快速使用
 > yarn add health-form-making
@@ -96,11 +52,11 @@
 
 # 版本记录
 `v2.3.1`
-1. `fix` 更改组件文字“换行符”为“断行”
-2. `fix` 解决select复制数据没有深拷贝问题(合并原作者更新)
-3. `feat` 计数器增加最小值和最大值
-4. `feat` 单选框可取消选中
-5. `chore` 升级element-ui-v2.12
+1. `fix:` 更改组件文字“换行符”为“断行”
+2. `fix:` 解决select复制数据没有深拷贝问题(合并原作者更新)
+3. `feat:` 计数器增加最小值和最大值
+4. `feat:` 单选框可取消选中
+5. `chore:` 升级element-ui-v2.12
 
 ## 社区资料笔记
 
