@@ -42,6 +42,7 @@ export const basicComponents = [
     options: {
       inline: true,
       defaultValue: '',
+      hidden: false,
       showLabel: false,
       options: [
         {
@@ -78,6 +79,7 @@ export const basicComponents = [
       inline: true,
       defaultValue: [],
       showLabel: false,
+      hidden: false,
       options: [
         {
           value: '选项1'
@@ -114,6 +116,7 @@ export const basicComponents = [
       placeholder: '',
       required: false,
       showLabel: false,
+      hidden: false,
       width: '',
       options: [
         {

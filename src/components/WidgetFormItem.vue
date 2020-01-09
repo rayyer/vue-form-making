@@ -51,12 +51,11 @@
     <template v-if="element.type == 'radio'">
       <el-radio-group v-model="element.options.defaultValue"
         :style="{width: element.options.width}"
-        :disabled="element.options.disabled"
+        :disabled="element.options.disabled || element.options.hidden"
       >
         <el-radio  
           :style="{display: element.options.inline ? 'inline-block' : 'block'}"
           :label="item.value" v-for="(item, index) in element.options.options" :key="item.value + index"
-          
         >
           {{element.options.showLabel ? item.label : item.value}}
         </el-radio>
@@ -66,7 +65,7 @@
     <template v-if="element.type == 'checkbox'">
       <el-checkbox-group v-model="element.options.defaultValue"
         :style="{width: element.options.width}"
-        :disabled="element.options.disabled"
+        :disabled="element.options.disabled || element.options.hidden"
       >
         <el-checkbox
           :style="{display: element.options.inline ? 'inline-block' : 'block'}"
@@ -130,7 +129,7 @@
     <template v-if="element.type == 'select'">
       <el-select
         v-model="element.options.defaultValue"
-        :disabled="element.options.disabled"
+        :disabled="element.options.disabled || element.options.hidden"
         :multiple="element.options.multiple"
         :clearable="element.options.clearable"
         :placeholder="element.options.placeholder"

@@ -17,6 +17,7 @@
           :md="item.cols"
           :sm="item.cols"
           :xs="item.cols"
+          v-show="!item.options.hasOwnProperty('hidden') || item.options.hidden !== true"
           >
           <!-- 自定义组件 -->
           <el-form-item v-if="item.type=='blank'" :label="item.name" :prop="item.model" :key="item.key">

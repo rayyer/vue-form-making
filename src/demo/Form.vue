@@ -38,7 +38,9 @@ const jsonData = {
       "icon": "icon-grid-",
       "cols": 24,
       "options": {
-        "defaultValue": [''],
+        "defaultValue": [
+          ""
+        ],
         "remoteFunc": "func_1563610030000_82402",
         "relatedTable": "table_input_1"
       },
@@ -48,7 +50,7 @@ const jsonData = {
     },
     {
       "type": "input",
-      "name": "单行文本",
+      "name": "男性显示",
       "icon": "icon-input",
       "cols": 12,
       "options": {
@@ -58,14 +60,20 @@ const jsonData = {
         "dataType": "string",
         "pattern": "",
         "placeholder": "",
-        "remoteFunc": "func_1561623027000_24735"
+        "remoteFunc": "func_1561623027000_24735",
+        "dependents": [
+          [
+            "sex",
+            "男"
+          ]
+        ]
       },
       "key": "1561623027000_24735",
       "model": "input_1561623027000_24735",
       "rules": [
         {
           "type": "string",
-          "message": "单行文本格式不正确"
+          "message": "男性显示格式不正确"
         }
       ]
     },
@@ -93,7 +101,9 @@ const jsonData = {
       "icon": "icon-grid-",
       "cols": 24,
       "options": {
-        "defaultValue": [''],
+        "defaultValue": [
+          ""
+        ],
         "remoteFunc": "func_1563610030000_82402",
         "relatedTable": "table_input_2",
         "islists": true,
@@ -102,6 +112,41 @@ const jsonData = {
       "key": "1563610030000_82402",
       "model": "childTable_1563610030011_82402",
       "rules": []
+    },
+    {
+      "type": "input",
+      "name": "65岁以上显示",
+      "icon": "icon-input",
+      "cols": 12,
+      "options": {
+        "width": "100%",
+        "defaultValue": "",
+        "required": false,
+        "dataType": "string",
+        "pattern": "",
+        "placeholder": "",
+        "disabled": false,
+        "prefix": "",
+        "suffix": "",
+        "prepend": "",
+        "append": "",
+        "showName": true,
+        "remoteFunc": "func_1578541634000_9413",
+        "dependents": [
+          [
+            "age",
+            ">65"
+          ]
+        ]
+      },
+      "key": "1578541634000_9413",
+      "model": "input_1578541634000_9413",
+      "rules": [
+        {
+          "type": "string",
+          "message": "65岁以上显示格式不正确"
+        }
+      ]
     },
     {
       "type": "radio",
@@ -138,6 +183,78 @@ const jsonData = {
       },
       "key": "1561623035000_50587",
       "model": "radio_1561623035000_50587",
+      "rules": []
+    },
+    {
+      "type": "radio",
+      "name": "不显示的性别",
+      "icon": "icon-radio-active",
+      "cols": 12,
+      "options": {
+        "inline": true,
+        "defaultValue": "",
+        "hidden": true,
+        "showLabel": false,
+        "options": [
+          {
+            "value": "男"
+          },
+          {
+            "value": "女"
+          }
+        ],
+        "required": false,
+        "width": "",
+        "remote": false,
+        "remoteOptions": [],
+        "props": {
+          "value": "value",
+          "label": "label"
+        },
+        "remoteFunc": "func_1578541704000_14034",
+        "disabled": false
+      },
+      "key": "1578541704000_14034",
+      "model": "sex",
+      "rules": []
+    },
+    {
+      "type": "select",
+      "name": "不显示的年龄段",
+      "icon": "icon-select",
+      "cols": 12,
+      "options": {
+        "defaultValue": "",
+        "multiple": false,
+        "disabled": false,
+        "clearable": false,
+        "placeholder": "",
+        "required": false,
+        "showLabel": false,
+        "hidden": true,
+        "width": "",
+        "options": [
+          {
+            "value": "0-18"
+          },
+          {
+            "value": "19-65"
+          },
+          {
+            "value": ">65"
+          }
+        ],
+        "remote": false,
+        "filterable": false,
+        "remoteOptions": [],
+        "props": {
+          "value": "value",
+          "label": "label"
+        },
+        "remoteFunc": "func_1578541726000_77163"
+      },
+      "key": "1578541726000_77163",
+      "model": "age",
       "rules": []
     }
   ],
@@ -497,6 +614,7 @@ export default {
     return {
       jsonData,
       editData: {
+        "sex": '男',
         "childTable_1563610030011_82402": [
           // {"radio_1564384522000_9914": '有', "select_1564384598000_85312": '父亲',"select_1564384722000_46717": ['高血压']},
           // {"radio_1564384522000_9914": '有', "select_1564384598000_85312": '母亲',"select_1564384722000_46717": ['糖尿病']}
