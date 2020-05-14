@@ -1,6 +1,6 @@
 <template>
   <div>
-    <fm-generate-form :data="jsonData" :remote="remoteFuncs" :value="editData" ref="generateForm" :dependChildTable="dependChildTable">
+    <fm-generate-form :data="jsonData" :remote="remoteFuncs" :value="editData" ref="generateForm" :dependChildTable="dependChildTable" :formDisabled="false">
 
         <template slot="blank" slot-scope="scope">
           <!-- 自定义 -->
@@ -60,6 +60,7 @@ const jsonData = {
         "dataType": "string",
         "pattern": "",
         "placeholder": "",
+        "disabled": true,
         "remoteFunc": "func_1561623027000_24735",
         "dependents": [
           [
@@ -309,7 +310,7 @@ const dependChildTable = {
         "options": {
           "defaultValue": "父亲",
           "multiple": false,
-          "disabled": false,
+          "disabled": true,
           "clearable": false,
           "placeholder": "请选择",
           "required": false,

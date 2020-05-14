@@ -14,7 +14,7 @@
         v-model.number="dataModel"
         :placeholder="widget.options.placeholder"
         :style="{width: widget.options.width}"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
       >
         <i slot="suffix">
           {{widget.options.suffix}}
@@ -24,7 +24,7 @@
         v-else
         :type="widget.options.dataType"
         v-model="dataModel"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
         :placeholder="widget.options.placeholder"
         :style="{width: widget.options.width}"
       >
@@ -47,7 +47,7 @@
       <el-input type="textarea" 
         :rows="widget.options.rows"
         v-model="dataModel"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
         :placeholder="widget.options.placeholder"
         :style="{width: widget.options.width}"
       ></el-input>
@@ -59,7 +59,7 @@
         :style="{width: widget.options.width}"
         :step="widget.options.step"
         controls-position="right"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
         :min="widget.options.min"
         :max="widget.options.max"
       ></el-input-number>
@@ -68,7 +68,7 @@
     <template v-if="widget.type == 'radio'">
       <el-radio-group v-model="dataModel"
         :style="{width: widget.options.width}"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
       >
         <el-radio
           :style="{display: widget.options.inline ? 'inline-block' : 'block'}"
@@ -84,7 +84,7 @@
     <template v-if="widget.type == 'checkbox'">
       <el-checkbox-group v-model="dataModel"
         :style="{width: widget.options.width}"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
       >
         <el-checkbox
           :style="{display: widget.options.inline ? 'inline-block' : 'block'}"
@@ -104,7 +104,7 @@
         :start-placeholder="widget.options.startPlaceholder"
         :end-placeholder="widget.options.endPlaceholder"
         :readonly="widget.options.readonly"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
         :editable="widget.options.editable"
         :clearable="widget.options.clearable"
         :arrowControl="widget.options.arrowControl"
@@ -122,7 +122,7 @@
         :start-placeholder="widget.options.startPlaceholder"
         :end-placeholder="widget.options.endPlaceholder"
         :readonly="widget.options.readonly"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
         :editable="widget.options.editable"
         :clearable="widget.options.clearable"
         :value-format="widget.options.timestamp ? 'timestamp' : widget.options.format"
@@ -135,7 +135,7 @@
     <template v-if="widget.type =='rate'">
       <el-rate v-model="dataModel"
         :max="widget.options.max"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
         :allow-half="widget.options.allowHalf"
       ></el-rate>
     </template>
@@ -143,7 +143,7 @@
     <template v-if="widget.type == 'color'">
       <el-color-picker 
         v-model="dataModel"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
         :show-alpha="widget.options.showAlpha"
       ></el-color-picker>
     </template>
@@ -151,7 +151,7 @@
     <template v-if="widget.type == 'select'">
       <el-select
         v-model="dataModel"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
         :multiple="widget.options.multiple"
         :clearable="widget.options.clearable"
         :placeholder="widget.options.placeholder"
@@ -165,7 +165,7 @@
     <template v-if="widget.type=='switch'">
       <el-switch
         v-model="dataModel"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
       >
       </el-switch>
     </template>
@@ -175,7 +175,7 @@
         v-model="dataModel"
         :min="widget.options.min"
         :max="widget.options.max"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
         :step="widget.options.step"
         :show-input="widget.options.showInput"
         :range="widget.options.range"
@@ -186,7 +186,7 @@
     <!-- <template v-if="widget.type=='imgupload'">
       <fm-upload
         v-model="dataModel"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
         :style="{'width': widget.options.width}"
         :width="widget.options.size.width"
         :height="widget.options.size.height"
@@ -216,7 +216,7 @@
     <template v-if="widget.type == 'cascader'">
       <el-cascader
         v-model="dataModel"
-        :disabled="widget.options.disabled"
+        :disabled="formDisabled || widget.options.disabled"
         :clearable="widget.options.clearable"
         :placeholder="widget.options.placeholder"
         :style="{width: widget.options.width}"
@@ -233,7 +233,7 @@
 // import FmEditor from './Editor/tinymce'
 
 export default {
-  props: ['widget', 'models', 'rules', 'remote'],
+  props: ['widget', 'models', 'rules', 'remote', 'formDisabled'],
   components: {
     // FmUpload,
     // FmEditor

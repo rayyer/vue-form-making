@@ -64,7 +64,7 @@
           <div v-else-if="item.type == 'childTable'">
             <div v-if="dependChildTable.hasOwnProperty(item.options.relatedTable)" v-show="!dependents.hasOwnProperty(item.model) || dependentShow[item.model] === true" style="min-height:50px" :id="item.model">
               <div v-if="item.options.showName===false">
-                <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
+                <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)" :formDisabled="formDisabled">
                   <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('islists') && item.options.islists">
                     <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
                     <el-button type="text" @click.prevent="getChildModels(item.model, index)" icon="el-icon-plus" v-if="models[item.model].length===index+1">新增</el-button>
@@ -73,7 +73,7 @@
               </div>
               <div v-else>
                 <el-form-item :label="item.name" :prop="item.model">
-                  <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)">
+                  <fm-generate-form :data="dependChildTable[item.options.relatedTable]" :value="list" v-for="(list, index) in models[item.model]" :key="index" @childFromModels="getChildModels(item.model, index, $event)" :formDisabled="formDisabled">
                     <template slot="dynamicFormDel" v-if="item.options.hasOwnProperty('islists') && item.options.islists">
                       <el-button type="text" @click.prevent="removeChildTableRecord(item.model, index)" icon="el-icon-delete">删除</el-button>
                       <el-button type="text" @click.prevent="getChildModels(item.model, index)" icon="el-icon-plus" v-if="models[item.model].length===index+1">新增</el-button>
@@ -97,6 +97,7 @@
                 :remote="remote" 
                 :rules="rules" 
                 :widget="item" 
+                :formDisabled="formDisabled" 
                 @input-change="onInputChange"
               ></genetate-form-item>
             </el-form-item>
@@ -115,6 +116,7 @@
                 :remote="remote" 
                 :rules="rules" 
                 :widget="item" 
+                :formDisabled="formDisabled" 
                 @input-change="onInputChange"
               ></genetate-form-item>
             </el-form-item>
@@ -140,7 +142,7 @@ export default {
     GenetateFormItem,
     CusDialog
   },
-  props: ['data', 'remote', 'value', 'insite', 'dependChildTable'],
+  props: ['data', 'remote', 'value', 'insite', 'dependChildTable', 'formDisabled'],
   // filters: {
   //   filtersGetName:function(model, list){
   //     const modelItem = list.filter(item => item.model === model)
